@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tips 插件</title>
+    <link href="css/index.css" rel="stylesheet">
+    <link href="lib/jquery-tips/css/tips.css" rel="stylesheet">
+</head>
+<body>
+    <div id="box-parent" class="box-parent box-center">
+        <div style="width: 400px">
+            <div style="text-align:center; margin-bottom: 10px"><h3>Tips 类型</h3></div>
+            <div>
+                <h5>默认位置</h5>
+                <div class="box-center">
+                    <button id="btn-top" class="button gray">上居中</button>
+                    <button id="btn-bottom" class="button gray">下居中</button>
+                    <button id="btn-middle" class="button gray">垂直居中</button>
+                    <button id="btn-left" class="button gray">左居中</button>
+                    <button id="btn-right" class="button gray">右居中</button>
+                </div>
+                <div class="box-center" style="margin-top:5px">
+                    <button id="btn-array" class="button gray">信息换行</button>
+                    <button id="btn-background" class="button gray">遮罩层</button>
+                    <button id="btn-delay" class="button gray">自定义3s销毁</button>
+                    <button id="btn-destory" class="button gray">手动销毁</button>
+                </div>
+                <div class="box-center" style="margin-top:5px">
+                    <button id="btn-simple" class="button gray">简单调用方法</button>
+                    <button id="btn-callback" class="button gray">回调函数</button>
+                    <button id="btn-html" class="button gray">html元素</button>
+                </div>
+            </div>
+            <div>
+                <h5>自定义位置</h5>
+                <div class="box-center">
+                    <div style="width: 25%">
+                        <label for="cus-top" class="label1">Top -</label>
+                        <input id="cus-top" class="input-1">
+                    </div>
+                    <div style="width: 25%">
+                        <label for="cus-left" class="label1">left -</label>
+                        <input id="cus-left" class="input-1">
+                    </div>
+                    <div style="width: 25%">
+                        <label for="cus-bottom" class="label1">bottom -</label>
+                        <input id="cus-bottom" class="input-1">
+                    </div>
+                    <div style="width: 25%">
+                        <label for="cus-right" class="label1">right -</label>
+                        <input id="cus-right" class="input-1">
+                    </div>
+                </div>
+                <div class="box-center" style="margin: 5px 0;">
+                    <button id="btn-custom" class="button black" style="padding: 5px 15px">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="lib/jquery-1.10.2/jquery-1.10.2.js"></script>
+<script src="lib/jquery-tips/js/tips.js"></script>
+<script>
+    $("#btn-top").click(function() {
+        var msg = '上居中，类型：success';
+        $.tips({
+            parentElement: "#box-parent",       //父元素id，可接受其它选择器，如class
+            position: "top",                    //Tip显示位置，top为上居中
+            type: "success",                    //显示的class，可接受自定义
+            msg: msg                            //Tip内容
+        })
+    })
+    $("#btn-bottom").click(function() {
+        var msg = '下居中，类型：error';
+        $.tips({
+            parentElement: ".box-parent",       //父元素class
+            position: "bottom",
+            type: "error",
+            msg: msg
+        })
+    })
+    $("#btn-middle").click(function() {
+        var msg = '垂直居中，类型：info';
+        $.tips({
+            parentElement: $("#box-parent"),       //父元素jq对象
+            position: "middle",
+            type: "info",
+            msg: msg
+        })
+    })
+    $("#btn-left").click(function() {
+        var msg = '左居中，类型：warning';
+        $.tips({
+            parentElement: "#box-parent",
+            position: "left",
+            type: "warning",
+            msg: msg
+        })
+    })
+    $("#btn-right").click(function() {
+        var msg = '右居中，类型：success';
+        $.tips({
+            parentElement: "#box-parent",
+            position: "right",
+            //type: "success",              //默认 success
+            msg: msg
+        })
+    })
+    $("#btn-array").click(function() {
+        var msg = [                         //换行数组
+            '生活就像海洋',
+            '只有意志坚强的人才能到达彼岸'
+        ];
+        $.tips({
+            parentElement: "#box-parent",
+            position: "middle",
+            type: "error",
+            msg: msg
+        })
+    })
+    $("#btn-background").click(function() {
+        var msg = '遮罩层 Tip';
+        $.tips({
+            parentElement: "#box-parent",
+            position: "middle",
+            background: true,       //显示遮罩层
+            msg: msg
+        })
+    })
+    $("#btn-delay").click(function() {
+        var msg = '3s 后销毁 Tip';
+        $.tips({
+            parentElement: "#box-parent",
+            position: "middle",
+            background: true,
+            delay: 3000,       //3s 后自动销毁
+            msg: msg
+        })
+    })
+    $("#btn-destory").click(function() {
+        var msg = '手动销毁 Tip';
+        $.tips({
+            parentElement: "#box-parent",
+            position: "middle",
+            destroy: false,         //手动销毁
+            background: true,
+            msg: msg
+        })
+    })
+    $("#btn-simple").click(function() {
+        var msg = [
+            '简单调用 Tip',
+            '这种方法调用方便，一般使用该类方法即可'
+        ];
+        var parent = "#box-parent";
+        $.tips().info(parent, msg);     //这种方法调用方便，一般使用该类方法即可
+        setTimeout(function () {
+            $.tips().success(parent, msg);
+        }, 1000);
+        setTimeout(function () {
+            $.tips().error($("#box-parent"), msg);
+        }, 2000);
+        setTimeout(function () {
+            $.tips().warning(parent, msg);
+        }, 3000);
+        setTimeout(function () {
+            $.tips().show(parent, "error", msg);
+        }, 4000);
+    })
+    $("#btn-callback").click(function() {
+        var msg = '回调函数 Tip';
+        $.tips({
+            parentElement: "#box-parent",
+            position: "middle",
+            destroy: false,         //手动销毁
+            background: true,
+            msg: msg,
+            callback: function() {
+                alert("Tip 渲染提示信息后，回调");
+            }
+        })
+    })
+    $("#btn-html").click(function() {
+        var random = Math.round(Math.random()*Math.pow(10, 10));
+        var randBtnId = "btn-tip-close"+random;
+        var msg = '<div class="box1" style="width: 160px">\n' +
+            '        <h4 style="text-align: center">Html Tip 说明</h4>\n' +
+            '        <p id="tip-content" style="text-indent:10px">设置选项html: true, msg 选项传入html元素实体。</p>\n' +
+            '        <div class="box-center"><button id="'+randBtnId+'" class="button black">隐藏 说明</button></div>\n' +
+            '    </div>';
+        $.tips({
+            parentElement: "#box-parent",
+            position: "middle",
+            type: "box-html",       //自定义msg 样式
+            destroy: false,
+            background: true,
+            html: true,
+            msg: msg,
+            htmlCallback: function() {  //回调函数
+                $("#box-parent").on("click", "#"+randBtnId, function() {
+                    var $content = $("#tip-content");
+                    if($content.is(":visible")) {
+                        $content.css("display", "none");
+                        $(this).text("显示 说明");
+                    }else {
+                        $content.css("display", "block");
+                        $(this).text("隐藏 说明");
+                    }
+                });
+            }
+        })
+    })
+    $("#btn-custom").click(function() {
+        var posTop = parseInt($("#cus-top").val()) ;
+        var posLeft = parseInt($("#cus-left").val()) ;
+        var posBottom = parseInt($("#cus-bottom").val());
+        var posRight = parseInt($("#cus-right").val());
+        var position = {
+            top: posTop,
+            left: posLeft,
+            bottom: posBottom,
+            right: posRight
+        };
+        var msg = '自定义位置 : ' +(posTop)+ ' ' +(posLeft)+ ' ' +(posBottom)+ ' ' +(posRight);
+
+        $.tips({
+            parentElement: "#box-parent",
+            position: position,
+            //destroy: false,
+            background: true,
+            delay: 2000,
+            type: "error",
+            msg: msg
+        })
+    })
+</script>
+</html>

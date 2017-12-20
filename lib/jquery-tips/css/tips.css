@@ -1,0 +1,75 @@
+/*Tips*/
+.tip {
+    position: absolute;
+    justify-content:center;     /*子元素水平居中*/
+    align-items:center;         /*子元素垂直居中*/
+    display:-webkit-flex;
+}
+
+.tip-bg {
+    position: absolute;
+    background-color: #000000;
+    opacity: .5;
+}
+
+.tip .tip-msg {
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: #949494;
+    color: #ffffff;
+    /*box-shadow: 0 0 3px 0 #fff;*/
+    opacity: .9;
+}
+
+.tip .tip-msg.tip-msg-success {
+    background-color: #0dbf12;
+    color: #ffffff;
+}
+
+.tip .tip-msg.tip-msg-error {
+    background-color: #c50600;
+    color: #ffffff;
+}
+
+.tip .tip-msg.tip-msg-warning {
+    background-color: #e29000;
+    color: #ffffff;
+}
+
+.tip .tip-msg.tip-msg-info {
+    background-color: #d9edf7;
+    color: #000000;
+}
+
+.tip .tip-close {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    display: block;
+    width: 20px;
+    height: 20px;
+    justify-content:center;     /*子元素水平居中*/
+    align-items:center;         /*子元素垂直居中*/
+    display:-webkit-flex;
+    border-radius: 50%;
+    background-color: #bd2929;
+    font-family: arial,verdana,Microsoft YaHei,Tahoma,Simsun,sans-serif;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    opacity: .8;
+
+}
+
+.tip .tip-close:hover {
+    /*background-color: #ffffff;
+    color: #a94f4f;*/
+    box-shadow: 0 0 5px 0px #9c1e1e;
+}
+
+.box-html {
+    background-color: white;
+    broder: 1px solid #efefef;
+    border-radius: 5px;
+}
