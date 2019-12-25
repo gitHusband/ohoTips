@@ -1,16 +1,45 @@
-
 .box-center {
+    display: -webkit-flex;
     display: flex;
     justify-content:center;     /*子元素水平居中*/
     align-items:center;         /*子元素垂直居中*/
+    flex-wrap: wrap;
+}
+
+.box-space-enenly {
+    display: -webkit-flex;
+    display: flex;
+    justify-content: space-evenly;     /*子元素水平居中*/
+    align-items:center;         /*子元素垂直居中*/
+    flex-wrap: wrap;
 }
 
 .box-parent {
-    width: 600px;
-    height: 450px;
+    width: 80%;
+    /*height: 400px;*/
     margin: 50px auto;
     border: 5px solid #3e4865;
     border-radius: 10px 30px 50px 100px;
+    /*border-width: 150px 12px 10px 200px;*/
+    box-shadow: 5px 10px 20px #000000;
+}
+
+.box-float {
+    width: 80%;
+    margin: 50px auto;
+    padding-bottom: 30px;
+    border: 5px solid #3e4865;
+    border-radius: 20px 30px;
+    /*border-width: 150px 12px 10px 200px;*/
+    box-shadow: 5px 10px 20px #000000;
+}
+
+.box-group {
+    width: 80%;
+    margin: 50px auto;
+    padding-bottom: 30px;
+    border: 5px solid #3e4865;
+    border-radius: 20px 30px;
     /*border-width: 150px 12px 10px 200px;*/
     box-shadow: 5px 10px 20px #000000;
 }
@@ -67,6 +96,11 @@ button:focus {
     color: #fff;
     text-shadow: 1px 1px 1px #333;
     border-radius: 5px;
+}
+
+.button.button-static {
+    width: 20%;
+    min-width: 50px;
 }
 
 .button.gray {
@@ -128,4 +162,64 @@ button:focus {
 .label1 {
     display: block;
     padding-bottom: 3px;
+}
+
+.box-others {
+    display: -webkit-flex;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 99%; 
+    height: 150px; 
+    /*background-color: #2c2c2a;*/
+    padding: 10px 10px
+}
+
+.other-1 {
+    width: 130px; 
+    height: 130px; 
+    background-color: #ffe3e3;
+}
+
+.other-2 {
+    width: 140px; 
+    height: 140px; 
+    background-color: #fff2db;
+    border-radius: 5%;
+}
+
+.other-3 {
+    width: 110px; 
+    height: 130px; 
+    background-color: #fbfbd1;
+    border-radius: 10%;
+}
+
+.other-4 {
+    width: 100px; 
+    height: 140px; 
+    background-color: #cdffcd;
+    border-radius: 15%;
+}
+
+.other-5 {
+    width: 130px; 
+    height: 130px; 
+    background-color: #c6f9f9;
+    border-radius: 25%;
+}
+
+.other-6 {
+    width: 140px; 
+    height: 140px; 
+    background-color: #dfdff7;
+    border-radius: 35%;
+}
+
+.other-7 {
+    width: 130px; 
+    height: 130px; 
+    background-color: #ffe1ff;
+    border-radius: 50%;
 }

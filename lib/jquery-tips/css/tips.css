@@ -1,47 +1,132 @@
 /*Tips*/
-.tip {
+.tip-container {
+    width: 100%;
+}
+
+.tip-group {
+    overflow: hidden;
     position: absolute;
-    justify-content:center;     /*子元素水平居中*/
-    align-items:center;         /*子元素垂直居中*/
-    display:-webkit-flex;
+    display: -webkit-flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    height: auto;
+}
+
+.tip-group.tip-init {
+    top: 0 !important; 
+    left: 0 !important;
+}
+
+.tip {
+    position: relative;
+    display: -webkit-flex;
+    justify-content: center;     /*子元素水平居中*/
+    align-items: center;         /*子元素垂直居中*/
+    flex-wrap: wrap;
+
+    font-size: 14px;
+
+    opacity: 0;
+    transition: opacity 1s, height 0.3s;
+}
+
+.tip-limit {
+    max-width: 400px;
+}
+
+.tip-group .tip + .tip {
+    margin-top: 10px;
+}
+
+.tip-box {
+    position: relative;
+    border-radius: 5px;
+    background-color: #41485b;
+    padding: 15px 20px;
+}
+
+.tip.tip-in {
+    opacity: 0.9;
+}
+
+.tip.tip-out {
+    opacity: 0;
+    height: 0 !important;
 }
 
 .tip-bg {
     position: absolute;
     background-color: #000000;
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.tip-bg.tip-bg-in {
     opacity: .5;
 }
 
 .tip .tip-msg {
-    padding: 5px 10px;
+    /*padding: 15px 20px;*/
     border-radius: 5px;
-    background-color: #949494;
-    color: #ffffff;
-    /*box-shadow: 0 0 3px 0 #fff;*/
-    opacity: .9;
+    background-color: #41485b;
+    color: #ffffff;    
 }
 
+.tip .tip-success,
 .tip .tip-msg.tip-msg-success {
-    background-color: #0dbf12;
+    background-color: #2ecc40;
     color: #ffffff;
 }
 
+.tip .tip-error,
 .tip .tip-msg.tip-msg-error {
-    background-color: #c50600;
+    background-color: #ff4136;
     color: #ffffff;
 }
 
+.tip .tip-warning,
 .tip .tip-msg.tip-msg-warning {
-    background-color: #e29000;
-    color: #ffffff;
+    background-color: #f39c12;
 }
 
+.tip .tip-info,
 .tip .tip-msg.tip-msg-info {
-    background-color: #d9edf7;
-    color: #000000;
+    background-color: #1496bb;
 }
 
 .tip .tip-close {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    display: block;
+    width: 15px;
+    height: 15px;
+    justify-content:center;     /*子元素水平居中*/
+    align-items:center;         /*子元素垂直居中*/
+    display:-webkit-flex;
+    border-radius: 50%;
+    font-family: arial,verdana,Microsoft YaHei,Tahoma,Simsun,sans-serif;
+    color: #c2c2c2;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    opacity: .8;
+}
+
+.tip .tip-close:hover {
+    transform: scale(1.1);
+}
+
+.tip-success ~ .tip-close,
+.tip-error ~ .tip-close,
+.tip-warning ~ .tip-close,
+.tip-info ~ .tip-close {
+    color: #ffffff;
+}
+
+.tip .tip-close-out {
     position: absolute;
     top: -10px;
     right: -10px;
@@ -52,7 +137,7 @@
     align-items:center;         /*子元素垂直居中*/
     display:-webkit-flex;
     border-radius: 50%;
-    background-color: #bd2929;
+    background-color: #41485b;
     font-family: arial,verdana,Microsoft YaHei,Tahoma,Simsun,sans-serif;
     color: #ffffff;
     font-size: 16px;
@@ -62,14 +147,280 @@
 
 }
 
-.tip .tip-close:hover {
-    /*background-color: #ffffff;
-    color: #a94f4f;*/
-    box-shadow: 0 0 5px 0px #9c1e1e;
+.tip .tip-close-out:hover {
+    box-shadow: 0 0 5px 0px #41485b;
+}
+
+.tip-fixed {
+    position: fixed;
+}
+
+.tip-bg-fixed {
+    position: fixed;
+    background-color: #000000;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.tip-fixed.top-left {
+    top: 0px;
+    left: 0px;
+}
+
+.tip-fixed.top-center {
+    top: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.tip-fixed.top-right {
+    top: 0px;
+    right: 0px;
+}
+
+.tip-fixed.bottom-left {
+    bottom: 0px;
+    left: 0px;
+}
+
+.tip-fixed.bottom-center {
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.tip-fixed.bottom-right {
+    bottom: 0px;
+    right: 0px;
+}
+
+.tip-fixed.center-left {
+    top: 50%;
+    left: 0px;
+    transform: translateY(-50%);
+}
+
+.tip-fixed.middle {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.tip-fixed.center-right {
+    top: 50%;
+    right: 0px;
+    transform: translateY(-50%);
 }
 
 .box-html {
     background-color: white;
-    broder: 1px solid #efefef;
+    /*border: 1px solid #efefef;*/
     border-radius: 5px;
+    margin: -15px -20px;
 }
+
+.tip-box.tip-add-icon {
+    padding-left: 50px;
+}
+
+.tip-icon-box {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+}
+
+.tip-icon-box .tip-icon {
+    position: relative;
+    display: inline-block;
+
+    box-sizing: border-box;
+
+    /*text-align: left;
+    vertical-align: middle;
+    text-indent: -10000px;
+    font-style: normal;
+    direction: ltr;*/
+
+    opacity: 0.6;
+}
+
+.tip-icon:before,
+.tip-icon:after {
+    content: '';
+    pointer-events: none;
+}
+
+.tip-icon.icon-check {
+    width: 30px;
+    height: 30px;
+    margin: 2px;
+    border: 2px solid;
+    border-radius: 50%;
+    color: #ddd;
+    transform: rotate(-45deg);
+}
+
+.tip-icon.icon-check:before {
+    position: absolute;
+    height: 2px;
+    width: 14px;
+    top: 15px;
+    left: 14px;
+
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.tip-icon.icon-check:after {
+    position: absolute;
+    width: 2px;
+    height: 8px;
+    left: 7px;
+    bottom: 10px;
+}
+
+.tip-icon.icon-check:before,
+.tip-icon.icon-check:after {
+    box-shadow: inset 0 0 0 32px;
+}
+
+.tip-icon.icon-cross {
+    width: 30px;
+    height: 30px;
+    margin: 2px;
+    border: 2px solid;
+    border-radius: 50%;
+    color: #ddd;
+    transform: rotate(45deg);
+}
+
+.tip-icon.icon-cross:before {
+    position: absolute;
+    width: 2px;
+    height: 16px;
+    top: 50%;
+    left: 50%;
+    background-color: #ddd;
+    transform: translate(-50%, -50%);
+}
+
+.tip-icon.icon-cross:after {
+    position: absolute;
+    width: 16px;
+    height: 2px;
+    top: 50%;
+    left: 50%;
+    background-color: #ddd;
+    transform: translate(-50%, -50%);
+}
+
+.tip-icon.icon-exclamation {
+    overflow: visible;
+    width: 32px;
+    border-bottom: 2px solid;
+    -webkit-border-radius: 0 0 4px 4px;
+    -moz-border-radius: 0 0 4px 4px;
+    -o-border-radius: 0 0 4px 4px;
+    border-radius: 0 0 4px 4px;
+    margin: 26px 2px 6px;
+}
+
+.tip-icon.icon-exclamation:before {
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    left: 1px;
+    top: -15px;
+    border-width: 2px 0 0 2px;
+    border-style: solid;
+    -webkit-border-radius: 4px 0;
+    -moz-border-radius: 4px 0;
+    -o-border-radius: 4px 0;
+    border-radius: 4px 0;
+    -webkit-transform: rotate(45deg) skew(14deg, 14deg);
+    -moz-transform: rotate(45deg) skew(14deg, 14deg);
+    -ms-transform: rotate(45deg) skew(14deg, 14deg);
+    -o-transform: rotate(45deg) skew(14deg, 14deg);
+    transform: rotate(45deg) skew(14deg, 14deg);
+}
+
+.tip-icon.icon-exclamation:after {
+    position: absolute;
+    left: 50%;
+    width: 4px;
+    height: 3px;
+    top: -15px;
+    
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transform: translateX(-50%);
+    box-shadow: inset 0 0 0 32px, 0 2px, 0 4px, 0 10px;
+}
+
+.tip-icon.icon-exclamation-circle {
+    width: 30px;
+    height: 30px;
+    margin: 2px;
+    border: 2px solid;
+    border-radius: 50%;
+    color: #ddd;
+    /*transform: rotate(45deg);*/
+}
+
+.tip-icon.icon-exclamation-circle:after {
+    position: absolute;
+    left: 50%;
+    width: 4px;
+    height: 3px;
+    top: 6px;
+    
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transform: translateX(-50%);
+    box-shadow: inset 0 0 0 32px, 0 2px, 0 4px, 0 10px;
+}
+
+.tip-icon[class*="icon-"].icon-success {
+    color: #00ff1d;
+}
+
+.tip-icon[class*="icon-"].icon-error {
+    color: #f00;
+}
+
+.tip-icon[class*="icon-"].icon-error:before,
+.tip-icon[class*="icon-"].icon-error:after {
+    background-color: #f00;
+}
+
+.tip-icon[class*="icon-"].icon-warning {
+    color: #ff9800;
+}
+
+.tip-icon[class*="icon-"].icon-info {
+    color: #00b0ff;
+}
+
+.tip-success [class*="icon-"],
+.tip-error [class*="icon-"],
+.tip-warning [class*="icon-"],
+.tip-info [class*="icon-"] {
+    color: #ffffff;
+}
+
+@media only screen and (max-width: 600px) {
+    .tip-limit {
+        max-width: 100%;
+    }
+}
+
