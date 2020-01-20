@@ -1,9 +1,9 @@
 /*Tips*/
-.tip-container {
+.ohoTip-container {
     width: 100%;
 }
 
-.tip-group {
+.ohoTip-group {
     overflow: hidden;
     position: absolute;
     display: -webkit-flex;
@@ -14,12 +14,12 @@
     height: auto;
 }
 
-.tip-group.tip-init {
+.ohoTip-group.ohoTip-init {
     top: 0 !important; 
     left: 0 !important;
 }
 
-.tip {
+.ohoTip {
     position: relative;
     display: -webkit-flex;
     justify-content: center;     /*子元素水平居中*/
@@ -27,76 +27,62 @@
     flex-wrap: wrap;
 
     font-size: 14px;
-
-    opacity: 0;
-    transition: opacity 1s, height 0.3s;
 }
 
-.tip-limit {
+.ohoTip-hide {
+    opacity: 0;
+}
+
+.ohoTip-limit {
     max-width: 400px;
 }
 
-.tip-group .tip + .tip {
+.ohoTip-group .ohoTip + .ohoTip {
     margin-top: 10px;
 }
 
-.tip-box {
+.ohoTip-box {
     position: relative;
     border-radius: 5px;
     background-color: #41485b;
     padding: 15px 20px;
 }
 
-.tip.tip-in {
-    opacity: 0.9;
-}
-
-.tip.tip-out {
-    opacity: 0;
-    height: 0 !important;
-}
-
-.tip-bg {
+.ohoTip-bg {
     position: absolute;
     background-color: #000000;
-    opacity: 0;
-    transition: opacity 1s;
 }
 
-.tip-bg.tip-bg-in {
-    opacity: .5;
-}
-
-.tip .tip-msg {
+.ohoTip .ohoTip-msg {
     /*padding: 15px 20px;*/
     border-radius: 5px;
     background-color: #41485b;
     color: #ffffff;    
 }
 
-.tip .tip-success,
-.tip .tip-msg.tip-msg-success {
+.ohoTip .ohoTip-success,
+.ohoTip .ohoTip-msg.ohoTip-msg-success {
     background-color: #2ecc40;
     color: #ffffff;
 }
 
-.tip .tip-error,
-.tip .tip-msg.tip-msg-error {
+.ohoTip .ohoTip-error,
+.ohoTip .ohoTip-msg.ohoTip-msg-error {
     background-color: #ff4136;
     color: #ffffff;
 }
 
-.tip .tip-warning,
-.tip .tip-msg.tip-msg-warning {
+.ohoTip .ohoTip-warning,
+.ohoTip .ohoTip-msg.ohoTip-msg-warning {
     background-color: #f39c12;
 }
 
-.tip .tip-info,
-.tip .tip-msg.tip-msg-info {
+.ohoTip .ohoTip-info,
+.ohoTip .ohoTip-msg.ohoTip-msg-info {
     background-color: #1496bb;
 }
 
-.tip .tip-close {
+.ohoTip .ohoTip-close {
     position: absolute;
     top: 2px;
     right: 2px;
@@ -115,18 +101,18 @@
     opacity: .8;
 }
 
-.tip .tip-close:hover {
+.ohoTip .ohoTip-close:hover {
     transform: scale(1.1);
 }
 
-.tip-success ~ .tip-close,
-.tip-error ~ .tip-close,
-.tip-warning ~ .tip-close,
-.tip-info ~ .tip-close {
+.ohoTip-success ~ .ohoTip-close,
+.ohoTip-error ~ .ohoTip-close,
+.ohoTip-warning ~ .ohoTip-close,
+.ohoTip-info ~ .ohoTip-close {
     color: #ffffff;
 }
 
-.tip .tip-close-out {
+.ohoTip .ohoTip-close-out {
     position: absolute;
     top: -10px;
     right: -10px;
@@ -147,15 +133,15 @@
 
 }
 
-.tip .tip-close-out:hover {
+.ohoTip .ohoTip-close-out:hover {
     box-shadow: 0 0 5px 0px #41485b;
 }
 
-.tip-fixed {
+.ohoTip-fixed {
     position: fixed;
 }
 
-.tip-bg-fixed {
+.ohoTip-bg-fixed {
     position: fixed;
     background-color: #000000;
     opacity: 0;
@@ -165,51 +151,51 @@
     height: 100%;
 }
 
-.tip-fixed.top-left {
+.ohoTip-fixed.top-left {
     top: 0px;
     left: 0px;
 }
 
-.tip-fixed.top-center {
+.ohoTip-fixed.top-center {
     top: 0px;
     left: 50%;
     transform: translateX(-50%);
 }
 
-.tip-fixed.top-right {
+.ohoTip-fixed.top-right {
     top: 0px;
     right: 0px;
 }
 
-.tip-fixed.bottom-left {
+.ohoTip-fixed.bottom-left {
     bottom: 0px;
     left: 0px;
 }
 
-.tip-fixed.bottom-center {
+.ohoTip-fixed.bottom-center {
     bottom: 0px;
     left: 50%;
     transform: translateX(-50%);
 }
 
-.tip-fixed.bottom-right {
+.ohoTip-fixed.bottom-right {
     bottom: 0px;
     right: 0px;
 }
 
-.tip-fixed.center-left {
+.ohoTip-fixed.center-left {
     top: 50%;
     left: 0px;
     transform: translateY(-50%);
 }
 
-.tip-fixed.middle {
+.ohoTip-fixed.middle {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
-.tip-fixed.center-right {
+.ohoTip-fixed.center-right {
     top: 50%;
     right: 0px;
     transform: translateY(-50%);
@@ -222,17 +208,54 @@
     margin: -15px -20px;
 }
 
-.tip-box.tip-add-icon {
+.ohoTip-box.ohoTip-add-icon {
+
+}
+
+.ohoTip-icon-box {
+    position: absolute;
+
+}
+
+.ohoTip-box.ohoTip-add-icon.icon-left {
     padding-left: 50px;
 }
 
-.tip-icon-box {
-    position: absolute;
-    top: 8px;
+.ohoTip-box.ohoTip-add-icon.icon-left .ohoTip-icon-box {
+    top: 9px;
     left: 8px;
 }
 
-.tip-icon-box .tip-icon {
+.ohoTip-box.ohoTip-add-icon.icon-right {
+    padding-right: 50px;
+}
+
+.ohoTip-box.ohoTip-add-icon.icon-right .ohoTip-icon-box {
+    top: 9px;
+    right: 8px;
+}
+
+.ohoTip-box.ohoTip-add-icon.icon-top {
+    padding-top: 50px;
+}
+
+.ohoTip-box.ohoTip-add-icon.icon-top .ohoTip-icon-box {
+    top: 9px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.ohoTip-box.ohoTip-add-icon.icon-bottom {
+    padding-bottom: 50px;
+}
+
+.ohoTip-box.ohoTip-add-icon.icon-bottom .ohoTip-icon-box {
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.ohoTip-icon-box .ohoTip-icon {
     position: relative;
     display: inline-block;
 
@@ -247,23 +270,22 @@
     opacity: 0.6;
 }
 
-.tip-icon:before,
-.tip-icon:after {
+.ohoTip-icon:before,
+.ohoTip-icon:after {
     content: '';
     pointer-events: none;
 }
 
-.tip-icon.icon-check {
+.ohoTip-icon.icon-check {
     width: 30px;
     height: 30px;
-    margin: 2px;
     border: 2px solid;
     border-radius: 50%;
     color: #ddd;
     transform: rotate(-45deg);
 }
 
-.tip-icon.icon-check:before {
+.ohoTip-icon.icon-check:before {
     position: absolute;
     height: 2px;
     width: 14px;
@@ -277,7 +299,7 @@
     transform: translate(-50%, -50%);
 }
 
-.tip-icon.icon-check:after {
+.ohoTip-icon.icon-check:after {
     position: absolute;
     width: 2px;
     height: 8px;
@@ -285,22 +307,21 @@
     bottom: 10px;
 }
 
-.tip-icon.icon-check:before,
-.tip-icon.icon-check:after {
+.ohoTip-icon.icon-check:before,
+.ohoTip-icon.icon-check:after {
     box-shadow: inset 0 0 0 32px;
 }
 
-.tip-icon.icon-cross {
+.ohoTip-icon.icon-cross {
     width: 30px;
     height: 30px;
-    margin: 2px;
     border: 2px solid;
     border-radius: 50%;
     color: #ddd;
     transform: rotate(45deg);
 }
 
-.tip-icon.icon-cross:before {
+.ohoTip-icon.icon-cross:before {
     position: absolute;
     width: 2px;
     height: 16px;
@@ -310,7 +331,7 @@
     transform: translate(-50%, -50%);
 }
 
-.tip-icon.icon-cross:after {
+.ohoTip-icon.icon-cross:after {
     position: absolute;
     width: 16px;
     height: 2px;
@@ -320,7 +341,7 @@
     transform: translate(-50%, -50%);
 }
 
-.tip-icon.icon-exclamation {
+.ohoTip-icon.icon-exclamation {
     overflow: visible;
     width: 32px;
     border-bottom: 2px solid;
@@ -331,7 +352,7 @@
     margin: 26px 2px 6px;
 }
 
-.tip-icon.icon-exclamation:before {
+.ohoTip-icon.icon-exclamation:before {
     position: absolute;
     width: 28px;
     height: 28px;
@@ -350,7 +371,7 @@
     transform: rotate(45deg) skew(14deg, 14deg);
 }
 
-.tip-icon.icon-exclamation:after {
+.ohoTip-icon.icon-exclamation:after {
     position: absolute;
     left: 50%;
     width: 4px;
@@ -365,17 +386,16 @@
     box-shadow: inset 0 0 0 32px, 0 2px, 0 4px, 0 10px;
 }
 
-.tip-icon.icon-exclamation-circle {
+.ohoTip-icon.icon-exclamation-circle {
     width: 30px;
     height: 30px;
-    margin: 2px;
     border: 2px solid;
     border-radius: 50%;
     color: #ddd;
     /*transform: rotate(45deg);*/
 }
 
-.tip-icon.icon-exclamation-circle:after {
+.ohoTip-icon.icon-exclamation-circle:after {
     position: absolute;
     left: 50%;
     width: 4px;
@@ -390,36 +410,130 @@
     box-shadow: inset 0 0 0 32px, 0 2px, 0 4px, 0 10px;
 }
 
-.tip-icon[class*="icon-"].icon-success {
+.ohoTip-icon.icon-clock {
+    width: 30px;
+    height: 30px;
+    border: 2px solid;
+    border-radius: 50%;
+    color: #ddd;
+    /*transform: rotate(-45deg);*/
+}
+
+.ohoTip-icon.icon-clock:before {
+    position: absolute;
+    left: 12.5px;
+    bottom: 13px;
+    height: 5px;
+    border-left-width: 0.5px;
+    border-style: solid;
+    border-radius: 50%;
+
+    -webkit-transform-origin: 50% 98%;
+    transform-origin: 50% 98%; 
+    -webkit-animation: clock 24s linear infinite; 
+    animation: clock 24s cubic-bezier(0, 0, 0.50, 0.50) infinite;
+}
+
+.ohoTip-icon.icon-clock:after {
+    position: absolute;
+    left: 12.5px;
+    bottom: 13px;
+    height: 7px;
+    border-left-width: 0.5px;
+    border-style: solid;
+    border-radius: 50%;
+
+    -webkit-transform-origin: 50% 98%;
+    transform-origin: 50% 98%; 
+    -webkit-animation: clock 2s linear infinite; 
+    animation: clock 2s cubic-bezier(0, 0, 0.50, 0.50) infinite;
+}
+
+@-webkit-keyframes clock{
+    0%{-webkit-transform:rotate(0deg);}
+    100%{-webkit-transform:rotate(360deg);}
+}
+
+@keyframes clock{
+    0%{transform:rotate(0deg);}
+    100%{transform:rotate(360deg);}
+}
+
+.ohoTip-icon[class*="icon-"].icon-success {
     color: #00ff1d;
 }
 
-.tip-icon[class*="icon-"].icon-error {
+.ohoTip-icon[class*="icon-"].icon-error {
     color: #f00;
 }
 
-.tip-icon[class*="icon-"].icon-error:before,
-.tip-icon[class*="icon-"].icon-error:after {
+.ohoTip-icon[class*="icon-"].icon-error:before,
+.ohoTip-icon[class*="icon-"].icon-error:after {
     background-color: #f00;
 }
 
-.tip-icon[class*="icon-"].icon-warning {
+.ohoTip-icon[class*="icon-"].icon-warning {
     color: #ff9800;
 }
 
-.tip-icon[class*="icon-"].icon-info {
+.ohoTip-icon[class*="icon-"].icon-info {
     color: #00b0ff;
 }
 
-.tip-success [class*="icon-"],
-.tip-error [class*="icon-"],
-.tip-warning [class*="icon-"],
-.tip-info [class*="icon-"] {
+.ohoTip-success [class*="icon-"],
+.ohoTip-error [class*="icon-"],
+.ohoTip-warning [class*="icon-"],
+.ohoTip-info [class*="icon-"] {
     color: #ffffff;
 }
 
+.ohoTip-amt-oho {
+    transition: opacity 1s, height 0.3s;
+}
+
+.ohoTip-bg-amt-oho {
+    transition: opacity 1s;
+}
+
+.ohoTip-amt-oho.in {
+    opacity: 0.9;
+}
+
+.ohoTip-amt-oho.out {
+    opacity: 0;
+    height: 0 !important;
+}
+
+.ohoTip-bg-amt-oho.in {
+    opacity: .5;
+}
+
+.ohoTip-amt-A {
+    transition: opacity 1s, top 0.2s, left 0.2s, height 0.2s, width 0.2s;
+}
+
+.ohoTip-bg-amt-A {
+    transition: opacity 1s;
+}
+
+.ohoTip-amt-A.in {
+    opacity: 0.9;
+}
+
+.ohoTip-amt-A.out {
+    opacity: 0;
+    height: 0 !important;
+}
+
+.ohoTip-bg-amt-A.in {
+    opacity: .5;
+}
+
+
+
+
 @media only screen and (max-width: 600px) {
-    .tip-limit {
+    .ohoTip-limit {
         max-width: 100%;
     }
 }
