@@ -17,6 +17,7 @@ function tipDefault() {
     }
     document.querySelector('#btn-body-top-center').onclick = function() {
         var msg = '窗口上居中，类型：success';
+        var a = "0px 759.6px 377.2px 663.6px";
         ohoTips({
             parentElement: bodyElement,         //父元素为空或者body，则定位基于整个窗口
             position: "top-center",             //Tip显示位置，窗口上居中
@@ -303,7 +304,7 @@ function tipDefault() {
             ohoTips().success(msg, parent);
         }, 1000);
         setTimeout(function () {
-            ohoTips().error(msg, $(parent));
+            ohoTips().error(msg, parent);
         }, 2000);
         setTimeout(function () {
             ohoTips().warning(msg, parent);
@@ -918,6 +919,91 @@ function animation() {
             animation: {
                 in: 'oho',
                 out: 'oho',
+            },
+            msg: msg,
+        })
+    };
+
+    document.querySelector('#btn-animation-gf-1').onclick = function() {
+        var position = 'top-left';
+        var icon = 'success';
+        var icon = 'info';
+        var msg = ['当前时间： ' , new Date(), new Date(), new Date(), new Date(), new Date(), new Date(), new Date()];
+        
+        ohoTips({
+            // parentElement: parentElementAnimation,
+            position: position,
+            background: true,
+            type: 'normal',
+            //limit: false,
+            icon: icon,
+            group: {
+                name: 'amtGroup-gf',
+                len: 4,
+            },
+            destroy: "manual",
+            animation: {
+                in: 'gf',
+                out: 'gf',
+                delay: 1000,
+            },
+            msg: msg,
+        })
+    };
+
+    document.querySelector('#btn-animation-gf-2').onclick = function() {
+        var position = 'center-left';
+        var icon = 'success';
+        var msg = ['当前时间： ' , new Date()];
+        
+        ohoTips({
+            // parentElement: parentElementAnimation,
+            position: position,
+            // background: true,
+            type: 'warning',
+            //limit: false,
+            icon: icon,
+            shadow: true,
+            group: {
+                name: 'amtGroup-gf',
+                len: 4,
+            },
+            destroy: "manual",
+            animation: {
+                in: 'gf',
+                out: 'gf',
+                fragments: {
+                    xCount: 5,
+                    yCount: 5,
+                },
+                delay: 1000,
+            },
+            msg: msg,
+        })
+    };
+
+    document.querySelector('#btn-animation-gf-3').onclick = function() {
+        var position = 'bottom-left';
+        var icon = 'success';
+        var icon = 'info';
+        var msg = ['当前时间： ' , new Date(), new Date(), new Date(), new Date(), new Date()];
+        
+        ohoTips({
+            // parentElement: parentElementAnimation,
+            position: position,
+            // background: true,
+            type: 'info',
+            //limit: false,
+            // icon: icon,
+            group: {
+                name: 'amtGroup-gf',
+                len: 4,
+            },
+            destroy: "manual",
+            animation: {
+                in: 'gf',
+                out: 'gf',
+                delay: 1000,
             },
             msg: msg,
         })

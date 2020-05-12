@@ -4,7 +4,7 @@
 }
 
 .ohoTip-group {
-    overflow: hidden;
+    /*overflow: hidden;*/
     position: absolute;
     display: -webkit-flex;
     justify-content: center;
@@ -48,38 +48,155 @@
     padding: 15px 20px;
 }
 
+.ohoTip-box-no-shadow {
+    box-shadow: none !important;
+}
+
+.ohoTip .ohoTip-box {
+    text-shadow: 0px 0px 0px #464646;
+    box-shadow: 3px 4px 4px #9b9b9b;
+    background: -webkit-linear-gradient(top,#626262,#373737);
+    background: -moz-linear-gradient(top,#626262,#373737);
+    background: linear-gradient(top,#626262,#373737);
+}
+
+.ohoTip .ohoTip-box:hover {
+    background: -webkit-linear-gradient(top,#373737,#626262);
+    background: -moz-linear-gradient(top,#373737,#626262);
+    background: linear-gradient(top,#373737,#626262);
+}
+
+.ohoTip .ohoTip-box:active {
+    box-shadow: 0 0 0 #464646;
+    background: -webkit-linear-gradient(top,#626262,#373737);
+    background: -moz-linear-gradient(top,#626262,#373737);
+    background: linear-gradient(top,#626262,#373737);
+}
+
 .ohoTip-bg {
     position: absolute;
     background-color: #000000;
 }
 
+.ohoTip-bg~.ohoTip-group .ohoTip-box {
+    box-shadow: none;
+}
+
 .ohoTip .ohoTip-msg {
     /*padding: 15px 20px;*/
     border-radius: 5px;
-    background-color: #41485b;
-    color: #ffffff;    
+    /*background-color: #41485b;*/
+    background-color: transparent;
+    color: #ffffff;
 }
 
 .ohoTip .ohoTip-success,
 .ohoTip .ohoTip-msg.ohoTip-msg-success {
-    background-color: #2ecc40;
+    /*background-color: #2ecc40;*/
+    background-color: transparent;
     color: #ffffff;
+}
+
+.ohoTip .ohoTip-success {
+    text-shadow: 0px 0px 0px #464646;
+    box-shadow: 3px 4px 4px #9b9b9b;
+    background: -webkit-linear-gradient(top,#8BC34A,#009688);
+    background: -moz-linear-gradient(top,#8BC34A,#009688);
+    background: linear-gradient(top,#8BC34A,#009688);
+}
+
+.ohoTip .ohoTip-success:hover {
+    background: -webkit-linear-gradient(top,#009688,#8BC34A);
+    background: -moz-linear-gradient(top,#009688,#8BC34A);
+    background: linear-gradient(top,#009688,#8BC34A);
+}
+
+.ohoTip .ohoTip-success:active {
+    box-shadow: 0 0 0 #464646;
+    background: -webkit-linear-gradient(top,#509500,#3a6c00);
+    background: -moz-linear-gradient(top,#509500,#3a6c00);
+    background: linear-gradient(top,#509500,#3a6c00);
 }
 
 .ohoTip .ohoTip-error,
 .ohoTip .ohoTip-msg.ohoTip-msg-error {
-    background-color: #ff4136;
+    /*background-color: #ff4136;*/
+    background-color: transparent;
     color: #ffffff;
+}
+
+.ohoTip .ohoTip-error {
+    text-shadow: 0px 0px 0px #464646;
+    box-shadow: 3px 4px 4px #9b9b9b;
+    background: -webkit-linear-gradient(top,#ff0000,#9b0000);
+    background: -moz-linear-gradient(top,#ff0000,#9b0000);
+    background: linear-gradient(top,#ff0000,#9b0000);
+}
+
+.ohoTip .ohoTip-error:hover {
+    background: -webkit-linear-gradient(top,#9b0000,#ff0000);
+    background: -moz-linear-gradient(top,#9b0000,#ff0000);
+    background: linear-gradient(top,#9b0000,#ff0000);
+}
+
+.ohoTip .ohoTip-error:active {
+    box-shadow: 0 0 0 #464646;
+    background: -webkit-linear-gradient(top,#ff0000,#a90606);
+    background: -moz-linear-gradient(top,#ff0000,#a90606);
+    background: linear-gradient(top,#ff0000,#a90606);
 }
 
 .ohoTip .ohoTip-warning,
 .ohoTip .ohoTip-msg.ohoTip-msg-warning {
-    background-color: #f39c12;
+    /*background-color: #f39c12;*/
+    background-color: transparent;
+}
+
+.ohoTip .ohoTip-warning {
+    text-shadow: 0px 0px 0px #464646;
+    box-shadow: 3px 4px 4px #9b9b9b;
+    background: -webkit-linear-gradient(top,#FFC107,#FF9800);
+    background: -moz-linear-gradient(top,#FFC107,#FF9800);
+    background: linear-gradient(top,#FFC107,#FF9800);
+}
+
+.ohoTip .ohoTip-warning:hover {
+    background: -webkit-linear-gradient(top,#FF9800,#FFC107);
+    background: -moz-linear-gradient(top,#FF9800,#FFC107);
+    background: linear-gradient(top,#FF9800,#FFC107);
+}
+
+.ohoTip .ohoTip-warning:active {
+    box-shadow: 0 0 0 #464646;
+    background: -webkit-linear-gradient(top,#FFC107,#FF9800);
+    background: -moz-linear-gradient(top,#FFC107,#FF9800);
+    background: linear-gradient(top,#FFC107,#FF9800);
 }
 
 .ohoTip .ohoTip-info,
 .ohoTip .ohoTip-msg.ohoTip-msg-info {
-    background-color: #1496bb;
+    /*background-color: #1496bb;*/
+    background-color: transparent;
+}
+
+.ohoTip .ohoTip-info {
+    box-shadow: 3px 4px 3px #8b8b8b;
+    background: -webkit-linear-gradient(top,#2196F3,#00BCD4);
+    background: -moz-linear-gradient(top,#2196F3,#00BCD4);
+    background: linear-gradient(top,#2196F3,#00BCD4);
+}
+
+.ohoTip .ohoTip-info:hover {
+    background: -webkit-linear-gradient(top,#00BCD4,#2196F3);
+    background: -moz-linear-gradient(top,#00BCD4,#2196F3);
+    background: linear-gradient(top,#00BCD4,#2196F3);
+}
+
+.ohoTip .ohoTip-info:active {
+    box-shadow: 0 0 0 #fff;
+    background: -webkit-linear-gradient(top,#2196F3,#00BCD4);
+    background: -moz-linear-gradient(top,#2196F3,#00BCD4);
+    background: linear-gradient(top,#2196F3,#00BCD4);
 }
 
 .ohoTip .ohoTip-close {
@@ -139,6 +256,7 @@
 
 .ohoTip-fixed {
     position: fixed;
+    /*width: 300px;*/
 }
 
 .ohoTip-bg-fixed {
@@ -487,29 +605,8 @@
     color: #ffffff;
 }
 
-.ohoTip-amt-oho {
-    transition: opacity 1s, height 0.3s;
-}
-
-.ohoTip-bg-amt-oho {
-    transition: opacity 1s;
-}
-
-.ohoTip-amt-oho.in {
-    opacity: 0.9;
-}
-
-.ohoTip-amt-oho.out {
-    opacity: 0;
-    height: 0 !important;
-}
-
-.ohoTip-bg-amt-oho.in {
-    opacity: .5;
-}
-
 .ohoTip-amt-A {
-    transition: opacity 1s, top 0.2s, left 0.2s, height 0.2s, width 0.2s;
+    transition: opacity 1s, height 0.3s;
 }
 
 .ohoTip-bg-amt-A {
@@ -529,7 +626,57 @@
     opacity: .5;
 }
 
+.ohoTip-amt-oho {
+    transition: opacity 1s, top 0.2s, left 0.2s, height 0.2s, width 0.2s;
+}
 
+.ohoTip-bg-amt-oho {
+    transition: opacity 1s;
+}
+
+.ohoTip-amt-oho.in {
+    opacity: 0.9;
+}
+
+.ohoTip-amt-oho.out {
+    opacity: 0;
+    height: 0 !important;
+}
+
+.ohoTip-bg-amt-oho.in {
+    opacity: .5;
+}
+
+.ohoTip-amt-GF {
+    transition: opacity 1s, height 0.3s;
+}
+
+.ohoTip-bg-amt-GF {
+    transition: opacity 1s;
+}
+
+.ohoTip-amt-GF.in {
+    opacity: 0.9;
+}
+
+.ohoTip-amt-GF.out {
+    opacity: 0;
+    height: 0 !important;
+}
+
+.ohoTip-bg-amt-GF.in {
+    opacity: .5;
+}
+
+.ohoTip-amt-GF-fragment {
+    transition: 1s;
+    transform-origin: 0 0;
+}
+
+.ohoTip-amt-GF-fragment.active {
+    /*opacity: 0;*/
+    transform: rotate(180deg);
+}
 
 
 @media only screen and (max-width: 600px) {

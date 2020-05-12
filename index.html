@@ -4,8 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Tips 插件</title>
+
     <link href="css/index.css" rel="stylesheet">
     <link href="lib/ohoTips/css/ohoTips.css" rel="stylesheet">
+
+    <style>
+        /*::-webkit-scrollbar {
+            overflow-x:hidden;
+        }*/
+    </style>
 </head>
 <body>
     <div id="box-parent" class="box-parent box-center">
@@ -121,13 +128,13 @@
             <div style="padding-bottom: 20px">
                 <h5>消息分组</h5>
                 <div class="box-space-enenly">
-                    <button id="btn-group-1" class="button button-static gray-2">第一消息分组</button>
+                    <button id="btn-group-1" class="button button-static violet">第一消息分组</button>
                 </div>
                 <div class="box-space-enenly">
-                    <button id="btn-group-2" class="button button-static gray-2">第二消息分组</button>
+                    <button id="btn-group-2" class="button button-static violet">第二消息分组</button>
                 </div>
                 <div class="box-space-enenly">
-                    <button id="btn-group-3" class="button button-static gray-2">第三消息分组</button>
+                    <button id="btn-group-3" class="button button-static violet">第三消息分组</button>
                 </div>
             </div>
         </div>
@@ -144,13 +151,21 @@
                     <button id="btn-animation-a" class="button button-static gray-2">动画类型A</button>
                 </div>
                 <div class="box-space-enenly">
+                    <button id="btn-animation-gf-1" class="button button-static red">动画类型-玻璃碎片-top-left</button>
+                    <button id="btn-animation-gf-2" class="button button-static red">动画类型-玻璃碎片-center-left</button>
+                    <button id="btn-animation-gf-3" class="button button-static red">动画类型-玻璃碎片-bottom-left</button>
+                </div>
+                <div class="box-space-enenly">
                     <button id="btn-animation-cus1" class="button button-static gray-2">自定义动画类型-1</button>
                 </div>
             </div>
         </div>
     </div>
+    <div id="div" style="width: 300px">
+    </div>
 </body>
 <!-- <script src="lib/jquery-1.10.2/jquery-1.10.2.js"></script> -->
 <script src="lib/ohoTips/js/ohoTips.js"></script>
 <script src="js/supported.js"></script>
+<script type="text/javascript" src="lib/html2canvas/html2canvas.js"></script>
 </html>
