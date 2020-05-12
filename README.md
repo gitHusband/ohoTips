@@ -2,7 +2,7 @@
 Tips is a JS plug-in that facilitates the generation of prompt information which is in the middle or other location relative to any parent element.
 
 # 使用方法
-将 jquery-tips 文件夹包含到你的项目并引用。
+将 ohoTips 文件夹包含到你的项目并引用。
 
     * 第一种方法，用于特殊需求定制
     ohoTips({
