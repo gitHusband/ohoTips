@@ -15,11 +15,93 @@
     </style>
 </head>
 <body>
+    <div id="box-def-config" class="box-def-config box-center">
+        <div id="def-config-icon-box" class="icon-box"><span class="box-center"><i class="def-config-icon"></i></span></div>
+        <div style="width: 85%">
+            <div class="box-def-content">
+                <div style="text-align:center; margin-bottom: 10px;color: white"><h3>Tips 默认配置</h3></div>
+                <div class="box-space-enenly">
+                    <div class="label-box">
+                        <label>
+                            <input id="def-parent" name="def-parent" type="checkbox" value="#box-def-config">
+                            <div for="def-parent" class="checkbox-label label-static red-2">父元素</div>
+                        </label>
+                    </div>
+                    <div class="label-box">
+                        <label class="">
+                            <input id="def-direction" type="checkbox" name="def-direction" value="outer">
+                            <div for="def-direction" class="checkbox-label label-static red-2">外围定位</div>
+                        </label>
+                    </div>
+                    <div class="label-box">
+                        <label class="">
+                            <input id="def-group" type="checkbox" name="def-group" value="staticGroupName">
+                            <div for="def-group" class="checkbox-label label-static red-2">分组</div>
+                        </label>
+                    </div>
+                </div>
+                <div class="box-space-enenly">
+                    <div class="label-box">
+                        <label class="">
+                            <input id="def-offset" type="checkbox" name="def-offset" value="outer" onclick="clickDefDirection(this)">
+                            <div for="def-offset" class="checkbox-label label-static red-2">定位偏移</div>
+                        </label>
+                    </div>
+                    <div class="label-box">
+                        <label class="">
+                            <input id="def-binder" type="checkbox" name="def-binder" value="true">
+                            <div for="def-binder" class="checkbox-label label-static red-2">粘合器</div>
+                        </label>
+                    </div>
+                    <div class="label-box">
+                        <label class="">
+                            <input id="def-icon" type="checkbox" name="def-icon" value="true">
+                            <div for="def-icon" class="checkbox-label label-static red-2">图标</div>
+                        </label>
+                    </div>
+                </div>
+                <div class="box-space-enenly">
+                    <div class="label-box">
+                        <label class="">
+                            <input id="def-background" type="checkbox" name="def-background" value="true">
+                            <div for="def-background" class="checkbox-label label-static red-2">遮罩层</div>
+                        </label>
+                    </div>
+                    <div class="label-box">
+                        <label class="">
+                            <input id="def-shadow" type="checkbox" name="def-shadow" value="true">
+                            <div for="def-shadow" class="checkbox-label label-static red-2">阴影</div>
+                        </label>
+                    </div>
+                    <div class="label-box">
+                        <label>
+                            <input id="def-destroy" name="def-destroy" type="checkbox" value="manual">
+                            <div for="def-destroy" class="checkbox-label label-static red-2">手动销毁</div>
+                        </label>
+                    </div>
+                </div>
+                <div class="box-space-enenly">
+                    <div class="label-box">
+                        <label class="">
+                            <input id="def-animation-oho" type="checkbox" name="def-animation-oho" value="oho">
+                            <div for="def-animation-oho" class="checkbox-label label-static red-2">动画oho</div>
+                        </label>
+                    </div>
+                    <div class="label-box">
+                        <label class="">
+                            <input id="def-animation-gf" type="checkbox" name="def-animation-gf" value="gf">
+                            <div for="def-animation-gf" class="checkbox-label label-static red-2">动画oho</div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div id="box-parent" class="box-parent box-center">
         <div style="width: 85%">
             <div style="text-align:center; margin-bottom: 10px"><h3>Tips 类型</h3></div>
             <div>
-                <h5>默认位置</h5>
+                <!-- <h5>默认位置</h5> -->
                 <div class="box-space-enenly">
                     <button id="btn-body-top-left" class="button button-static blue">窗口左上角</button>
                     <button id="btn-body-top-center" class="button button-static blue">窗口上居中</button button-static>
@@ -36,19 +118,19 @@
                     <button id="btn-body-bottom-right" class="button button-static blue">窗口右下角</button>
                 </div>
                 <div class="box-space-enenly">
-                    <button id="btn-top-left" class="button button-static gray-2">左上角</button>
-                    <button id="btn-top-center" class="button button-static gray-2">上居中</button button-static>
-                    <button id="btn-top-right" class="button button-static gray-2">右上角</button>
+                    <button id="btn-top-left" name="directionBtn" class="button button-static gray-2">左上角</button>
+                    <button id="btn-top-center" name="directionBtn" class="button button-static gray-2">上居中</button button-static>
+                    <button id="btn-top-right" name="directionBtn" class="button button-static gray-2">右上角</button>
                 </div>
                 <div class="box-space-enenly">
-                    <button id="btn-center-left" class="button button-static gray-2">左居中</button>
-                    <button id="btn-middle" class="button button-static gray-2">垂直居中</button>
-                    <button id="btn-center-right" class="button button-static gray-2">右居中</button>
+                    <button id="btn-center-left" name="directionBtn" class="button button-static gray-2">左居中</button>
+                    <button id="btn-middle" name="directionBtn" class="button button-static gray-2">垂直居中</button>
+                    <button id="btn-center-right" name="directionBtn" class="button button-static gray-2">右居中</button>
                 </div>
                 <div class="box-space-enenly">
-                    <button id="btn-bottom-left" class="button button-static gray-2">左下角</button>
-                    <button id="btn-bottom-center" class="button button-static gray-2">下居中</button>
-                    <button id="btn-bottom-right" class="button button-static gray-2">右下角</button>
+                    <button id="btn-bottom-left" name="directionBtn" class="button button-static gray-2">左下角</button>
+                    <button id="btn-bottom-center" name="directionBtn" class="button button-static gray-2">下居中</button>
+                    <button id="btn-bottom-right" name="directionBtn" class="button button-static gray-2">右下角</button>
                 </div>
                 <div class="box-space-enenly">
                     <button id="btn-array-top" class="button button-static yellow">信息换行-top</button>
@@ -66,37 +148,95 @@
                     <button id="btn-html" class="button button-static yellow">html元素</button>
                 </div>
             </div>
-            <div style="padding-bottom: 20px">
-                <h5>自定义位置</h5>
+            <div style="padding-bottom: 20px; margin-top: 20px">
+                <!-- <h5>自定义位置</h5> -->
+                <div class="box-space-enenly">
+                    <div class="label-box">
+                        <label class="">
+                            <input id="background" type="checkbox" name="background" value="true" checked="checked">
+                            <div for="background" class="checkbox-label label-static red-2">遮罩层</div>
+                        </label>
+                    </div>
+                    <div class="label-box">
+                        <label class="">
+                            <input id="direction" type="checkbox" name="direction" value="outer" onclick="clickDirection(this)">
+                            <div for="direction" class="checkbox-label label-static red-2">外围定位</div>
+                        </label>
+                    </div>
+                    <!-- <div class="label-box">
+                        <label>
+                            <input name="destroy" type="radio" value="auto" checked="checked">
+                            <div class="checkbox-label label-static red-2">自动销毁</div>
+                        </label>
+                    </div> -->
+                    <div class="label-box">
+                        <label>
+                            <input name="destroy" type="checkbox" value="manual">
+                            <div class="checkbox-label label-static red-2">手动销毁</div>
+                        </label>
+                    </div>
+                </div>
                 <div class="box-space-enenly">
                     <div >
-                        <label for="cus-top" class="label1">Top -</label>
+                        <label for="cus-top" class="label1">Top(n/%)</label>
                         <input id="cus-top" class="input-1">
                     </div>
                     <div >
-                        <label for="cus-left" class="label1">left -</label>
+                        <label for="cus-left" class="label1">left(n/%)</label>
                         <input id="cus-left" class="input-1">
                     </div>
                     <div >
-                        <label for="cus-bottom" class="label1">bottom -</label>
+                        <label for="cus-bottom" class="label1">bottom(n/%)</label>
                         <input id="cus-bottom" class="input-1">
                     </div>
                     <div >
-                        <label for="cus-right" class="label1">right -</label>
+                        <label for="cus-right" class="label1">right(n/%)</label>
                         <input id="cus-right" class="input-1">
                     </div>
                 </div>
                 <div class="box-space-enenly" style="margin: 5px 0;">
                     <button id="btn-custom-normal" class="button black" style="padding: 5px 15px">普通定位</button>
-                    <button id="btn-custom-default" class="button black" style="padding: 5px 15px">内部(默认定位)</button>
-                    <button id="btn-custom-outer" class="button black" style="padding: 5px 15px">外部定位</button>
+                    <button id="btn-custom-default" class="button black" style="padding: 5px 15px">内部(默认)</button>
+                    <button id="btn-custom-outside" class="button black" style="padding: 5px 15px">外部定位</button>
+                    <button id="btn-custom-outer" class="button black" style="padding: 5px 15px">外围定位</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="box-outer" class="box-float box-center">
+        <div style="width: 85%">
+            <div style="text-align:center; margin-bottom: 10px"><h3>Tips 类型</h3></div>
+            <div style="padding-bottom: 20px">
+                <h5>外围提醒</h5>
+                <div class="box-space-enenly">
+                    <button id="btn-outer-top-left" name="outerBtn" class="button button-static orange">左上角</button>
+                    <button id="btn-outer-top-center" name="outerBtn" class="button button-static orange">上居中</button button-static>
+                    <button id="btn-outer-top-right" name="outerBtn" class="button button-static orange">右上角</button>
+                </div>
+                <div class="box-space-enenly">
+                    <button id="btn-outer-center-left" name="outerBtn" class="button button-static orange">左居中</button>
+                    <button id="btn-outer-middle" name="outerBtn" class="button button-static orange">垂直居中</button>
+                    <button id="btn-outer-center-right" name="outerBtn" class="button button-static orange">右居中</button>
+                </div>
+                <div class="box-space-enenly">
+                    <button id="btn-outer-bottom-left" name="outerBtn" class="button button-static orange">左下角</button>
+                    <button id="btn-outer-bottom-center" name="outerBtn" class="button button-static orange">下居中</button>
+                    <button id="btn-outer-bottom-right" name="outerBtn" class="button button-static orange">右下角</button>
+                </div>
+                <div class="box-space-enenly">
+                    <button id="btn-outer-left-top" name="outerBtn" class="button button-static orange">上左角</button>
+                    <button id="btn-outer-right-top" name="outerBtn" class="button button-static orange">上右角</button>
+                </div>
+                <div class="box-space-enenly">
+                    <button id="btn-outer-left-bottom" name="outerBtn" class="button button-static orange">下左角</button>
+                    <button id="btn-outer-right-bottom" name="outerBtn" class="button button-static orange">下右角</button>
                 </div>
             </div>
         </div>
     </div>
     <div id="box-float" class="box-float box-center">
         <div style="width: 85%">
-            <div style="text-align:center; margin-bottom: 10px"><h3>Tips 类型</h3></div>
+            <div style="text-align:center; margin-bottom: 10px"><h3>Tips 浮动</h3></div>
             <div style="padding-bottom: 20px">
                 <h5>浮动</h5>
                 <div class="box-space-enenly">
@@ -124,31 +264,31 @@
     </div>
     <div id="box-group" class="box-group box-center">
         <div style="width: 85%">
-            <div style="text-align:center; margin-bottom: 10px"><h3>Tips 类型</h3></div>
+            <div style="text-align:center; margin-bottom: 10px"><h3>Tips 分组</h3></div>
             <div style="padding-bottom: 20px">
                 <h5>消息分组</h5>
                 <div class="box-space-enenly">
-                    <button id="btn-group-1" class="button button-static violet">第一消息分组</button>
+                    <button id="btn-group-1" class="button button-static blue-2">第一消息分组</button>
                 </div>
                 <div class="box-space-enenly">
-                    <button id="btn-group-2" class="button button-static violet">第二消息分组</button>
+                    <button id="btn-group-2" class="button button-static blue-2">第二消息分组</button>
                 </div>
                 <div class="box-space-enenly">
-                    <button id="btn-group-3" class="button button-static violet">第三消息分组</button>
+                    <button id="btn-group-3" class="button button-static blue-2">第三消息分组</button>
                 </div>
             </div>
         </div>
     </div>
     <div id="box-animation" name='box-js-name' class="box-animation box-center">
         <div style="width: 85%">
-            <div style="text-align:center; margin-bottom: 10px"><h3>Tips 类型</h3></div>
+            <div style="text-align:center; margin-bottom: 10px"><h3>Tips 动画</h3></div>
             <div style="padding-bottom: 20px">
                 <h5>动画</h5>
                 <div class="box-space-enenly">
                     <button id="btn-animation-oho" class="button button-static gray-2">默认动画</button>
                 </div>
                 <div class="box-space-enenly">
-                    <button id="btn-animation-a" class="button button-static gray-2">动画类型A</button>
+                    <button id="btn-animation-a" class="button button-static green">动画类型A</button>
                 </div>
                 <div class="box-space-enenly">
                     <button id="btn-animation-gf-1" class="button button-static red">动画类型-玻璃碎片-top-left</button>
@@ -156,7 +296,7 @@
                     <button id="btn-animation-gf-3" class="button button-static red">动画类型-玻璃碎片-bottom-left</button>
                 </div>
                 <div class="box-space-enenly">
-                    <button id="btn-animation-cus1" class="button button-static gray-2">自定义动画类型-1</button>
+                    <button id="btn-animation-cus1" class="button button-static yellow">自定义动画类型-1</button>
                 </div>
             </div>
         </div>
