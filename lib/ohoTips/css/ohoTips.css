@@ -44,6 +44,10 @@
     margin-top: 10px;
 }
 
+.ohoTip-group .ohoTip.out + .ohoTip {
+    margin-top: 0px;
+}
+
 .ohoTip-box {
     position: relative;
     border-radius: 5px;
@@ -215,7 +219,7 @@
     display:-webkit-flex;
     border-radius: 50%;
     font-family: arial,verdana,Microsoft YaHei,Tahoma,Simsun,sans-serif;
-    color: #c2c2c2;
+    color: white;
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
@@ -608,27 +612,55 @@
     color: #ffffff;
 }
 
-.ohoTip-amt-A {
-    transition: opacity 1s, height 0.3s;
-}
-
-.ohoTip-bg-amt-A {
+/*----------------- 淡入淡出 -----------------*/
+.ohoTip-amt-fade {
     transition: opacity 1s;
 }
 
-.ohoTip-amt-A.in {
+.ohoTip-bg-amt-fade {
+    transition: opacity 1s;
+}
+
+.ohoTip-amt-fade.in {
     opacity: 0.9;
 }
 
-.ohoTip-amt-A.out {
+.ohoTip-amt-fade.out {
     opacity: 0;
+}
+
+.ohoTip-bg-amt-fade.in {
+    opacity: .5;
+}
+/*----------------- 淡入淡出 -----------------*/
+
+
+/*----------------- 折叠特效 -----------------*/
+.ohoTip-amt-fold {
+    overflow: hidden;
+    height: 0;
+    transition: height 0.3s;
+    opacity: 0.9
+}
+
+.ohoTip-bg-amt-fold {
+    transition: opacity 1s;
+}
+
+.ohoTip-amt-fold.in {
+    opacity: 0.9;
+}
+
+.ohoTip-amt-fold.out {
     height: 0 !important;
 }
 
-.ohoTip-bg-amt-A.in {
+.ohoTip-bg-amt-fold.in {
     opacity: .5;
 }
+/*----------------- 折叠特效 -----------------*/
 
+/*----------------- oho特效 -----------------*/
 .ohoTip-amt-oho {
     transition: opacity 1s, top 0.2s, left 0.2s, height 0.2s, width 0.2s;
 }
@@ -649,7 +681,9 @@
 .ohoTip-bg-amt-oho.in {
     opacity: .5;
 }
+/*----------------- oho特效 -----------------*/
 
+/*----------------- 碎片化特效 -----------------*/
 .ohoTip-amt-GF {
     transition: opacity 1s, height 0.3s;
 }
@@ -680,12 +714,17 @@
     /*opacity: 0;*/
     transform: rotate(180deg);
 }
+/*----------------- 碎片化特效 -----------------*/
 
-.ohoTip-binder {
+.ohoTip-symbol-box {
+
+}
+
+.ohoTip-symbol {
     opacity: .9
 }
 
-.ohoTip-binder.triangle-top-left {
+.ohoTip-symbol.triangle-top-left {
     position: absolute;
     top: -16px;
     left: 4px;
@@ -699,7 +738,7 @@
     border-left-color: transparent !important;
 }
 
-.ohoTip-binder.triangle-top-center {
+.ohoTip-symbol.triangle-top-center {
     position: absolute;
     top: -16px;
     left: 50%;
@@ -714,7 +753,7 @@
     border-left-color: transparent !important;
 }
 
-.ohoTip-binder.triangle-top-right {
+.ohoTip-symbol.triangle-top-right {
     position: absolute;
     top: -16px;
     right: 4px;
@@ -728,7 +767,7 @@
     border-left-color: transparent !important;
 }
 
-.ohoTip-binder.triangle-center-left {
+.ohoTip-symbol.triangle-center-left {
     position: absolute;
     top: 50%;
     left: -16px;
@@ -743,11 +782,11 @@
     border-left-color: transparent !important;
 }
 
-.ohoTip-binder.triangle-middle {
+.ohoTip-symbol.triangle-middle {
     
 }
 
-.ohoTip-binder.triangle-center-right {
+.ohoTip-symbol.triangle-center-right {
     position: absolute;
     top: 50%;
     right: -16px;
@@ -762,7 +801,7 @@
     border-left-color: #454545;
 }
 
-.ohoTip-binder.triangle-bottom-left {
+.ohoTip-symbol.triangle-bottom-left {
     position: absolute;
     bottom: -16px;
     left: 4px;
@@ -776,7 +815,7 @@
     border-left-color: transparent !important;
 }
 
-.ohoTip-binder.triangle-bottom-center {
+.ohoTip-symbol.triangle-bottom-center {
     position: absolute;
     bottom: -16px;
     left: 50%;
@@ -791,7 +830,7 @@
     border-left-color: transparent !important;
 }
 
-.ohoTip-binder.triangle-bottom-right {
+.ohoTip-symbol.triangle-bottom-right {
     position: absolute;
     bottom: -16px;
     right: 4px;
@@ -805,7 +844,7 @@
     border-left-color: transparent !important;
 }
 
-.ohoTip-binder.triangle-left-top {
+.ohoTip-symbol.triangle-left-top {
     position: absolute;
     top: 4px;
     left: -16px;
@@ -819,7 +858,7 @@
     border-left-color: transparent !important;
 }
 
-.ohoTip-binder.triangle-left-bottom {
+.ohoTip-symbol.triangle-left-bottom {
     position: absolute;
     bottom: 4px;
     left: -16px;
@@ -833,7 +872,7 @@
     border-left-color: transparent !important;
 }
 
-.ohoTip-binder.triangle-right-top {
+.ohoTip-symbol.triangle-right-top {
     position: absolute;
     top: 4px;
     right: -16px;
@@ -847,7 +886,7 @@
     border-left-color: #454545;
 }
 
-.ohoTip-binder.triangle-right-bottom {
+.ohoTip-symbol.triangle-right-bottom {
     position: absolute;
     bottom: 4px;
     right: -16px;
@@ -861,107 +900,107 @@
     border-left-color: #454545;
 }
 
-.ohoTip .ohoTip-box ~ .ohoTip-binder {
+.ohoTip .ohoTip-box .ohoTip-symbol {
     border-color: #454545;
 }
-.ohoTip .ohoTip-box:hover ~ .ohoTip-binder {
+.ohoTip .ohoTip-box:hover .ohoTip-symbol {
     border-color: #373737;
 }
-.ohoTip .ohoTip-box:active ~ .ohoTip-binder {
+.ohoTip .ohoTip-box:active .ohoTip-symbol {
     border-color: #454545;
 }
 
-.ohoTip .ohoTip-success ~ .ohoTip-binder {
+.ohoTip .ohoTip-success .ohoTip-symbol {
     border-color: #8BC34A;
 }
-.ohoTip .ohoTip-success:hover ~ .ohoTip-binder {
+.ohoTip .ohoTip-success:hover .ohoTip-symbol {
     border-color: #009688;
 }
-.ohoTip .ohoTip-success:active ~ .ohoTip-binder {
+.ohoTip .ohoTip-success:active .ohoTip-symbol {
     border-color: #8BC34A;
 }
 
-.ohoTip .ohoTip-error ~ .ohoTip-binder {
+.ohoTip .ohoTip-error .ohoTip-symbol {
     border-color: #FF0000;
 }
-.ohoTip .ohoTip-error:hover ~ .ohoTip-binder {
+.ohoTip .ohoTip-error:hover .ohoTip-symbol {
     border-color: #9B0000;
 }
-.ohoTip .ohoTip-error:active ~ .ohoTip-binder {
+.ohoTip .ohoTip-error:active .ohoTip-symbol {
     border-color: #FF0000;
 }
 
-.ohoTip .ohoTip-warning ~ .ohoTip-binder {
+.ohoTip .ohoTip-warning .ohoTip-symbol {
     border-color: #FFC107;
 }
-.ohoTip .ohoTip-warning:hover ~ .ohoTip-binder {
+.ohoTip .ohoTip-warning:hover .ohoTip-symbol {
     border-color: #FF9800;
 }
-.ohoTip .ohoTip-warning:active ~ .ohoTip-binder {
+.ohoTip .ohoTip-warning:active .ohoTip-symbol {
     border-color: #FFC107;
 }
 
-.ohoTip .ohoTip-info ~ .ohoTip-binder {
+.ohoTip .ohoTip-info .ohoTip-symbol {
     border-color: #2196F3;
 }
-.ohoTip .ohoTip-info:hover ~ .ohoTip-binder {
+.ohoTip .ohoTip-info:hover .ohoTip-symbol {
     border-color: #00BCD4;
 }
-.ohoTip .ohoTip-info:active ~ .ohoTip-binder {
+.ohoTip .ohoTip-info:active .ohoTip-symbol {
     border-color: #2196F3;
 }
 
-/*Binder 位于Tips底部，色调跟 top 的相反*/
-.ohoTip .ohoTip-box ~ .ohoTip-binder[class*="bottom"] {
+/*Symbol 位于Tips底部时，色调跟 top 的相反*/
+.ohoTip .ohoTip-box .ohoTip-symbol[class*="bottom"] {
     border-color: #373737;
 }
-.ohoTip .ohoTip-box:hover ~ .ohoTip-binder[class*="bottom"] {
+.ohoTip .ohoTip-box:hover .ohoTip-symbol[class*="bottom"] {
     border-color: #454545;
 }
-.ohoTip .ohoTip-box:active ~ .ohoTip-binder[class*="bottom"] {
+.ohoTip .ohoTip-box:active .ohoTip-symbol[class*="bottom"] {
     border-color: #373737;
 }
 
-.ohoTip .ohoTip-success ~ .ohoTip-binder[class*="bottom"] {
+.ohoTip .ohoTip-success .ohoTip-symbol[class*="bottom"] {
     border-color: #009688;
 }
-.ohoTip .ohoTip-success:hover ~ .ohoTip-binder[class*="bottom"] {
+.ohoTip .ohoTip-success:hover .ohoTip-symbol[class*="bottom"] {
     border-color: #8BC34A;
 }
-.ohoTip .ohoTip-success:active ~ .ohoTip-binder[class*="bottom"] {
+.ohoTip .ohoTip-success:active .ohoTip-symbol[class*="bottom"] {
     border-color: #009688;
 }
 
-.ohoTip .ohoTip-error ~ .ohoTip-binder[class*="bottom"] {
+.ohoTip .ohoTip-error .ohoTip-symbol[class*="bottom"] {
     border-color: #9B0000;
 }
-.ohoTip .ohoTip-error:hover ~ .ohoTip-binder[class*="bottom"] {
+.ohoTip .ohoTip-error:hover .ohoTip-symbol[class*="bottom"] {
     border-color: #FF0000;
 }
-.ohoTip .ohoTip-error:active ~ .ohoTip-binder[class*="bottom"] {
+.ohoTip .ohoTip-error:active .ohoTip-symbol[class*="bottom"] {
     border-color: #9B0000;
 }
 
-.ohoTip .ohoTip-warning ~ .ohoTip-binder[class*="bottom"] {
+.ohoTip .ohoTip-warning .ohoTip-symbol[class*="bottom"] {
     border-color: #FF9800;
 }
-.ohoTip .ohoTip-warning:hover ~ .ohoTip-binder[class*="bottom"] {
+.ohoTip .ohoTip-warning:hover .ohoTip-symbol[class*="bottom"] {
     border-color: #FFC107;
 }
-.ohoTip .ohoTip-warning:active ~ .ohoTip-binder[class*="bottom"] {
+.ohoTip .ohoTip-warning:active .ohoTip-symbol[class*="bottom"] {
     border-color: #FF9800;
 }
 
-.ohoTip .ohoTip-info ~ .ohoTip-binder[class*="bottom"] {
+.ohoTip .ohoTip-info .ohoTip-symbol[class*="bottom"] {
     border-color: #00BCD4;
 }
-.ohoTip .ohoTip-info:hover ~ .ohoTip-binder[class*="bottom"] {
+.ohoTip .ohoTip-info:hover .ohoTip-symbol[class*="bottom"] {
     border-color: #2196F3;
 }
-.ohoTip .ohoTip-info:active ~ .ohoTip-binder[class*="bottom"] {
+.ohoTip .ohoTip-info:active .ohoTip-symbol[class*="bottom"] {
     border-color: #00BCD4;
 }
-/*Binder 位于Tips底部，色调跟 top 的相反*/
+/*Symbol 位于Tips底部时，色调跟 top 的相反*/
 
 @media only screen and (max-width: 600px) {
     .ohoTip-limit {
