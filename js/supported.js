@@ -1522,8 +1522,8 @@ function animation() {
             },
             destroy: "manual",
             animation: {
-                in: 'gf',
-                out: 'gf',
+                in: 'fragment',
+                out: 'fragment',
                 delay: 1000,
             },
             msg: msg,
@@ -1549,8 +1549,8 @@ function animation() {
             },
             destroy: "manual",
             animation: {
-                in: 'gf',
-                out: 'gf',
+                in: 'fragment',
+                out: 'fragment',
                 fragments: {
                     xCount: 5,
                     yCount: 5,
@@ -1580,8 +1580,8 @@ function animation() {
             },
             destroy: "manual",
             animation: {
-                in: 'gf',
-                out: 'gf',
+                in: 'fragment',
+                out: 'fragment',
                 delay: 1000,
             },
             msg: msg,

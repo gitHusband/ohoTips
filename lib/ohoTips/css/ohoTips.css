@@ -44,6 +44,10 @@
     margin-top: 10px;
 }
 
+.ohoTip-group .ohoTip[style*="display: none"] + .ohoTip {
+    margin-top: 0px;
+}
+
 .ohoTip-group .ohoTip.out + .ohoTip {
     margin-top: 0px;
 }
@@ -684,35 +688,45 @@
 /*----------------- oho特效 -----------------*/
 
 /*----------------- 碎片化特效 -----------------*/
-.ohoTip-amt-GF {
-    transition: opacity 1s, height 0.3s;
-}
-
-.ohoTip-bg-amt-GF {
+.ohoTip-amt-fragment {
     transition: opacity 1s;
 }
 
-.ohoTip-amt-GF.in {
+.ohoTip-bg-amt-fragment {
+    transition: opacity 1s;
+}
+
+.ohoTip-amt-fragment.in {
     opacity: 0.9;
 }
 
-.ohoTip-amt-GF.out {
+.ohoTip-amt-fragment.out {
     opacity: 0;
-    height: 0 !important;
 }
 
-.ohoTip-bg-amt-GF.in {
+.ohoTip-bg-amt-fragment.in {
     opacity: .5;
 }
 
-.ohoTip-amt-GF-fragment {
-    transition: 1s;
-    transform-origin: 0 0;
+.ohoTip-amt-fragment-box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: transparent;
 }
 
-.ohoTip-amt-GF-fragment.active {
-    /*opacity: 0;*/
-    transform: rotate(180deg);
+.ohoTip-amt-fragment-box + .flow {
+    transition: top 0.2s, opacity 1s, transform 1.4s ease-in;
+}
+
+.ohoTip-amt-fragment-box + .explode-in {
+    -webkit-transition: top .8s, left .8s, opacity .8s, -webkit-transform .8s ease-in;
+    transition: top .8s, left .8s, opacity .8s, transform .8s ease-in;
+}
+
+.ohoTip-amt-fragment-box + .explode-out {
+    -webkit-transition: top 1s, left 1s, opacity 1s, -webkit-transform 1s ease-in;
+    transition: top 1s, left 1s, opacity 1s, transform 1s ease-in;
 }
 /*----------------- 碎片化特效 -----------------*/
 
