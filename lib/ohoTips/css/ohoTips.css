@@ -93,7 +93,7 @@
     box-shadow: none;
 }
 
-.ohoTip .ohoTip-msg {
+.ohoTip .ohoTip-message {
     /*padding: 15px 20px;*/
     border-radius: 5px;
     /*background-color: #41485b;*/
@@ -103,7 +103,7 @@
 }
 
 .ohoTip .ohoTip-success,
-.ohoTip .ohoTip-msg.ohoTip-msg-success {
+.ohoTip .ohoTip-message.ohoTip-message-success {
     /*background-color: #2ecc40;*/
     background-color: transparent;
     color: #ffffff;
@@ -131,7 +131,7 @@
 }
 
 .ohoTip .ohoTip-error,
-.ohoTip .ohoTip-msg.ohoTip-msg-error {
+.ohoTip .ohoTip-message.ohoTip-message-error {
     /*background-color: #ff4136;*/
     background-color: transparent;
     color: #ffffff;
@@ -159,7 +159,7 @@
 }
 
 .ohoTip .ohoTip-warning,
-.ohoTip .ohoTip-msg.ohoTip-msg-warning {
+.ohoTip .ohoTip-message.ohoTip-message-warning {
     /*background-color: #f39c12;*/
     background-color: transparent;
 }
@@ -186,7 +186,7 @@
 }
 
 .ohoTip .ohoTip-info,
-.ohoTip .ohoTip-msg.ohoTip-msg-info {
+.ohoTip .ohoTip-message.ohoTip-message-info {
     /*background-color: #1496bb;*/
     background-color: transparent;
 }
