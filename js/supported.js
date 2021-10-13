@@ -487,6 +487,20 @@ function tipDefault() {
         setTimeout(function () {
             ohoTips().show(message, "info", parent);
         }, 5000);
+
+        ohoTips("以默认配置弹出消息");
+        setTimeout(function () {
+            ohoTips([
+                '以默认配置弹出消息',
+                '这种方法调用方便，建议配合 setDefOptions 使用'
+                ]);
+        }, 2000);
+        setTimeout(function () {
+            ohoTips([
+                '以默认配置弹出消息',
+                '这种方法调用方便，建议配合 setDefOptions 使用'
+                ]);
+        }, 4000);
     }
     document.querySelector('#btn-callback').onclick = function() {
         var message = '回调函数 Tip';

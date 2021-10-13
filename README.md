@@ -14,6 +14,8 @@ ohoTips({
 })
 
 ohoTips().success(message, parent);
+
+ohoTips(message);
 ```
 
 ## 1. 简介
