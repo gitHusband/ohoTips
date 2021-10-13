@@ -1043,13 +1043,13 @@ function tipFloat() {
                 position: "float",                      //Tip显示位置，浮动
                 float: {
                     type: "default",                    //浮动类型
-                    /*cusFloatOptions: {                //浮动参数
+                    /*customFloatOptions: {                //浮动参数
                         status: true,
                         xOffsetLen: 0.0005,
                         yOffsetLen: 0.0005,
                         delay: 10,
                     },
-                    cusFloatStatus: {                   //浮动初始状态
+                    customFloatStatus: {                   //浮动初始状态
                         top: 60,
                         left: 60,
                     }*/
@@ -1093,7 +1093,7 @@ function tipFloat() {
             position: "float",                      //Tip显示位置，top为上居中
             float: {
                 type: "x",                          //浮动类型
-                cusFloatOptions: {
+                customFloatOptions: {
                     offsetType: '%',
                     xMinThreshold: 0,
                     xMaxThreshold: 100,
@@ -1103,7 +1103,7 @@ function tipFloat() {
                     yOffsetLen: 0.05,
                     delay: 1,
                 },
-                cusFloatStatus: {
+                customFloatStatus: {
                     top: 50,
                     left: 50,
                 }
@@ -1119,7 +1119,7 @@ function tipFloat() {
             position: "float",                      //Tip显示位置，top为上居中
             float: {
                 type: 'square',
-                cusFloatOptions: {
+                customFloatOptions: {
                     offsetType: '%',
                     xMinThreshold: 0,
                     xMaxThreshold: 100,
@@ -1129,11 +1129,11 @@ function tipFloat() {
                     yOffsetLen: 0.1,
                     delay: 1,
                 },
-                cusFloatStatus: {
+                customFloatStatus: {
                     top: 0,
                     left: 0,
                 },
-                cusFloatCallback: function() { console.log(this.backup._tElem); }
+                customFloatCallback: function() { console.log(this.backup._tElem); }
             },
             destroy: "never",                       //从不销毁
             msg: msg,                               //Tip内容
@@ -1141,10 +1141,10 @@ function tipFloat() {
     }
     document.querySelector('#btn-float-custom').onclick = function() {
         var msg = '自定义浮动，三角形';
-        var cusFloatFun =  function(){
+        var customFloatFuntion =  function(){
             var _this = this;
 
-            var cusFloatOptions = {
+            var customFloatOptions = {
                 status: 1,
                 offsetType: '%',
                 xMinThreshold: 0,
@@ -1156,13 +1156,13 @@ function tipFloat() {
                 delay: 1,
             };
 
-            var cusFloatStatus = {
+            var customFloatStatus = {
                 top: 100,
                 left: 0,
             };
 
-            var floatOptions = this.setFloatOptions(cusFloatOptions);
-            var floatStatus = this.getfloatStatus(cusFloatStatus);
+            var floatOptions = this.setFloatOptions(customFloatOptions);
+            var floatStatus = this.getfloatStatus(customFloatStatus);
 
             if(floatOptions.floatId) clearInterval(floatOptions.floatId);
             floatOptions.floatId = setInterval(function(){
@@ -1191,7 +1191,7 @@ function tipFloat() {
             //parentElement: parentElementFloat,
             position: "float",                      //Tip显示位置，浮动
             float: {
-                cusFloatFun: cusFloatFun,           //自定义浮动函数
+                customFloatFuntion: customFloatFuntion,           //自定义浮动函数
             },
             destroy: "never",                       //从不销毁
             msg: msg,                               //Tip内容
@@ -1210,13 +1210,13 @@ function tipFloat() {
                 position: "translate",                  //Tip显示位置，浮动
                 float: {
                     type: "default",                    //浮动类型
-                    /*cusFloatOptions: {                //浮动参数
+                    /*customFloatOptions: {                //浮动参数
                         status: true,
                         xOffsetLen: 0.0005,
                         yOffsetLen: 0.0005,
                         delay: 10,
                     },
-                    cusFloatStatus: {                   //浮动初始状态
+                    customFloatStatus: {                   //浮动初始状态
                         top: 60,
                         left: 60,
                     }*/
@@ -1260,7 +1260,7 @@ function tipFloat() {
             position: "translate",                  //Tip显示位置，top为上居中
             float: {
                 type: "x",                          //浮动类型
-                cusFloatOptions: {
+                customFloatOptions: {
                     offsetType: '%',
                     xMinThreshold: 0,
                     xMaxThreshold: 100,
@@ -1270,7 +1270,7 @@ function tipFloat() {
                     yOffsetLen: 0.05,
                     delay: 1,
                 },
-                cusFloatStatus: {
+                customFloatStatus: {
                     top: 50,
                     left: 50,
                 }
@@ -1286,7 +1286,7 @@ function tipFloat() {
             position: "translate",                      //Tip显示位置，top为上居中
             float: {
                 type: 'square',
-                cusFloatOptions: {
+                customFloatOptions: {
                     offsetType: '%',
                     xMinThreshold: 0,
                     xMaxThreshold: 100,
@@ -1296,11 +1296,11 @@ function tipFloat() {
                     yOffsetLen: 0.1,
                     delay: 1,
                 },
-                cusFloatStatus: {
+                customFloatStatus: {
                     top: 0,
                     left: 0,
                 },
-                cusFloatCallback: function() { console.log(this.backup._tElem); }
+                customFloatCallback: function() { console.log(this.backup._tElem); }
             },
             destroy: "never",                       //从不销毁
             msg: msg,                               //Tip内容
@@ -1308,10 +1308,10 @@ function tipFloat() {
     }
     document.querySelector('#btn-float-translate-custom').onclick = function() {
         var msg = '自定义浮动-Translate，三角形';
-        var cusFloatFun =  function(){
+        var customFloatFuntion =  function(){
             var _this = this;
 
-            var cusFloatOptions = {
+            var customFloatOptions = {
                 status: 1,
                 offsetType: '%',
                 xMinThreshold: 0,
@@ -1323,13 +1323,13 @@ function tipFloat() {
                 delay: 1,
             };
 
-            var cusFloatStatus = {
+            var customFloatStatus = {
                 top: 100,
                 left: 0,
             };
 
-            var floatOptions = this.setFloatTranslateOptions(cusFloatOptions);
-            var floatStatus = this.getfloatTranslateStatus(cusFloatStatus);
+            var floatOptions = this.setFloatTranslateOptions(customFloatOptions);
+            var floatStatus = this.getfloatTranslateStatus(customFloatStatus);
 
             if(floatOptions.floatId) clearInterval(floatOptions.floatId);
             floatOptions.floatId = setInterval(function(){
@@ -1358,7 +1358,7 @@ function tipFloat() {
             //parentElement: parentElementFloat,
             position: "translate",                  //Tip显示位置，浮动
             float: {
-                cusFloatFun: cusFloatFun,           //自定义浮动函数
+                customFloatFuntion: customFloatFuntion,           //自定义浮动函数
             },
             destroy: "never",                       //从不销毁
             msg: msg,                               //Tip内容
@@ -1606,7 +1606,7 @@ function animation() {
             },
             // destroy: "manual",
             animation: {
-                cusAmtFun: function(status) {
+                customAmtFuntion: function(status) {
                     let C = this.C;
                     let $tip = this.backup._tElem;
                     let $tipGroup = this.backup._tgElem;
