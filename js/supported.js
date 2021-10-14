@@ -467,40 +467,63 @@ function tipDefault() {
     }
     document.querySelector('#btn-simple').onclick = function() {
         var message = [
-            '简单调用 Tip',
-            '这种方法调用方便，一般使用该类方法即可'
+            '简单调用 Tips 接口',
         ];
         var parent = parentElement;
+
+        message[1] = "ohoTips().info(message, parentElement)";
         ohoTips().info(message, parent);     //这种方法调用方便，一般使用该类方法即可
         setTimeout(function () {
+            message[1] = "ohoTips().success(message, parentElement)";
             ohoTips().success(message, parent);
         }, 1000);
         setTimeout(function () {
+            message[1] = "ohoTips().error(message, parentElement)";
             ohoTips().error(message, parent);
         }, 2000);
         setTimeout(function () {
+            message[1] = "ohoTips().warning(message, parentElement)";
             ohoTips().warning(message, parent);
         }, 3000);
         setTimeout(function () {
+            message[1] = "ohoTips().normal(message, parentElement)";
             ohoTips().normal(message, 'success', parent);
         }, 4000);
         setTimeout(function () {
+            message[1] = "ohoTips().show(message, \"info\", parentElement)";
             ohoTips().show(message, "info", parent);
         }, 5000);
 
-        ohoTips("以默认配置弹出消息");
         setTimeout(function () {
-            ohoTips([
-                '以默认配置弹出消息',
-                '这种方法调用方便，建议配合 setDefOptions 使用'
-                ]);
-        }, 2000);
-        setTimeout(function () {
-            ohoTips([
-                '以默认配置弹出消息',
-                '这种方法调用方便，建议配合 setDefOptions 使用'
-                ]);
-        }, 4000);
+            // 配置默认配置，是影响全局的，如果是临时修改记得重置回来
+            ohoTipsPrototype.setDefOptions({
+                type: "info",
+                position: "top-center",
+                offset: {                   //如果position 是对象如{tip: 0}，则一般不需要这个，如果是字符串，则可以酌情添加offset, 调整父元素与Tips 的相对定位, 仅支持top，left
+                    top: 10,
+                    left: null
+                },
+            });
+            var onlyMessage = [
+                '以默认配置弹出消息，第二参数是可选配置对象',
+                '建议配合 setDefOptions 使用',
+            ];
+            ohoTips('以默认配置弹出消息，第二参数可选配置');
+            setTimeout(function () {
+                onlyMessage[2] = "ohoTips(message)";
+                ohoTips(onlyMessage);
+            }, 2000);
+            setTimeout(function () {
+                onlyMessage[2] = "ohoTips(message, options)";
+                ohoTips(onlyMessage, {
+                    type: "success"
+                });
+
+                // 重置默认配置
+                ohoTipsPrototype.resetDefOptions();
+
+            }, 4000);
+        }, 6000);
     }
     document.querySelector('#btn-callback').onclick = function() {
         var message = '回调函数 Tip';
