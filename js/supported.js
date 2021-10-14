@@ -1164,7 +1164,7 @@ function tipFloat() {
         })
     }
     document.querySelector('#btn-float-square-custom').onclick = function() {
-        var message = '配置方形浮动';
+        var message = '配置方形浮动, 事件请看log';
         ohoTips({
             //parentElement: parentElementFloat,
             position: "float",                      //Tip显示位置，top为上居中
@@ -1184,15 +1184,18 @@ function tipFloat() {
                     top: 0,
                     left: 0,
                 },
-                customFloatCallback: function() { console.log(this.backup._tElem); }
             },
             destroy: "never",                       //从不销毁
-            message: message,                               //Tip内容
+            message: message,                       //Tip内容
+            events: {
+                beforeFloated: function(floatFlag) { console.log(floatFlag + " - " + "Before Tips floating.", this.backup._tElem); },
+                floated: function(floatFlag) { console.log(floatFlag + " - " + "Tips begins to float.", this.backup._tElem); },
+            }
         })
     }
     document.querySelector('#btn-float-custom').onclick = function() {
         var message = '自定义浮动，三角形';
-        var customFloatFuntion =  function(){
+        var customFloatType =  function(){
             var _this = this;
 
             var customFloatOptions = {
@@ -1242,7 +1245,7 @@ function tipFloat() {
             //parentElement: parentElementFloat,
             position: "float",                      //Tip显示位置，浮动
             float: {
-                customFloatFuntion: customFloatFuntion,           //自定义浮动函数
+                customFloatType: customFloatType,           //自定义浮动函数
             },
             destroy: "never",                       //从不销毁
             message: message,                               //Tip内容
@@ -1331,7 +1334,7 @@ function tipFloat() {
         })
     }
     document.querySelector('#btn-float-translate-square-custom').onclick = function() {
-        var message = '配置方形浮动-Translate';
+        var message = '配置方形浮动-Translate, 事件请看log';
         ohoTips({
             //parentElement: parentElementFloat,
             position: "translate",                      //Tip显示位置，top为上居中
@@ -1351,15 +1354,18 @@ function tipFloat() {
                     top: 0,
                     left: 0,
                 },
-                customFloatCallback: function() { console.log(this.backup._tElem); }
             },
             destroy: "never",                       //从不销毁
             message: message,                               //Tip内容
+            events: {
+                beforeFloated: function(floatFlag) { console.log(floatFlag + " - " + "Before Tips floating.", this.backup._tElem); },
+                floated: function(floatFlag) { console.log(floatFlag + " - " + "Tips begins to float.", this.backup._tElem); },
+            }
         })
     }
     document.querySelector('#btn-float-translate-custom').onclick = function() {
         var message = '自定义浮动-Translate，三角形';
-        var customFloatFuntion =  function(){
+        var customFloatType =  function(){
             var _this = this;
 
             var customFloatOptions = {
@@ -1409,7 +1415,7 @@ function tipFloat() {
             //parentElement: parentElementFloat,
             position: "translate",                  //Tip显示位置，浮动
             float: {
-                customFloatFuntion: customFloatFuntion,           //自定义浮动函数
+                customFloatType: customFloatType,           //自定义浮动函数
             },
             destroy: "never",                       //从不销毁
             message: message,                               //Tip内容

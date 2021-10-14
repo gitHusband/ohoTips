@@ -79,11 +79,10 @@ ohoTips(message, options);
     message: '',                //传入数组可换行
     html: false,                //false - 文本类型信息，true - dom元素类型信息
     float: {                    //浮动参数，当position 等于 'float' 或 'translate' 时，可选；其余情况不需要 
-        type: 'default',                //若不使用floatPositionFun, 可选择默认浮动方法
+        type: 'default',                //可选择默认浮动方法，浮动方法支持自定义，见 customFloatType
         customFloatOptions: null,       //自定义浮动选项
         customFloatStatus: null,        //自定义浮动初始状态，top，left等
-        customFloatFuntion: null,       //自定义浮动方法
-        customFloatCallback: C.noop,    //自定义浮动回调函数
+        customFloatType: null,          //自定义浮动类型的方法, 参考 floatTypeDefault 方法
     },
     animation: {                //动画
         in: 'default',              //Tips 显示动画
@@ -104,6 +103,8 @@ ohoTips(message, options);
         shown: C.noop,              //Tips 展示之后 触发
         beforeDestroyed: C.noop,    //Tips 销毁之前 触发
         destroyed: C.noop,          //Tips 销毁之后 触发
+        beforeFloated: C.noop,      //Tips 每次浮动之前 触发
+        floated: C.noop,            //Tips 每次浮动之后 触发
     }
 }
 ```
