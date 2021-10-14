@@ -462,7 +462,7 @@ function tipDefault() {
                 message: message
             })
         }else{
-            desrtoyNeverTip.remove();
+            desrtoyNeverTip.destroy();
         }
     }
     document.querySelector('#btn-simple').onclick = function() {
@@ -526,16 +526,32 @@ function tipDefault() {
         }, 6000);
     }
     document.querySelector('#btn-callback').onclick = function() {
-        var message = '回调函数 Tip';
+        var message = 'Tips 生命周期函数，请看控制台log';
         ohoTips({
             parentElement: parentElement,
             position: "middle",
             destroy: 'manual',         //手动销毁
             background: true,
             message: message,
-            callback: function() {
-                console.log(this);
-                alert("Tip 渲染提示信息后，回调");
+            events: {
+                beforeCreated: function() {  //Tips 创建消息之前 触发
+                    console.log("events.beforeCreated - Tips 创建消息之前 触发", this);
+                },
+                created: function() {  //Tips 创建消息之后 触发
+                    console.log("events.created - Tips 创建消息之后 触发", this);
+                },
+                beforeShown: function() {
+                    console.log("events.beforeShown - Tips 创建消息之后，展示之前 触发", this);
+                },
+                shown: function() {
+                    console.log("events.shown - Tips 展示之后触发", this);
+                },
+                beforeDestroyed: function() {
+                    console.log("events.beforeDestroyed - Tips 销毁之前触发", this);
+                },
+                destroyed: function() {
+                    console.log("events.destroyed - Tips 销毁之后触发", this);
+                },
             }
         })
     }
@@ -557,17 +573,24 @@ function tipDefault() {
             // background: true,
             html: true,
             message: message,
-            htmlCallback: function() {  //回调函数
-                document.querySelector("#"+randBtnId).addEventListener("click", function() {
-                    var $content = document.querySelector("#tip-content");
-                    if($content.style.display != 'none') {
-                        $content.style.display = 'none';
-                        this.innerHTML = "显示 说明";
-                    }else {
-                        $content.style.display = 'block';
-                        this.innerHTML = "隐藏 说明";
-                    }
-                });
+            events: {
+                beforeCreated: function() {  //Tips 创建消息之前 触发
+                    console.log("events.beforeCreated - Tips 创建消息之前 触发", this);
+                },
+                created: function() {  //Tips 创建消息之后 触发
+                    console.log("events.created - Tips 创建消息之后 触发, 为 Dom消息实体添加点击事件", this);
+
+                    document.querySelector("#"+randBtnId).addEventListener("click", function() {
+                        var $content = document.querySelector("#tip-content");
+                        if($content.style.display != 'none') {
+                            $content.style.display = 'none';
+                            this.innerHTML = "显示 说明";
+                        }else {
+                            $content.style.display = 'block';
+                            this.innerHTML = "隐藏 说明";
+                        }
+                    });
+                },
             }
         })
     }
@@ -685,15 +708,6 @@ function tipDefault() {
 }
 
 function tipOuter() {
-    var htmlCallback = function() {  //回调函数
-        console.log('htmlCallback', this, this.backup._tElem);
-    }
-    var callback = function() {  //回调函数
-        console.log('callback');
-        var pre = this.backup._tElem.getElementsByTagName("pre")[0];
-        pre.innerText = JSON.stringify(JSON.parse(pre.innerText), null, 2);
-        this.resetPosition();
-    }
     var stringifyHtml = function(jsonString) {
         jsonString = JSON.stringify(JSON.parse(jsonString), null, 2);
         var html = '<pre>'+jsonString+'</pre>';
@@ -731,7 +745,7 @@ function tipOuter() {
     }
     btnOuterTopLeft.onmouseleave = function() {
         if(contentTopLeft) {
-            contentTopLeft.remove();
+            contentTopLeft.destroy();
         }
     }
 
@@ -1095,7 +1109,7 @@ function tipFloat() {
                 message: message,                               //Tip内容
             })
         }else {
-            desrtoyNeverTip1.remove();
+            desrtoyNeverTip1.destroy();
         }
     }
     document.querySelector('#btn-float-x').onclick = function() {
@@ -1262,7 +1276,7 @@ function tipFloat() {
                 message: message,                               //Tip内容
             })
         }else {
-            desrtoyNeverTip2.remove();
+            desrtoyNeverTip2.destroy();
         }
     }
     document.querySelector('#btn-float-translate-x').onclick = function() {

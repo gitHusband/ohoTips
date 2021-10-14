@@ -1,4 +1,4 @@
-# ohoTips - 一款前端弹出消息提醒工具
+# ohoTips - 一款功能丰富的前端弹出消息提醒工具
 
 ohoTips 消息美观，可自由方便地定位消息位置，支持任何定位。
 
@@ -10,24 +10,24 @@ ohoTips({
     position: "top-left",               //Tip显示位置，窗口左上角
     type: "success",                    //显示的class，可接受自定义
     icon: false,                        //不显示图标
-    message: message,                       //Tip内容
+    message: message,                   //Tip内容
 })
 
 ohoTips().success(message, parent);
 
-ohoTips(message);
+ohoTips(message, options);
 ```
 
 ## 1. 简介
 ### 1.1 特点
-- 支持单行、多行消息，支持html 消息
+- 支持单行、多行消息，支持 DOM 消息
 - 支持自定义消息类型，成功、失败、警告、信息、普通5种类型，默认普通
 - 支持自定义图标，成功、失败、警告、信息4种类型，默认成功；支持自定义图标位置，上下左右，默认左
 - 支持遮罩层，遮盖住整个父元素
 - 支持自定义消息位置类型，有左上角，上居中，右上角，左居中，全居中，右居中，左小角，下居中，右小角。定位基于父元素，父元素可以是任意元素，也可以基于整个窗口
 - 支持精准定位，也就是传说中的top，left，right，bottom。父元素可以是任意元素，也可以基于整个窗口
 - 支持自定义消息手动销毁，销毁延时以及手动销毁
-- 支持回调
+- 支持生命周期函数，shown, destroyed 等
 - 支持消息分组，同组消息上下排列
 - 支持浮动，使消息在页面来回浮动。支持自定义浮动函数
 - 支持自定义动画类型，支持自定义动画函数
@@ -63,7 +63,7 @@ ohoTips(message);
         type: 'info',           //当icon 为字符串时，icon主要定制形状(也含颜色)，此时type可以额外设置icon 的色调
         position: 'left',       //icon 的位置，支持top, left, bottom, right
     },
-    symbol: false,              //是否显示bnder, true - 默认triangle，支持字符串设置symbol类型，如 triangle等，目前仅支持triangle
+    symbol: false,              //是否显示binder, true - 默认triangle，支持字符串设置symbol类型，如 triangle等，目前仅支持triangle
     symbolOptions: {
         type: null,             //如果不设置，symbol则按option.type 色调，否则按该参数的色调
         position: null,         //如果不设置，symbol则根据option.position 设置定位(不一定一样)，否则按该参数定位
@@ -78,7 +78,6 @@ ohoTips(message);
     delay: 2000,                //自动销毁tips 延时，单位：ms
     message: '',                //传入数组可换行
     html: false,                //false - 文本类型信息，true - dom元素类型信息
-    htmlCallback: C.noop,       //dom元素回调函数，用于监听dom元素动作
     float: {                    //浮动参数，当position 等于 'float' 或 'translate' 时，可选；其余情况不需要 
         type: 'default',                //若不使用floatPositionFun, 可选择默认浮动方法
         customFloatOptions: null,       //自定义浮动选项
@@ -98,7 +97,14 @@ ohoTips(message);
         delay: 1000,                //Tips 动画执行时间，延时时间删除Tips
         customAmtFuntion: null,     //自定义Tips 动画函数
     },
-    callback: C.noop,           //公共回调函数
+    events: {
+        beforeCreated: C.noop,      //Tips 创建消息之前 触发
+        created: C.noop,            //Tips 创建消息之后 触发
+        beforeShown: C.noop,        //Tips 创建消息之后，展示之前 触发
+        shown: C.noop,              //Tips 展示之后 触发
+        beforeDestroyed: C.noop,    //Tips 销毁之前 触发
+        destroyed: C.noop,          //Tips 销毁之后 触发
+    }
 }
 ```
 
