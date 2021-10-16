@@ -1536,11 +1536,29 @@ function animation() {
             //     maxLength: 1,
             // },
             // destroy: "manual",
+            animation: {
+                in: 'oho',
+                out: 'oho',
+            },
             message: message,
         })
     };
 
-    document.querySelector('#btn-animation-a').onclick = function() {
+    document.querySelector('#btn-animation-fade').onclick = function() {
+        var position = 'top-center';
+        var icon = 'success';
+        var message = ['当前时间： ' , new Date()];
+        
+        ohoTips({
+            parentElement: parentElementAnimation,
+            position: position,
+            type: 'normal',
+            icon: icon,
+            message: message,
+        })
+    };
+
+    document.querySelector('#btn-animation-fold').onclick = function() {
         var position = 'top-center';
         var icon = 'success';
         var icon = 'clock';
@@ -1559,8 +1577,8 @@ function animation() {
             },
             destroy: "manual",
             animation: {
-                in: 'oho',
-                out: 'oho',
+                in: 'fold',
+                out: 'fold',
             },
             message: message,
         })
