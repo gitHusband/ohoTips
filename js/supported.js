@@ -1077,19 +1077,16 @@ function tipOuter() {
 }
 
 function tipFloat() {
-    var clickDesrtoyNever1 = false;
-    var desrtoyNeverTip1;
-    var clickDesrtoyNever2 = false;
-    var desrtoyNeverTip2;
-        
+    var canDesrtoyFloatDefault = false;
+    var floatDefaultTips;
     document.querySelector('#btn-float-default').onclick = function() {
-        clickDesrtoyNever1 = !clickDesrtoyNever1;
-        if(clickDesrtoyNever1) {
+        canDesrtoyFloatDefault = !canDesrtoyFloatDefault;
+        if(canDesrtoyFloatDefault) {
             var message = [
                 '默认浮动',
                 '再次点击销毁',
             ];
-            desrtoyNeverTip1 = ohoTips({
+            floatDefaultTips = ohoTips({
                 parentElement: parentElementFloat,      //父元素id，可接受其它选择器，如class
                 position: "float",                      //Tip显示位置，浮动
                 float: {
@@ -1109,7 +1106,7 @@ function tipFloat() {
                 message: message,                               //Tip内容
             })
         }else {
-            desrtoyNeverTip1.destroy();
+            floatDefaultTips.destroy();
         }
     }
     document.querySelector('#btn-float-x').onclick = function() {
@@ -1252,14 +1249,16 @@ function tipFloat() {
         })
     }
 
+    var canDesrtoyFloatTranslateDefault = false;
+    var floatTranslateDefaultTips;
     document.querySelector('#btn-float-translate-default').onclick = function() {
-        clickDesrtoyNever2 = !clickDesrtoyNever2;
-        if(clickDesrtoyNever2) {
+        canDesrtoyFloatTranslateDefault = !canDesrtoyFloatTranslateDefault;
+        if(canDesrtoyFloatTranslateDefault) {
             var message = [
                 '默认浮动-Translate',
                 '再次点击销毁',
             ];
-            desrtoyNeverTip2 = ohoTips({
+            floatTranslateDefaultTips = ohoTips({
                 parentElement: parentElementFloat,      //父元素id，可接受其它选择器，如class
                 position: "translate",                  //Tip显示位置，浮动
                 float: {
@@ -1279,7 +1278,7 @@ function tipFloat() {
                 message: message,                               //Tip内容
             })
         }else {
-            desrtoyNeverTip2.destroy();
+            floatTranslateDefaultTips.destroy();
         }
     }
     document.querySelector('#btn-float-translate-x').onclick = function() {
@@ -1307,31 +1306,38 @@ function tipFloat() {
         })
     }
 
+    var canDesrtoyFloatTranslateDefaultConfing = false;
+    var floatTranslateDefaultConfingTips;
     document.querySelector('#btn-float-translate-x-custom').onclick = function() {
-        var message = '配置X浮动-Translate';
-        ohoTips({
-            parentElement: parentElementFloat,
-            position: "translate",                  //Tip显示位置，top为上居中
-            float: {
-                type: "x",                          //浮动类型
-                customFloatOptions: {
-                    offsetType: '%',
-                    xMinThreshold: 0,
-                    xMaxThreshold: 100,
-                    xOffsetLen: 0.05,
-                    yMinThreshold: 0,
-                    yMaxThreshold: 100,
-                    yOffsetLen: 0.05,
-                    delay: 1,
+        canDesrtoyFloatTranslateDefaultConfing = !canDesrtoyFloatTranslateDefaultConfing;
+        if(canDesrtoyFloatTranslateDefaultConfing) {
+            var message = '配置X浮动-Translate';
+            floatTranslateDefaultConfingTips = ohoTips({
+                parentElement: parentElementFloat,
+                position: "translate",                  //Tip显示位置，top为上居中
+                float: {
+                    type: "x",                          //浮动类型
+                    customFloatOptions: {
+                        offsetType: '%',
+                        xMinThreshold: 0,
+                        xMaxThreshold: 100,
+                        xOffsetLen: 0.05,
+                        yMinThreshold: 0,
+                        yMaxThreshold: 100,
+                        yOffsetLen: 0.05,
+                        delay: 1,
+                    },
+                    customFloatStatus: {
+                        top: 50,
+                        left: 50,
+                    }
                 },
-                customFloatStatus: {
-                    top: 50,
-                    left: 50,
-                }
-            },
-            destroy: "never",                       //从不销毁
-            message: message,                               //Tip内容
-        })
+                destroy: "never",                       //从不销毁
+                message: message,                               //Tip内容
+            })
+        }else {
+            floatTranslateDefaultConfingTips.destroy();
+        }
     }
     document.querySelector('#btn-float-translate-square-custom').onclick = function() {
         var message = '配置方形浮动-Translate, 事件请看log';
