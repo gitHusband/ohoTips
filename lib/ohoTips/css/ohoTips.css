@@ -330,11 +330,27 @@
     transform: translateY(-50%);
 }
 
-.box-html {
+.ohoTip .ohoTip-box-html {
+}
+.ohoTip .ohoTip-box-html:hover {
+}
+
+.ohoTip .ohoTip-box-html-transparent {
+    background: transparent;
+}
+.ohoTip .ohoTip-box-html-transparent:hover {
+    background: transparent;
+}
+
+.ohoTip .ohoTip-box-html .box-html {
     background-color: white;
     /*border: 1px solid #efefef;*/
     border-radius: 5px;
     margin: -15px -20px;
+}
+
+.ohoTip .ohoTip-box-html-transparent .box-html {
+    background-color: transparent;
 }
 
 .ohoTip-box.ohoTip-add-icon {

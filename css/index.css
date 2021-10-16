@@ -307,7 +307,7 @@ button:focus {
     border-radius: 30%;
 }
 
-.button.button-static {
+.box-space-enenly .button.button-static {
     width: 20%;
     min-width: 50px;
     max-width: 130px;

@@ -465,7 +465,7 @@ function tipDefault() {
             desrtoyNeverTip.destroy();
         }
     }
-    document.querySelector('#btn-simple').onclick = function() {
+    document.querySelector('#btn-simple-1').onclick = function() {
         var message = [
             '简单调用 Tips 接口',
         ];
@@ -493,37 +493,36 @@ function tipDefault() {
             message[1] = "ohoTips().show(message, \"info\", parentElement)";
             ohoTips().show(message, "info", parent);
         }, 5000);
-
+    }
+    document.querySelector('#btn-simple-2').onclick = function() {
+        // 配置默认配置，是影响全局的，如果是临时修改记得重置回来
+        ohoTipsPrototype.setDefOptions({
+            type: "info",
+            position: "top-center",
+            offset: {                   //如果position 是对象如{tip: 0}，则一般不需要这个，如果是字符串，则可以酌情添加offset, 调整父元素与Tips 的相对定位, 仅支持top，left
+                top: 10,
+                left: null
+            },
+        });
+        var onlyMessage = [
+            '以默认配置弹出消息，第二参数是可选配置对象',
+            '建议配合 setDefOptions 使用',
+        ];
+        ohoTips('以默认配置弹出消息，第二参数可选配置');
         setTimeout(function () {
-            // 配置默认配置，是影响全局的，如果是临时修改记得重置回来
-            ohoTipsPrototype.setDefOptions({
-                type: "info",
-                position: "top-center",
-                offset: {                   //如果position 是对象如{tip: 0}，则一般不需要这个，如果是字符串，则可以酌情添加offset, 调整父元素与Tips 的相对定位, 仅支持top，left
-                    top: 10,
-                    left: null
-                },
+            onlyMessage[2] = "ohoTips(message)";
+            ohoTips(onlyMessage);
+        }, 2000);
+        setTimeout(function () {
+            onlyMessage[2] = "ohoTips(message, options)";
+            ohoTips(onlyMessage, {
+                type: "success"
             });
-            var onlyMessage = [
-                '以默认配置弹出消息，第二参数是可选配置对象',
-                '建议配合 setDefOptions 使用',
-            ];
-            ohoTips('以默认配置弹出消息，第二参数可选配置');
-            setTimeout(function () {
-                onlyMessage[2] = "ohoTips(message)";
-                ohoTips(onlyMessage);
-            }, 2000);
-            setTimeout(function () {
-                onlyMessage[2] = "ohoTips(message, options)";
-                ohoTips(onlyMessage, {
-                    type: "success"
-                });
 
-                // 重置默认配置
-                ohoTipsPrototype.resetDefOptions();
+            // 重置默认配置
+            ohoTipsPrototype.resetDefOptions();
 
-            }, 4000);
-        }, 6000);
+        }, 4000);
     }
     document.querySelector('#btn-callback').onclick = function() {
         var message = 'Tips 生命周期函数，请看控制台log';
@@ -555,7 +554,8 @@ function tipDefault() {
             }
         })
     }
-    document.querySelector('#btn-html').onclick = function() {
+
+    document.querySelector('#btn-html-string').onclick = function() {
         var random = Math.round(Math.random()*Math.pow(10, 10));
         var randBtnId = "btn-tip-close"+random;
         var message = '<div class="box1" style="width: 160px">\n' +
@@ -571,7 +571,10 @@ function tipDefault() {
             icon: false,
             destroy: 'manual',
             // background: true,
-            html: true,
+            html: {
+                param: true,                //false - 文本类型信息，true - dom元素类型信息
+                isParentTransparent: true,  //false - 父元素不透明，true - 父元素透明
+            },
             message: message,
             events: {
                 beforeCreated: function() {  //Tips 创建消息之前 触发
@@ -590,6 +593,58 @@ function tipDefault() {
                             this.innerHTML = "隐藏 说明";
                         }
                     });
+                },
+            }
+        })
+    }
+    document.querySelector('#btn-html-js').onclick = function() {
+        var random = Math.round(Math.random()*Math.pow(10, 10));
+        var randBtnId = "btn-tip-close"+random;
+        var message = document.querySelector('#btn-html-js');
+
+        ohoTips({
+            parentElement: parentElement,
+            position: "middle",
+            type: "box-html",       //自定义message 样式
+            icon: false,
+            destroy: 'manual',
+            // background: true,
+            html: {
+                param: true,                //false - 文本类型信息，true - dom元素类型信息
+                isParentTransparent: true,  //false - 父元素不透明，true - 父元素透明
+            },
+            message: message,
+            events: {
+                destroyed: function() {  
+                    console.log("events.destroyed - Tips 销毁消息之后 触发", this);
+
+                    this.C.insertAfter(message, document.querySelector('#btn-html-string'));
+                },
+            }
+        })
+    }
+    document.querySelector('#btn-html-jq').onclick = function() {
+        var random = Math.round(Math.random()*Math.pow(10, 10));
+        var randBtnId = "btn-tip-close"+random;
+        var message = $('#btn-html-jq');
+
+        ohoTips({
+            parentElement: parentElement,
+            position: "middle",
+            type: "box-html",       //自定义message 样式
+            icon: false,
+            destroy: 'manual',
+            // background: true,
+            html: {
+                param: true,                //false - 文本类型信息，true - dom元素类型信息
+                isParentTransparent: true,  //false - 父元素不透明，true - 父元素透明
+            },
+            message: message,
+            events: {
+                destroyed: function() {  
+                    console.log("events.destroyed - Tips 销毁消息之后 触发", this);
+
+                    this.C.insertAfter(message[0], document.querySelector('#btn-html-js'));
                 },
             }
         })

@@ -77,12 +77,15 @@ ohoTips(message, options);
     destroy: "auto",            //auto - 自动销毁tips，manual - 不自动销毁tips，需手动销毁, never - 从不销毁tips
     delay: 2000,                //自动销毁tips 延时，单位：ms
     message: '',                //传入数组可换行
-    html: false,                //false - 文本类型信息，true - dom元素类型信息
+    html: {
+        param: false,               //false - 文本类型信息，true - dom元素类型信息
+        isParentTransparent: false, //false - 父元素不透明，true - 父元素透明
+    },                
     float: {                    //浮动参数，当position 等于 'float' 或 'translate' 时，可选；其余情况不需要 
-        type: 'default',                //可选择默认浮动方法，浮动方法支持自定义，见 customFloatType
-        customFloatOptions: null,       //自定义浮动选项
-        customFloatStatus: null,        //自定义浮动初始状态，top，left等
-        customFloatType: null,          //自定义浮动类型的方法, 参考 floatTypeDefault 方法
+        type: 'default',            //可选择默认浮动方法，浮动方法支持自定义，见 customFloatType
+        customFloatOptions: null,   //自定义浮动选项
+        customFloatStatus: null,    //自定义浮动初始状态，top，left等
+        customFloatType: null,      //自定义浮动类型的方法, 参考 floatTypeDefault 方法
     },
     animation: {                //动画
         in: 'default',              //Tips 显示动画
@@ -105,7 +108,8 @@ ohoTips(message, options);
         destroyed: C.noop,          //Tips 销毁之后 触发
         beforeFloated: C.noop,      //Tips 每次浮动之前 触发
         floated: C.noop,            //Tips 每次浮动之后 触发
-    }
+    },
+    debug: true                     //debug 默认打开，打开可以调试log。 error, warn 类型的log 不受此影响
 }
 ```
 
