@@ -40,6 +40,8 @@ ohoTips().success(message, baseElement);
 
 ohoTips(message, options);
 ```
+> 具体例子展示 请看 index.html
+
 ### 1.3 开发目标
 
 1. 增加更多的css样式
