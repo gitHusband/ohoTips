@@ -7,8 +7,42 @@ var baseElementGroup = "#box-group";
 var baseElementAnimation = '#box-animation';
 
 function defConfig() {
+    var defConfigHelpTips = null;
+    var showDefConfigHelp = function() {
+        defConfigHelpTips = ohoTips({
+            baseElement: defConfigIconBox,         //基准元素id，可接受其它选择器，如class
+            position: "center-right",                 //Tip显示位置，基准元素左上角
+            direction: 'outer',                     //Tip 方向, 默认inner
+            type: 'success',
+            icon: false,
+            symbol: 'triangle',
+            delay: 3000,
+            message: '单击一下，固定住弹框不缩小',
+        });
+    }
+    var destroyDefConfigHelp = function() {
+        if(defConfigHelpTips) {
+            defConfigHelpTips.destroy();
+            defConfigHelpTips = null;
+        }
+    }
+    var showDefConfigClickMessage = function(message) {
+        ohoTips({
+            baseElement: '#box-def-config',         //基准元素id，可接受其它选择器，如class
+            position: "top-center",                 //Tip显示位置，基准元素左上角
+            type: 'success',
+            delay: 3000,
+            message: message,
+        });
+    }
+
     var isFixedSize = false;
-    document.querySelector('.icon-box').onclick = function() {
+    var iconBox = document.querySelector('.icon-box');
+    var defConfigIconBox = document.querySelector("#def-config-icon-box");
+    defConfigIconBox.onmouseenter = function() {
+        setTimeout(showDefConfigHelp, 1000);
+    }
+    iconBox.onclick = function() {
         if(!isFixedSize) {
             document.querySelector(defConfingElement).classList.add('box-def-config-fixed');
             document.querySelector("#def-config-icon-box").classList.add('active');
@@ -23,6 +57,8 @@ function defConfig() {
         var options = {baseElement: ''};
         if(this.checked) {
             options.baseElement = this.value;
+
+            showDefConfigClickMessage('设置默认 baseElement: #box-def-config');
         }
         ohoTipsPrototype.setDefOptions(options);
     }
