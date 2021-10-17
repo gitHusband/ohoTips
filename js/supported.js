@@ -1,10 +1,10 @@
 var bodyElement = '';
 var defConfingElement = "#box-def-config";
-var parentElement = "#box-parent";
-var parentElementOuter = "#box-outer";
-var parentElementFloat = "#box-float";
-var parentElementGroup = "#box-group";
-var parentElementAnimation = '#box-animation';
+var baseElement = "#box-parent";
+var baseElementOuter = "#box-outer";
+var baseElementFloat = "#box-float";
+var baseElementGroup = "#box-group";
+var baseElementAnimation = '#box-animation';
 
 function defConfig() {
     var isFixedSize = false;
@@ -20,9 +20,9 @@ function defConfig() {
         }
     }
     document.querySelector('#def-parent').onclick = function() {
-        var options = {parentElement: ''};
+        var options = {baseElement: ''};
         if(this.checked) {
-            options.parentElement = this.value;
+            options.baseElement = this.value;
         }
         ohoTipsPrototype.setDefOptions(options);
     }
@@ -163,7 +163,7 @@ function tipDefault() {
     document.querySelector('#btn-body-top-left').onclick = function() {
         var message = '窗口左上角，类型：success';
         ohoTips({
-            // parentElement: bodyElement,         //父元素为空或者body，则定位基于整个窗口
+            // baseElement: bodyElement,         //基准元素为空或者body，则定位基于整个窗口
             position: "top-left",               //Tip显示位置，窗口左上角
             // type: "success",                    //显示的class，可接受自定义
             // icon: false,                        //不显示图标
@@ -174,7 +174,7 @@ function tipDefault() {
         var message = '窗口上居中，类型：success';
         var a = "0px 759.6px 377.2px 663.6px";
         ohoTips({
-            // parentElement: bodyElement,         //父元素为空或者body，则定位基于整个窗口
+            // baseElement: bodyElement,         //基准元素为空或者body，则定位基于整个窗口
             position: "top-center",             //Tip显示位置，窗口上居中
             type: "success",                    //显示的class，可接受自定义
             // icon: false,                        //不显示图标
@@ -184,7 +184,7 @@ function tipDefault() {
     document.querySelector('#btn-body-top-right').onclick = function() {
         var message = '窗口右上角，类型：success';
         ohoTips({
-            // parentElement: bodyElement,         //父元素为空或者body，则定位基于整个窗口
+            // baseElement: bodyElement,         //基准元素为空或者body，则定位基于整个窗口
             position: "top-right",              //Tip显示位置，窗口右上角
             type: "success",                    //显示的class，可接受自定义
             // icon: false,                         //显示icon, 可接受自定义
@@ -194,7 +194,7 @@ function tipDefault() {
     document.querySelector('#btn-body-center-left').onclick = function() {
         var message = '窗口左居中，类型：warning';
         ohoTips({
-            // parentElement: bodyElement,
+            // baseElement: bodyElement,
             position: "center-left",
             type: "warning",
             // icon: false,                        //不显示图标
@@ -204,7 +204,7 @@ function tipDefault() {
     document.querySelector('#btn-body-middle').onclick = function() {
         var message = '窗口垂直居中，类型：normal';
         ohoTips({
-            // parentElement: bodyElement,     
+            // baseElement: bodyElement,     
             position: "middle",
             //type: "normal",                   //默认 normal
             background: true,                   //显示遮罩层
@@ -215,7 +215,7 @@ function tipDefault() {
     document.querySelector('#btn-body-center-right').onclick = function() {
         var message = '窗口右居中，类型：normal';
         ohoTips({
-            // parentElement: bodyElement,
+            // baseElement: bodyElement,
             position: "center-right",
             type: "info",
             // icon: false,                        //不显示图标
@@ -226,7 +226,7 @@ function tipDefault() {
     document.querySelector('#btn-body-bottom-left').onclick = function() {
         var message = '窗口左下角，类型：error';
         ohoTips({
-            // parentElement: "",
+            // baseElement: "",
             position: "bottom-left",
             type: "error",
             // icon: false,                        //不显示图标
@@ -236,7 +236,7 @@ function tipDefault() {
     document.querySelector('#btn-body-bottom-center').onclick = function() {
         var message = '窗口下居中，类型：error';
         ohoTips({
-            // parentElement: "",
+            // baseElement: "",
             position: "bottom-center",
             type: "error",
             // icon: false,                        //不显示图标
@@ -246,7 +246,7 @@ function tipDefault() {
     document.querySelector('#btn-body-bottom-right').onclick = function() {
         var message = '窗口右下角，类型：error';
         ohoTips({
-            //parentElement: "",
+            //baseElement: "",
             position: "bottom-right",
             type: "error",
             // icon: false,                        //不显示图标
@@ -258,8 +258,8 @@ function tipDefault() {
         var checkboxValue = getCheckboxValue();
         var message = '左上角，类型：success';
         ohoTips({
-            parentElement: parentElement,       //父元素id，可接受其它选择器，如class
-            position: "top-left",               //Tip显示位置，父元素左上角
+            baseElement: baseElement,       //基准元素id，可接受其它选择器，如class
+            position: "top-left",               //Tip显示位置，基准元素左上角
             direction: checkboxValue.direction, //Tip 方向, 默认inner
             type: "success",                    //显示的class，可接受自定义
             message: message                            //Tip内容
@@ -269,13 +269,13 @@ function tipDefault() {
     document.querySelector('#btn-top-center').onclick = function() {
         var checkboxValue = getCheckboxValue();
         var message = '上居中，类型：success';
-        var jsonString = '{ "parentElement": "this", "position": "top-left", "direction": "outer", "type": "success", "icon": false, "destroy": "never", "html": true, "message": "html" }';
+        var jsonString = '{ "baseElement": "this", "position": "top-left", "direction": "outer", "type": "success", "icon": false, "destroy": "never", "html": true, "message": "html" }';
         jsonString = JSON.stringify(JSON.parse(jsonString), null, 2);
         var htmlJson = '<pre>'+jsonString+'</pre>';
         
         ohoTips({
-            parentElement: parentElement,       //父元素id，可接受其它选择器，如class
-            position: "top-center",             //Tip显示位置，父元素上居中
+            baseElement: baseElement,       //基准元素id，可接受其它选择器，如class
+            position: "top-center",             //Tip显示位置，基准元素上居中
             direction: checkboxValue.direction, //Tip 方向, 默认inner
             type: "success",                    //显示的class，可接受自定义
             icon: true,
@@ -292,8 +292,8 @@ function tipDefault() {
         var checkboxValue = getCheckboxValue();
         var message = '右上角，类型：success';
         ohoTips({
-            parentElement: parentElement,       //父元素id，可接受其它选择器，如class
-            position: "top-right",              //Tip显示位置，父元素右上角
+            baseElement: baseElement,       //基准元素id，可接受其它选择器，如class
+            position: "top-right",              //Tip显示位置，基准元素右上角
             direction: checkboxValue.direction, //Tip 方向, 默认inner
             type: "success",                    //显示的class，可接受自定义
             message: message                            //Tip内容
@@ -304,7 +304,7 @@ function tipDefault() {
         var checkboxValue = getCheckboxValue();
         var message = '左居中，类型：warning';
         ohoTips({
-            parentElement: parentElement,
+            baseElement: baseElement,
             position: "center-left",
             direction: checkboxValue.direction, //Tip 方向, 默认inner
             type: "warning",
@@ -319,7 +319,7 @@ function tipDefault() {
         var checkboxValue = getCheckboxValue();
         var message = '垂直居中，类型：normal';
         ohoTips({
-            parentElement: parentElement,
+            baseElement: baseElement,
             position: "middle",
             direction: checkboxValue.direction, //Tip 方向, 默认inner
             //type: "normal",                   //默认 normal
@@ -339,7 +339,7 @@ function tipDefault() {
         var checkboxValue = getCheckboxValue();
         var message = '右居中，类型：info';
         ohoTips({
-            parentElement: parentElement,
+            baseElement: baseElement,
             position: "center-right",
             direction: checkboxValue.direction, //Tip 方向, 默认inner
             type: "info",
@@ -355,7 +355,7 @@ function tipDefault() {
         var checkboxValue = getCheckboxValue();
         var message = '左下角，类型：error';
         ohoTips({
-            parentElement: ".box-parent",       //父元素class
+            baseElement: ".box-parent",       //基准元素class
             position: "bottom-left",
             direction: checkboxValue.direction, //Tip 方向, 默认inner
             type: "error",
@@ -366,7 +366,7 @@ function tipDefault() {
         var checkboxValue = getCheckboxValue();
         var message = '下居中，类型：error';
         ohoTips({
-            parentElement: ".box-parent",       //父元素class
+            baseElement: ".box-parent",       //基准元素class
             position: "bottom-center",
             direction: checkboxValue.direction, //Tip 方向, 默认inner
             type: "error",
@@ -381,7 +381,7 @@ function tipDefault() {
         var checkboxValue = getCheckboxValue();
         var message = '右下角，类型：error';
         ohoTips({
-            parentElement: ".box-parent",       //父元素class
+            baseElement: ".box-parent",       //基准元素class
             position: "bottom-right",
             direction: checkboxValue.direction, //Tip 方向, 默认inner
             type: "error",
@@ -395,7 +395,7 @@ function tipDefault() {
             '只有意志坚强的人才能到达彼岸'
         ];
         ohoTips({
-            parentElement: parentElement,
+            baseElement: baseElement,
             position: "top-center",
             type: "success",
             message: message
@@ -409,7 +409,7 @@ function tipDefault() {
             '低头思故乡。',
         ];
         ohoTips({
-            parentElement: parentElement,
+            baseElement: baseElement,
             position: "middle",
             type: "info",
             message: message
@@ -421,7 +421,7 @@ function tipDefault() {
             '吸烟有害健康！'
         ];
         ohoTips({
-            parentElement: parentElement,
+            baseElement: baseElement,
             position: "bottom-center",
             type: "error",
             message: message
@@ -430,7 +430,7 @@ function tipDefault() {
     document.querySelector('#btn-delay').onclick = function() {
         var message = '3s 后销毁 Tip';
         ohoTips({
-            parentElement: parentElement,
+            baseElement: baseElement,
             position: "center-left",
             delay: 3000,                    //3s 后自动销毁
             message: message
@@ -439,7 +439,7 @@ function tipDefault() {
     document.querySelector('#btn-destroy').onclick = function() {
         var message = '手动销毁 Tip';
         ohoTips({
-            parentElement: parentElement,
+            baseElement: baseElement,
             position: "middle",
             destroy: 'manual',              //手动销毁
             type: 'normal',
@@ -455,7 +455,7 @@ function tipDefault() {
         if(clickDesrtoyNever){
             var message = ['永不销毁 Tip', '再按一次销毁'];
             desrtoyNeverTip = ohoTips({
-                parentElement: parentElement,
+                baseElement: baseElement,
                 position: "center-right",
                 destroy: 'never',           //永不销毁
                 icon: 'clock',
@@ -469,28 +469,28 @@ function tipDefault() {
         var message = [
             '简单调用 Tips 接口',
         ];
-        var parent = parentElement;
+        var parent = baseElement;
 
-        message[1] = "ohoTips().info(message, parentElement)";
+        message[1] = "ohoTips().info(message, baseElement)";
         ohoTips().info(message, parent);     //这种方法调用方便，一般使用该类方法即可
         setTimeout(function () {
-            message[1] = "ohoTips().success(message, parentElement)";
+            message[1] = "ohoTips().success(message, baseElement)";
             ohoTips().success(message, parent);
         }, 1000);
         setTimeout(function () {
-            message[1] = "ohoTips().error(message, parentElement)";
+            message[1] = "ohoTips().error(message, baseElement)";
             ohoTips().error(message, parent);
         }, 2000);
         setTimeout(function () {
-            message[1] = "ohoTips().warning(message, parentElement)";
+            message[1] = "ohoTips().warning(message, baseElement)";
             ohoTips().warning(message, parent);
         }, 3000);
         setTimeout(function () {
-            message[1] = "ohoTips().normal(message, parentElement)";
+            message[1] = "ohoTips().normal(message, baseElement)";
             ohoTips().normal(message, 'success', parent);
         }, 4000);
         setTimeout(function () {
-            message[1] = "ohoTips().show(message, \"info\", parentElement)";
+            message[1] = "ohoTips().show(message, \"info\", baseElement)";
             ohoTips().show(message, "info", parent);
         }, 5000);
     }
@@ -499,7 +499,7 @@ function tipDefault() {
         ohoTipsPrototype.setDefOptions({
             type: "info",
             position: "top-center",
-            offset: {                   //如果position 是对象如{tip: 0}，则一般不需要这个，如果是字符串，则可以酌情添加offset, 调整父元素与Tips 的相对定位, 仅支持top，left
+            offset: {                   //如果position 是对象如{tip: 0}，则一般不需要这个，如果是字符串，则可以酌情添加offset, 调整基准元素与Tips 的相对定位, 仅支持top，left
                 top: 10,
                 left: null
             },
@@ -527,7 +527,7 @@ function tipDefault() {
     document.querySelector('#btn-callback').onclick = function() {
         var message = 'Tips 生命周期函数，请看控制台log';
         ohoTips({
-            parentElement: parentElement,
+            baseElement: baseElement,
             position: "middle",
             destroy: 'manual',         //手动销毁
             background: true,
@@ -565,7 +565,7 @@ function tipDefault() {
             '    </div>';
 
         ohoTips({
-            parentElement: parentElement,
+            baseElement: baseElement,
             position: "middle",
             type: "box-html",       //自定义message 样式
             icon: false,
@@ -573,7 +573,7 @@ function tipDefault() {
             // background: true,
             html: {
                 param: true,                //false - 文本类型信息，true - dom元素类型信息
-                isParentTransparent: true,  //false - 父元素不透明，true - 父元素透明
+                isParentTransparent: true,  //false - Tips 容器不透明，true - Tips 容器透明
             },
             message: message,
             events: {
@@ -603,7 +603,7 @@ function tipDefault() {
         var message = document.querySelector('#btn-html-js');
 
         ohoTips({
-            parentElement: parentElement,
+            baseElement: baseElement,
             position: "middle",
             type: "box-html",       //自定义message 样式
             icon: false,
@@ -611,7 +611,7 @@ function tipDefault() {
             // background: true,
             html: {
                 param: true,                //false - 文本类型信息，true - dom元素类型信息
-                isParentTransparent: true,  //false - 父元素不透明，true - 父元素透明
+                isParentTransparent: true,  //false - Tips 容器不透明，true - Tips 容器透明
             },
             message: message,
             events: {
@@ -629,7 +629,7 @@ function tipDefault() {
         var message = $('#btn-html-jq');
 
         ohoTips({
-            parentElement: parentElement,
+            baseElement: baseElement,
             position: "middle",
             type: "box-html",       //自定义message 样式
             icon: false,
@@ -637,7 +637,7 @@ function tipDefault() {
             // background: true,
             html: {
                 param: true,                //false - 文本类型信息，true - dom元素类型信息
-                isParentTransparent: true,  //false - 父元素不透明，true - 父元素透明
+                isParentTransparent: true,  //false - Tips 容器不透明，true - Tips 容器透明
             },
             message: message,
             events: {
@@ -688,7 +688,7 @@ function tipDefault() {
         ];
 
         ohoTips({
-            parentElement: parentElement,
+            baseElement: baseElement,
             position: position,
             direction: 'normal',
             background: checkboxValue.bg,
@@ -703,11 +703,11 @@ function tipDefault() {
         var position = inputPosition();
         var message = [
             '自定义位置 : ' + JSON.stringify(position),
-            '内部(默认)定位方案，计算Tips 宽高，尽量使Tips 位于父元素内部',
+            '内部(默认)定位方案，计算Tips 宽高，尽量使Tips 位于基准元素内部',
         ];
 
         ohoTips({
-            parentElement: parentElement,
+            baseElement: baseElement,
             position: position,
             // direction: 'inner',
             background: checkboxValue.bg,
@@ -722,11 +722,11 @@ function tipDefault() {
         var position = inputPosition();
         var message = [
             '自定义位置 : ' + JSON.stringify(position),
-            '外部定位方案，计算Tips 宽高，尽量使Tips 位于父元素外部'
+            '外部定位方案，计算Tips 宽高，尽量使Tips 位于基准元素外部'
         ];
 
         ohoTips({
-            parentElement: parentElement,
+            baseElement: baseElement,
             position: position,
             direction: 'outside',
             background: checkboxValue.bg,
@@ -741,15 +741,15 @@ function tipDefault() {
         var position = inputPosition();
         var message = [
             '自定义位置 : ' + JSON.stringify(position),
-            '外围定位方案，计算Tips 宽高，尽量使Tips 位于父元素外部',
+            '外围定位方案，计算Tips 宽高，尽量使Tips 位于基准元素外部',
             '当百分比为正数时，百分比基准是Tips元素',
-            '当百分比为负数时，百分比基准是父元素',
+            '当百分比为负数时，百分比基准是基准元素',
         ];
 
         // message = "1"
 
         ohoTips({
-            parentElement: parentElement,
+            baseElement: baseElement,
             position: position,
             direction: 'outer',
             background: checkboxValue.bg,
@@ -774,8 +774,8 @@ function tipOuter() {
     btnOuterTopLeft.onclick = function() {
         var message = '左上角，类型：success';
         ohoTips({
-            parentElement: parentElementOuter,      //父元素id，可接受其它选择器，如class
-            position: "top-left",                   //Tip显示位置，父元素左上角
+            baseElement: baseElementOuter,      //基准元素id，可接受其它选择器，如class
+            position: "top-left",                   //Tip显示位置，基准元素左上角
             direction: 'outer',                     //Tip 方向, 默认inner
             icon: 'success',
             message: message                                //Tip内容
@@ -783,12 +783,12 @@ function tipOuter() {
     }
     var contentTopLeft;
     btnOuterTopLeft.onmouseenter = function() {
-        var jsonString = '{ "parentElement": "this", "position": "top-left", "direction": "outer", "type": "success", "icon": false, "destroy": "never", "html": true, "message": "html" }';
+        var jsonString = '{ "baseElement": "this", "position": "top-left", "direction": "outer", "type": "success", "icon": false, "destroy": "never", "html": true, "message": "html" }';
         jsonString = JSON.stringify(JSON.parse(jsonString), null, 2);
         var html = '<pre>'+jsonString+'</pre>';
         contentTopLeft = ohoTips({
-            parentElement: btnOuterTopLeft,         //父元素id，可接受其它选择器，如class
-            position: "top-left",                   //Tip显示位置，父元素左上角
+            baseElement: btnOuterTopLeft,         //基准元素id，可接受其它选择器，如class
+            position: "top-left",                   //Tip显示位置，基准元素左上角
             direction: 'outer',                     //Tip 方向, 默认inner
             type: 'success',
             symbol: true,
@@ -809,8 +809,8 @@ function tipOuter() {
         var checkboxValue = getCheckboxValue();
         var message = '上居中，类型：success';
         ohoTips({
-            parentElement: parentElementOuter,       //父元素id，可接受其它选择器，如class
-            position: "top-center",             //Tip显示位置，父元素上居中
+            baseElement: baseElementOuter,       //基准元素id，可接受其它选择器，如class
+            position: "top-center",             //Tip显示位置，基准元素上居中
             direction: 'outer', //Tip 方向, 默认inner
             icon: 'success',
             iconOptions: {                      
@@ -821,22 +821,22 @@ function tipOuter() {
         })
     }
     ohoTips().hoverTip({
-        parentElement: btnOuterTopCenter,       //父元素id，可接受其它选择器，如class
-        position: "top-center",                 //Tip显示位置，父元素左上角
+        baseElement: btnOuterTopCenter,       //基准元素id，可接受其它选择器，如class
+        position: "top-center",                 //Tip显示位置，基准元素左上角
         direction: 'outer',                     //Tip 方向, 默认inner
         type: 'success',
         icon: false,
         destroy: 'never',
         html: true,
-        message: stringifyHtml('{ "parentElement": "this", "position": "top-center", "direction": "outer", "type": "success", "icon": false, "destroy": "never", "html": true, "message": "html" }'),
+        message: stringifyHtml('{ "baseElement": "this", "position": "top-center", "direction": "outer", "type": "success", "icon": false, "destroy": "never", "html": true, "message": "html" }'),
     }, btnOuterTopCenter);
 
     var btnOuterTopRight = document.querySelector('#btn-outer-top-right');
     btnOuterTopRight.onclick = function() {
         var message = '右上角，类型：success';
         ohoTips({
-            parentElement: parentElementOuter,      //父元素id，可接受其它选择器，如class
-            position: "top-right",                  //Tip显示位置，父元素右上角
+            baseElement: baseElementOuter,      //基准元素id，可接受其它选择器，如class
+            position: "top-right",                  //Tip显示位置，基准元素右上角
             direction: 'outer',                     //Tip 方向, 默认inner
             icon: 'success',
             iconOptions: {                      
@@ -846,14 +846,14 @@ function tipOuter() {
         })
     }
     ohoTips().hoverTip({
-        parentElement: btnOuterTopRight,            //父元素id，可接受其它选择器，如class
-        position: "top-right",                      //Tip显示位置，父元素左上角
+        baseElement: btnOuterTopRight,            //基准元素id，可接受其它选择器，如class
+        position: "top-right",                      //Tip显示位置，基准元素左上角
         direction: 'outer',                         //Tip 方向, 默认inner
         type: 'success',
         icon: false,
         destroy: 'never',
         html: true,
-        message: stringifyHtml('{ "parentElement": "this", "position": "top-right", "direction": "outer", "type": "success", "icon": false, "destroy": "never", "html": true, "message": "html" }'),
+        message: stringifyHtml('{ "baseElement": "this", "position": "top-right", "direction": "outer", "type": "success", "icon": false, "destroy": "never", "html": true, "message": "html" }'),
     }, btnOuterTopRight);
 
     var btnOuterCenterLeft = document.querySelector('#btn-outer-center-left');
@@ -861,7 +861,7 @@ function tipOuter() {
         var checkboxValue = getCheckboxValue();
         var message = '左居中，类型：warning';
         ohoTips({
-            parentElement: parentElementOuter,
+            baseElement: baseElementOuter,
             position: "center-left",
             direction: 'outer', //Tip 方向, 默认inner
             type: "warning",
@@ -869,14 +869,14 @@ function tipOuter() {
         })
     }
     ohoTips().hoverTip({
-        parentElement: btnOuterCenterLeft,      //父元素id，可接受其它选择器，如class
-        position: "center-left",                   //Tip显示位置，父元素左上角
+        baseElement: btnOuterCenterLeft,      //基准元素id，可接受其它选择器，如class
+        position: "center-left",                   //Tip显示位置，基准元素左上角
         direction: 'outer',                     //Tip 方向, 默认inner
         type: "warning",                        //显示的class，可接受自定义
         icon: false,
         destroy: 'never',
         html: true,
-        message: stringifyHtml('{ "parentElement": "this", "position": "center-left", "direction": "outer", "type": "warning", "icon": false, "destroy": "never", "html": true, "message": "html" }'),
+        message: stringifyHtml('{ "baseElement": "this", "position": "center-left", "direction": "outer", "type": "warning", "icon": false, "destroy": "never", "html": true, "message": "html" }'),
     }, btnOuterCenterLeft);
 
     var btnOuterMiddle = document.querySelector('#btn-outer-middle');
@@ -884,7 +884,7 @@ function tipOuter() {
         var checkboxValue = getCheckboxValue();
         var message = '垂直居中，类型：normal';
         ohoTips({
-            parentElement: parentElementOuter,
+            baseElement: baseElementOuter,
             position: "middle",
             direction: 'outer', //Tip 方向, 默认inner
             //type: "normal",                   //默认 normal
@@ -901,13 +901,13 @@ function tipOuter() {
         })
     }
     ohoTips().hoverTip({
-        parentElement: btnOuterMiddle,          //父元素id，可接受其它选择器，如class
-        position: "top-center",                 //Tip显示位置，父元素左上角
+        baseElement: btnOuterMiddle,          //基准元素id，可接受其它选择器，如class
+        position: "top-center",                 //Tip显示位置，基准元素左上角
         direction: 'outer',                     //Tip 方向, 默认inner
         type: "info",
         destroy: 'never',
         html: true,
-        message: stringifyHtml('{ "parentElement": "this", "position": "top-center", "direction": "outer", "type": "info", "destroy": "never", "html": true, "message": "html" }'),
+        message: stringifyHtml('{ "baseElement": "this", "position": "top-center", "direction": "outer", "type": "info", "destroy": "never", "html": true, "message": "html" }'),
     }, btnOuterMiddle);
 
     var btnOuterCenterRight = document.querySelector('#btn-outer-center-right');
@@ -915,7 +915,7 @@ function tipOuter() {
         var checkboxValue = getCheckboxValue();
         var message = '右居中，类型：info';
         ohoTips({
-            parentElement: parentElementOuter,
+            baseElement: baseElementOuter,
             position: "center-right",
             direction: 'outer', //Tip 方向, 默认inner
             type: "info",
@@ -927,13 +927,13 @@ function tipOuter() {
         })
     }
     ohoTips().hoverTip({
-        parentElement: btnOuterCenterRight,      //父元素id，可接受其它选择器，如class
-        position: "center-right",                   //Tip显示位置，父元素左上角
+        baseElement: btnOuterCenterRight,      //基准元素id，可接受其它选择器，如class
+        position: "center-right",                   //Tip显示位置，基准元素左上角
         direction: 'outer',                     //Tip 方向, 默认inner
         type: "info",
         destroy: 'never',
         html: true,
-        message: stringifyHtml('{ "parentElement": "this", "position": "center-right", "direction": "outer", "type": "info", "destroy": "never", "html": true, "message": "html" }'),
+        message: stringifyHtml('{ "baseElement": "this", "position": "center-right", "direction": "outer", "type": "info", "destroy": "never", "html": true, "message": "html" }'),
     }, btnOuterCenterRight);
 
     var btnOuterBottomLeft = document.querySelector('#btn-outer-bottom-left');
@@ -941,7 +941,7 @@ function tipOuter() {
         var checkboxValue = getCheckboxValue();
         var message = '左下角，类型：error';
         ohoTips({
-            parentElement: parentElementOuter,       //父元素class
+            baseElement: baseElementOuter,       //基准元素class
             position: "bottom-left",
             direction: 'outer', //Tip 方向, 默认inner
             type: "error",
@@ -949,13 +949,13 @@ function tipOuter() {
         })
     }
     ohoTips().hoverTip({
-        parentElement: btnOuterBottomLeft,          //父元素id，可接受其它选择器，如class
-        position: "bottom-left",                    //Tip显示位置，父元素左上角
+        baseElement: btnOuterBottomLeft,          //基准元素id，可接受其它选择器，如class
+        position: "bottom-left",                    //Tip显示位置，基准元素左上角
         direction: 'outer',                         //Tip 方向, 默认inner
         type: 'error',
         destroy: 'never',
         html: true,
-        message: stringifyHtml('{ "parentElement": "this", "position": "bottom-left", "direction": "outer", "destroy": "never", "html": true, "message": "html" }'),
+        message: stringifyHtml('{ "baseElement": "this", "position": "bottom-left", "direction": "outer", "destroy": "never", "html": true, "message": "html" }'),
     }, btnOuterBottomLeft);
 
     var btnOuterBottomCenter = document.querySelector('#btn-outer-bottom-center');
@@ -963,7 +963,7 @@ function tipOuter() {
         var checkboxValue = getCheckboxValue();
         var message = '下居中，类型：error';
         ohoTips({
-            parentElement: parentElementOuter,       //父元素class
+            baseElement: baseElementOuter,       //基准元素class
             position: "bottom-center",
             direction: 'outer', //Tip 方向, 默认inner
             type: "error",
@@ -975,13 +975,13 @@ function tipOuter() {
         })
     }
     ohoTips().hoverTip({
-        parentElement: btnOuterBottomCenter,            //父元素id，可接受其它选择器，如class
-        position: "bottom-center",                      //Tip显示位置，父元素左上角
+        baseElement: btnOuterBottomCenter,            //基准元素id，可接受其它选择器，如class
+        position: "bottom-center",                      //Tip显示位置，基准元素左上角
         direction: 'outer',                             //Tip 方向, 默认inner
         type: 'error',
         destroy: 'never',
         html: true,
-        message: stringifyHtml('{ "parentElement": "this", "position": "bottom-center", "direction": "outer", "destroy": "never", "html": true, "message": "html" }'),
+        message: stringifyHtml('{ "baseElement": "this", "position": "bottom-center", "direction": "outer", "destroy": "never", "html": true, "message": "html" }'),
     }, btnOuterBottomCenter);
 
     var btnOuterBottomRight = document.querySelector('#btn-outer-bottom-right');
@@ -989,7 +989,7 @@ function tipOuter() {
         var checkboxValue = getCheckboxValue();
         var message = '右下角，类型：error';
         ohoTips({
-            parentElement: parentElementOuter,       //父元素class
+            baseElement: baseElementOuter,       //基准元素class
             position: "bottom-right",
             direction: 'outer', //Tip 方向, 默认inner
             type: "error",
@@ -1001,8 +1001,8 @@ function tipOuter() {
         })
     }
     ohoTips().hoverTip({
-        parentElement: btnOuterBottomRight,      //父元素id，可接受其它选择器，如class
-        position: "bottom-right",                   //Tip显示位置，父元素左上角
+        baseElement: btnOuterBottomRight,      //基准元素id，可接受其它选择器，如class
+        position: "bottom-right",                   //Tip显示位置，基准元素左上角
         direction: 'outer',                     //Tip 方向, 默认inner
         destroy: 'never',
         icon: 'error',
@@ -1010,7 +1010,7 @@ function tipOuter() {
             position: 'right',              //Icon 位置
         },
         html: true,
-        message: stringifyHtml('{ "parentElement": "this", "position": "bottom-right", "direction": "outer", "destroy": "never", "icon": "error", "iconOptions": { "position": "right" }, "html": true, "message": "html" }'),
+        message: stringifyHtml('{ "baseElement": "this", "position": "bottom-right", "direction": "outer", "destroy": "never", "icon": "error", "iconOptions": { "position": "right" }, "html": true, "message": "html" }'),
     }, btnOuterBottomRight);
 
     var btnOuterLeftTop = document.querySelector('#btn-outer-left-top');
@@ -1018,7 +1018,7 @@ function tipOuter() {
         var checkboxValue = getCheckboxValue();
         var message = '上左角，类型：error';
         ohoTips({
-            parentElement: parentElementOuter,       //父元素class
+            baseElement: baseElementOuter,       //基准元素class
             position: "left-top",
             direction: 'outer', //Tip 方向, 默认inner
             type: "error",
@@ -1030,8 +1030,8 @@ function tipOuter() {
         })
     }
     ohoTips().hoverTip({
-        parentElement: btnOuterLeftTop,      //父元素id，可接受其它选择器，如class
-        position: "left-top",                   //Tip显示位置，父元素左上角
+        baseElement: btnOuterLeftTop,      //基准元素id，可接受其它选择器，如class
+        position: "left-top",                   //Tip显示位置，基准元素左上角
         direction: 'outer',                     //Tip 方向, 默认inner
         destroy: 'never',
         icon: 'error',
@@ -1039,7 +1039,7 @@ function tipOuter() {
             position: 'right',              //Icon 位置
         },
         html: true,
-        message: stringifyHtml('{ "parentElement": "this", "position": "left-top", "direction": "outer", "destroy": "never", "icon": "error", "iconOptions": { "position": "right" }, "html": true, "message": "html" }'),
+        message: stringifyHtml('{ "baseElement": "this", "position": "left-top", "direction": "outer", "destroy": "never", "icon": "error", "iconOptions": { "position": "right" }, "html": true, "message": "html" }'),
     }, btnOuterLeftTop);
 
     var btnOuterLeftBottom = document.querySelector('#btn-outer-left-bottom');
@@ -1047,7 +1047,7 @@ function tipOuter() {
         var checkboxValue = getCheckboxValue();
         var message = '下左角，类型：error';
         ohoTips({
-            parentElement: parentElementOuter,       //父元素class
+            baseElement: baseElementOuter,       //基准元素class
             position: "left-bottom",
             direction: 'outer', //Tip 方向, 默认inner
             type: "error",
@@ -1059,8 +1059,8 @@ function tipOuter() {
         })
     }
     ohoTips().hoverTip({
-        parentElement: btnOuterLeftBottom,      //父元素id，可接受其它选择器，如class
-        position: "left-bottom",                   //Tip显示位置，父元素左上角
+        baseElement: btnOuterLeftBottom,      //基准元素id，可接受其它选择器，如class
+        position: "left-bottom",                   //Tip显示位置，基准元素左上角
         direction: 'outer',                     //Tip 方向, 默认inner
         destroy: 'never',
         icon: 'error',
@@ -1068,7 +1068,7 @@ function tipOuter() {
             position: 'right',              //Icon 位置
         },
         html: true,
-        message: stringifyHtml('{ "parentElement": "this", "position": "left-bottom", "direction": "outer", "destroy": "never", "icon": "error", "iconOptions": { "position": "right" }, "html": true, "message": "html" }'),
+        message: stringifyHtml('{ "baseElement": "this", "position": "left-bottom", "direction": "outer", "destroy": "never", "icon": "error", "iconOptions": { "position": "right" }, "html": true, "message": "html" }'),
     }, btnOuterLeftBottom);
 
     var btnOuterRightTop = document.querySelector('#btn-outer-right-top');
@@ -1076,7 +1076,7 @@ function tipOuter() {
         var checkboxValue = getCheckboxValue();
         var message = '上右角，类型：error';
         ohoTips({
-            parentElement: parentElementOuter,       //父元素class
+            baseElement: baseElementOuter,       //基准元素class
             position: "right-top",
             direction: 'outer', //Tip 方向, 默认inner
             type: "error",
@@ -1088,8 +1088,8 @@ function tipOuter() {
         })
     }
     ohoTips().hoverTip({
-        parentElement: btnOuterRightTop,      //父元素id，可接受其它选择器，如class
-        position: "right-top",                   //Tip显示位置，父元素左上角
+        baseElement: btnOuterRightTop,      //基准元素id，可接受其它选择器，如class
+        position: "right-top",                   //Tip显示位置，基准元素左上角
         direction: 'outer',                     //Tip 方向, 默认inner
         destroy: 'never',
         icon: 'error',
@@ -1097,7 +1097,7 @@ function tipOuter() {
             position: 'right',              //Icon 位置
         },
         html: true,
-        message: stringifyHtml('{ "parentElement": "this", "position": "right-top", "direction": "outer", "destroy": "never", "icon": "error", "iconOptions": { "position": "right" }, "html": true, "message": "html" }'),
+        message: stringifyHtml('{ "baseElement": "this", "position": "right-top", "direction": "outer", "destroy": "never", "icon": "error", "iconOptions": { "position": "right" }, "html": true, "message": "html" }'),
     }, btnOuterRightTop);
 
     var btnOuterRightBottom = document.querySelector('#btn-outer-right-bottom');
@@ -1105,7 +1105,7 @@ function tipOuter() {
         var checkboxValue = getCheckboxValue();
         var message = '下右角，类型：error';
         ohoTips({
-            parentElement: parentElementOuter,       //父元素class
+            baseElement: baseElementOuter,       //基准元素class
             position: "right-bottom",
             direction: 'outer', //Tip 方向, 默认inner
             type: "error",
@@ -1117,8 +1117,8 @@ function tipOuter() {
         })
     }
     ohoTips().hoverTip({
-        parentElement: btnOuterRightBottom,      //父元素id，可接受其它选择器，如class
-        position: "right-bottom",                   //Tip显示位置，父元素左上角
+        baseElement: btnOuterRightBottom,      //基准元素id，可接受其它选择器，如class
+        position: "right-bottom",                   //Tip显示位置，基准元素左上角
         direction: 'outer',                     //Tip 方向, 默认inner
         destroy: 'never',
         icon: 'error',
@@ -1126,7 +1126,7 @@ function tipOuter() {
             position: 'right',              //Icon 位置
         },
         html: true,
-        message: stringifyHtml('{ "parentElement": "this", "position": "right-bottom", "direction": "outer", "destroy": "never", "icon": "error", "iconOptions": { "position": "right" }, "html": true, "message": "html" }'),
+        message: stringifyHtml('{ "baseElement": "this", "position": "right-bottom", "direction": "outer", "destroy": "never", "icon": "error", "iconOptions": { "position": "right" }, "html": true, "message": "html" }'),
     }, btnOuterRightBottom);
 
 }
@@ -1142,7 +1142,7 @@ function tipFloat() {
                 '再次点击销毁',
             ];
             floatDefaultTips = ohoTips({
-                parentElement: parentElementFloat,      //父元素id，可接受其它选择器，如class
+                baseElement: baseElementFloat,      //基准元素id，可接受其它选择器，如class
                 position: "float",                      //Tip显示位置，浮动
                 float: {
                     type: "default",                    //浮动类型
@@ -1167,7 +1167,7 @@ function tipFloat() {
     document.querySelector('#btn-float-x').onclick = function() {
         var message = 'X浮动';
         ohoTips({
-            parentElement: parentElement,
+            baseElement: baseElement,
             position: "float",                      //Tip显示位置，浮动
             float: {
                 type: "x",                          //浮动类型
@@ -1179,7 +1179,7 @@ function tipFloat() {
     document.querySelector('#btn-float-square').onclick = function() {
         var message = '方形浮动';
         ohoTips({
-            //parentElement: parentElementFloat,
+            //baseElement: baseElementFloat,
             position: "float",                      //Tip显示位置，浮动
             float: {
                 type: 'square',
@@ -1192,7 +1192,7 @@ function tipFloat() {
     document.querySelector('#btn-float-x-custom').onclick = function() {
         var message = '配置X浮动';
         ohoTips({
-            parentElement: parentElementFloat,
+            baseElement: baseElementFloat,
             position: "float",                      //Tip显示位置，top为上居中
             float: {
                 type: "x",                          //浮动类型
@@ -1218,7 +1218,7 @@ function tipFloat() {
     document.querySelector('#btn-float-square-custom').onclick = function() {
         var message = '配置方形浮动, 事件请看log';
         ohoTips({
-            //parentElement: parentElementFloat,
+            //baseElement: baseElementFloat,
             position: "float",                      //Tip显示位置，top为上居中
             float: {
                 type: 'square',
@@ -1240,8 +1240,8 @@ function tipFloat() {
             destroy: "never",                       //从不销毁
             message: message,                       //Tip内容
             events: {
-                beforeFloated: function(floatFlag) { console.log(floatFlag + " - " + "Before Tips floating.", this.backup._tElem); },
-                floated: function(floatFlag) { console.log(floatFlag + " - " + "Tips begins to float.", this.backup._tElem); },
+                beforeFloated: function(floatFlag) { console.log(floatFlag + " - " + "Before Tips floating.", this.backup._tipElm); },
+                floated: function(floatFlag) { console.log(floatFlag + " - " + "Tips begins to float.", this.backup._tipElm); },
             }
         })
     }
@@ -1294,7 +1294,7 @@ function tipFloat() {
             }, floatOptions.delay);
         };
         ohoTips({
-            //parentElement: parentElementFloat,
+            //baseElement: baseElementFloat,
             position: "float",                      //Tip显示位置，浮动
             float: {
                 customFloatType: customFloatType,           //自定义浮动函数
@@ -1314,7 +1314,7 @@ function tipFloat() {
                 '再次点击销毁',
             ];
             floatTranslateDefaultTips = ohoTips({
-                parentElement: parentElementFloat,      //父元素id，可接受其它选择器，如class
+                baseElement: baseElementFloat,      //基准元素id，可接受其它选择器，如class
                 position: "translate",                  //Tip显示位置，浮动
                 float: {
                     type: "default",                    //浮动类型
@@ -1339,7 +1339,7 @@ function tipFloat() {
     document.querySelector('#btn-float-translate-x').onclick = function() {
         var message = 'X浮动-Translate';
         ohoTips({
-            parentElement: parentElement,
+            baseElement: baseElement,
             position: "translate",                      //Tip显示位置，浮动
             float: {
                 type: "x",                          //浮动类型
@@ -1351,7 +1351,7 @@ function tipFloat() {
     document.querySelector('#btn-float-translate-square').onclick = function() {
         var message = '方形浮动-Translate';
         ohoTips({
-            //parentElement: parentElementFloat,
+            //baseElement: baseElementFloat,
             position: "translate",                      //Tip显示位置，浮动
             float: {
                 type: 'square',
@@ -1368,7 +1368,7 @@ function tipFloat() {
         if(canDesrtoyFloatTranslateDefaultConfing) {
             var message = '配置X浮动-Translate';
             floatTranslateDefaultConfingTips = ohoTips({
-                parentElement: parentElementFloat,
+                baseElement: baseElementFloat,
                 position: "translate",                  //Tip显示位置，top为上居中
                 float: {
                     type: "x",                          //浮动类型
@@ -1397,7 +1397,7 @@ function tipFloat() {
     document.querySelector('#btn-float-translate-square-custom').onclick = function() {
         var message = '配置方形浮动-Translate, 事件请看log';
         ohoTips({
-            //parentElement: parentElementFloat,
+            //baseElement: baseElementFloat,
             position: "translate",                      //Tip显示位置，top为上居中
             float: {
                 type: 'square',
@@ -1419,8 +1419,8 @@ function tipFloat() {
             destroy: "never",                       //从不销毁
             message: message,                               //Tip内容
             events: {
-                beforeFloated: function(floatFlag) { console.log(floatFlag + " - " + "Before Tips floating.", this.backup._tElem); },
-                floated: function(floatFlag) { console.log(floatFlag + " - " + "Tips begins to float.", this.backup._tElem); },
+                beforeFloated: function(floatFlag) { console.log(floatFlag + " - " + "Before Tips floating.", this.backup._tipElm); },
+                floated: function(floatFlag) { console.log(floatFlag + " - " + "Tips begins to float.", this.backup._tipElm); },
             }
         })
     }
@@ -1473,7 +1473,7 @@ function tipFloat() {
             }, floatOptions.delay);
         };
         ohoTips({
-            //parentElement: parentElementFloat,
+            //baseElement: baseElementFloat,
             position: "translate",                  //Tip显示位置，浮动
             float: {
                 customFloatType: customFloatType,           //自定义浮动函数
@@ -1507,7 +1507,7 @@ function tipGroup() {
         status1 = !status1;
         
         ohoTips({
-            //parentElement: parentElementGroup,
+            //baseElement: baseElementGroup,
             position: position,
             //background: randomNum(0, 1),
             type: 'normal',
@@ -1535,7 +1535,7 @@ function tipGroup() {
         }
 
         ohoTips({
-            parentElement: parentElementGroup,
+            baseElement: baseElementGroup,
             position: position,
             //background: randomNum(0, 1),
             type: type,
@@ -1557,7 +1557,7 @@ function tipGroup() {
         var message = ['当前时间： ' , new Date() + new Date()];
         
         ohoTips({
-            parentElement: parentElementGroup,
+            baseElement: baseElementGroup,
             position: position,
             //background: randomNum(0, 1),
             type: 'normal',
@@ -1580,7 +1580,7 @@ function animation() {
         var message = ['当前时间： ' , new Date()];
         
         ohoTips({
-            parentElement: parentElementAnimation,
+            baseElement: baseElementAnimation,
             position: position,
             // background: true,
             type: 'normal',
@@ -1605,7 +1605,7 @@ function animation() {
         var message = ['当前时间： ' , new Date()];
         
         ohoTips({
-            parentElement: parentElementAnimation,
+            baseElement: baseElementAnimation,
             position: position,
             type: 'normal',
             icon: icon,
@@ -1620,7 +1620,7 @@ function animation() {
         var message = ['当前时间： ' , new Date()];
         
         ohoTips({
-            // parentElement: parentElementAnimation,
+            // baseElement: baseElementAnimation,
             position: position,
             // background: true,
             type: 'normal',
@@ -1646,7 +1646,7 @@ function animation() {
         var message = ['当前时间： ' , new Date(), new Date(), new Date(), new Date(), new Date(), new Date(), new Date(), new Date(), new Date(), new Date(), new Date()];
         
         ohoTips({
-            // parentElement: parentElementAnimation,
+            // baseElement: baseElementAnimation,
             position: position,
             background: true,
             type: 'normal',
@@ -1672,7 +1672,7 @@ function animation() {
         var message = ['当前时间： ' , new Date()];
         
         ohoTips({
-            // parentElement: parentElementAnimation,
+            // baseElement: baseElementAnimation,
             position: position,
             // background: true,
             type: 'warning',
@@ -1704,7 +1704,7 @@ function animation() {
         var message = ['当前时间： ' , new Date(), new Date(), new Date(), new Date(), new Date()];
         
         ohoTips({
-            // parentElement: parentElementAnimation,
+            // baseElement: baseElementAnimation,
             position: position,
             // background: true,
             type: 'info',
@@ -1730,7 +1730,7 @@ function animation() {
         var message = ['自定义动画类型-1', '当前时间： ' , new Date()];
         
         ohoTips({
-            parentElement: parentElementAnimation,
+            baseElement: baseElementAnimation,
             position: position,
             background: true,
             type: 'normal',
@@ -1744,9 +1744,9 @@ function animation() {
             animation: {
                 customAmtFuntion: function(status) {
                     let C = this.C;
-                    let $tip = this.backup._tElem;
-                    let $tipGroup = this.backup._tgElem;
-                    let $bg = this.backup._bgElem;
+                    let $tip = this.backup._tipElm;
+                    let $tipGroup = this.backup._tipGroupElm;
+                    let $bg = this.backup._backgroundElem;
 
                     if(status == 'in') {
                         C.addClass($tip, 'ohoTip-amt-cus1');
