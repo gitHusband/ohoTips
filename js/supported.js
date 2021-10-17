@@ -573,7 +573,7 @@ function tipDefault() {
             // background: true,
             html: {
                 param: true,                //false - 文本类型信息，true - dom元素类型信息
-                isParentTransparent: true,  //false - Tips 容器不透明，true - Tips 容器透明
+                isContainerTransparent: true,  //false - Tips 容器不透明，true - Tips 容器透明
             },
             message: message,
             events: {
@@ -611,7 +611,7 @@ function tipDefault() {
             // background: true,
             html: {
                 param: true,                //false - 文本类型信息，true - dom元素类型信息
-                isParentTransparent: true,  //false - Tips 容器不透明，true - Tips 容器透明
+                isContainerTransparent: true,  //false - Tips 容器不透明，true - Tips 容器透明
             },
             message: message,
             events: {
@@ -637,7 +637,7 @@ function tipDefault() {
             // background: true,
             html: {
                 param: true,                //false - 文本类型信息，true - dom元素类型信息
-                isParentTransparent: true,  //false - Tips 容器不透明，true - Tips 容器透明
+                isContainerTransparent: true,  //false - Tips 容器不透明，true - Tips 容器透明
             },
             message: message,
             events: {
