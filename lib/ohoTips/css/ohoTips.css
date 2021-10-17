@@ -1,7 +1,6 @@
 /*Tips*/
 .ohoTip-container {
     /*width: 100%;*/
-    z-index: 99999;
     /*如果父元素position style是fixed, 免除遮罩层设置border-radius*/
     border-radius: inherit;
 }
@@ -9,6 +8,7 @@
 .ohoTip-group {
     /*overflow: hidden;*/
     position: absolute;
+    z-index: 99999;
     display: -webkit-flex;
     justify-content: center;
     align-items: center;
