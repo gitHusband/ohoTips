@@ -9,6 +9,7 @@ var baseElementAnimation = '#box-animation';
 function defConfig() {
     var defConfigHelpTips = null;
     var showDefConfigHelp = function() {
+        destroyDefConfigHelp();
         defConfigHelpTips = ohoTips({
             baseElement: defConfigIconBox,         //基准元素id，可接受其它选择器，如class
             position: "center-right",                 //Tip显示位置，基准元素左上角
@@ -16,6 +17,7 @@ function defConfig() {
             type: 'success',
             icon: false,
             symbol: 'triangle',
+            // destroy: 'never',
             delay: 3000,
             message: '单击一下，固定住弹框不缩小',
         });
@@ -24,6 +26,11 @@ function defConfig() {
         if(defConfigHelpTips) {
             defConfigHelpTips.destroy();
             defConfigHelpTips = null;
+        }
+    }
+    var resetPositionDefConfigHelp = function() {
+        if(defConfigHelpTips) {
+            defConfigHelpTips.resetPosition();
         }
     }
     var showDefConfigClickMessage = function(message) {
@@ -41,6 +48,9 @@ function defConfig() {
     var defConfigIconBox = document.querySelector("#def-config-icon-box");
     defConfigIconBox.onmouseenter = function() {
         setTimeout(showDefConfigHelp, 1000);
+    }
+    document.querySelector(defConfingElement).onmouseleave = function() {
+        setTimeout(resetPositionDefConfigHelp, 1000);
     }
     iconBox.onclick = function() {
         if(!isFixedSize) {
