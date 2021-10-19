@@ -1,0 +1,62 @@
+$z-index: 99999;                                // Tips 的堆叠顺序，尽量让Tips 处于最上层展示
+$tips-to-tips-vertical-distance: 10px;          // 同组内两个Tips的垂直距离
+
+@mixin flex-virtical-center {
+    display: -webkit-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/**
+ * Tips 第一层元素
+ * Tips 容器，将分组，Tips, 遮罩层包裹住，避免凌乱
+ */
+.ohoTip-container {
+    /*如果父元素position style是fixed, 免除遮罩层设置border-radius*/
+    border-radius: inherit;
+
+    // ohoTip-hide 动画用，首先设置为全透明
+    // 注意 遮罩层也要设置该属性 
+    .ohoTip-hide {
+        opacity: 0;
+    }
+}
+
+/**
+ * Tips 第二层元素
+ * Tips 分组元素，也是Tips 设置定位的直接元素
+ */
+.ohoTip-group {
+    /*overflow: hidden;*/
+    position: absolute;
+    z-index: $z-index;
+    @include flex-virtical-center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    height: auto;
+
+    &.ohoTip-init {
+        top: 0 !important; 
+        left: 0 !important;
+    }
+
+    .ohoTip ~ .ohoTip {
+        margin-top: $tips-to-tips-vertical-distance;
+    }
+}
+
+/**
+ * Tips 第三层元素
+ * Tips 实体内容，包含消息，图标，角标以及遮罩层
+ */
+.ohoTip {
+    position: relative;
+    @include flex-virtical-center;
+    flex-wrap: wrap;
+
+    font-size: 14px;
+
+    &.ohoTip-limit {
+        max-width: 400px;
+    }
+}
