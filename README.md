@@ -62,14 +62,24 @@ ohoTips(message, options);
 **联系人：蛮吉是魁拔 - 707077549@qq.com**
 
 ## 2. 安装
-项目引入 ohoTips.js
+项目引入 ohoTips.js, ohoTips.min.css
 
 ```
 <html>
-    <link href="lib/ohoTips/css/ohoTips.css" rel="stylesheet">
-    <script src="lib/ohoTips/js/ohoTips.js"></script>
+    <link href="../dist/ohoTips/css/themes/ohoTips.min.css" rel="stylesheet">
+    <script src="../dist/ohoTips/js/ohoTips.js"></script>
 </html>
 ```
+
+### 2.1 构建
+
+```
+# 构建调试版
+sass src/ohoTips/css/themes/ohoTips.scss dist/ohoTips/css/themes/ohoTips.css --style expanded
+# 构建生产版
+sass src/ohoTips/css/themes/ohoTips.scss dist/ohoTips/css/themes/ohoTips.min.css --style compressed
+```
+
 
 ## 3. 配置及使用方法
 

@@ -1,0 +1,1046 @@
+$z-index: 99999;                                        // Tips 的堆叠顺序，尽量让Tips 处于最上层展示
+$bg-background-color: #000000;                          // Tips 的堆叠顺序，尽量让Tips 处于最上层展示
+$tips-to-tips-vertical-distance: 10px;                  // 同组内两个Tips的垂直距离
+
+@mixin flex-virtical-center {
+    display: -webkit-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin linear-gradient($color-stop1, $color-stop2, $direction: $tip-box-background-direction-default) {
+    background: -webkit-linear-gradient($direction, $color-stop1, $color-stop2);
+    background: -moz-linear-gradient($direction, $color-stop1, $color-stop2);
+    background: linear-gradient($direction, $color-stop1, $color-stop2);
+}
+
+
+/**
+ * Tips 第一层元素
+ * Tips 容器，将分组Tips, 遮罩层包裹住，避免凌乱
+ */
+.ohoTip-container {
+    /*如果父元素position style是fixed, 免除遮罩层设置border-radius*/
+    border-radius: inherit;
+
+    // ohoTip-hide 动画用，首先设置为全透明
+    // 注意 遮罩层也要设置该属性 
+    .ohoTip-hide {
+        opacity: 0;
+    }
+}
+
+/**
+ * Tips 第二层元素
+ * Tips 遮罩层，将基准元素覆盖
+ * 每一个分组里面可以有多个Tips 元素
+ */
+.ohoTip-bg {
+    position: absolute;
+    z-index: $z-index;
+    background-color: $bg-background-color;
+
+    // 如果存在遮罩层，则取消Tips阴影效果
+    ~ .ohoTip-group .ohoTip-box {
+        box-shadow: none;
+    }
+
+    //只有以body 为基准元素时才需要
+    &.ohoTip-bg-fixed {
+        position: fixed;
+        background-color: $bg-background-color;
+        opacity: $bg-opacity;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+/**
+ * Tips 第二层元素，位于遮罩层之后
+ * Tips 分组元素，也是Tips 设置定位的直接元素
+ * 每一个分组里面可以有多个Tips 元素
+ */
+.ohoTip-group {
+    /*overflow: hidden;*/
+    position: absolute;
+    z-index: $z-index;
+    @include flex-virtical-center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    height: auto;
+
+    &.ohoTip-init {
+        top: 0 !important; 
+        left: 0 !important;
+    }
+
+    .ohoTip ~ .ohoTip {
+        margin-top: $tips-to-tips-vertical-distance;
+    }
+
+    // 上一个Tips 不显示，则取消间距
+    .ohoTip[style*="display: none"] + .ohoTip {
+        margin-top: 0px;
+    }
+
+    // 上一个Tips 正在执行退场动画，则取消间距
+    .ohoTip.out + .ohoTip {
+        margin-top: 0px;
+    }
+}
+
+/**
+ * Tips 第三层元素
+ * Tips 实体内容，包含角标，消息，图标，以及遮罩层
+ */
+.ohoTip {
+    position: relative;
+    @include flex-virtical-center;
+    flex-wrap: wrap;
+
+    font-size: 14px;
+
+    &.ohoTip-limit {
+        max-width: 400px;
+    }
+}
+
+/**
+ * Tips 第四层元素
+ * Tips 实体内容，包含角标，消息，图标，以及遮罩层
+ * 作用是当存在角标时，根据角标size 撑开 padding，利于动画执行
+ */
+.ohoTip-symbol-box {
+
+}
+
+/**
+ * Tips 第五层元素
+ * Tips 实体内容，包含角标，消息，图标，以及遮罩层
+ */
+.ohoTip-box {
+    position: relative;
+    border-radius: $tip-box-border-radius;
+    background-color: #41485b;
+    padding: $tip-box-padding;
+    text-shadow: $tip-box-text-shadow-normal;
+    box-shadow: $tip-box-box-shadow-color-normal;
+
+    &.ohoTip-box-no-shadow {
+        box-shadow: none !important;
+    }
+
+    @include linear-gradient($tip-box-background-normal-color-stop1, $tip-box-background-normal-color-stop2);
+    &:hover {
+        @include linear-gradient($tip-box-background-normal-color-stop2, $tip-box-background-normal-color-stop1);
+    }
+    &:active {
+        box-shadow: 0 0 0 #FFFFFF;
+        @include linear-gradient($tip-box-background-normal-color-stop1, $tip-box-background-normal-color-stop2);
+    }
+
+    .ohoTip-message {
+        border-radius: $tip-box-border-radius;
+        background-color: transparent;
+        color: $tip-box-color-normal;
+        word-break:break-all;
+    }
+
+    &.ohoTip-success,
+    .ohoTip-message.ohoTip-message-success {
+        background-color: transparent;
+        color: $tip-box-color-success;
+    }
+    &.ohoTip-success {
+        text-shadow: $tip-box-text-shadow-success;
+        box-shadow: $tip-box-box-shadow-success;
+        @include linear-gradient($tip-box-background-success-color-stop1, $tip-box-background-success-color-stop2);
+    }
+    &.ohoTip-success:hover {
+        @include linear-gradient($tip-box-background-success-color-stop2, $tip-box-background-success-color-stop1);
+    }
+    &.ohoTip-success:active {
+        box-shadow: 0 0 0 #FFFFFF;
+        @include linear-gradient($tip-box-background-success-color-stop1, $tip-box-background-success-color-stop2);
+    }
+
+    &.ohoTip-error,
+    .ohoTip-message.ohoTip-message-error {
+        background-color: transparent;
+        color: $tip-box-color-error;
+    }
+    &.ohoTip-error {
+        text-shadow: $tip-box-text-shadow-error;
+        box-shadow: $tip-box-box-shadow-error;
+        @include linear-gradient($tip-box-background-error-color-stop1, $tip-box-background-error-color-stop2);
+    }
+    &.ohoTip-error:hover {
+        @include linear-gradient($tip-box-background-error-color-stop2, $tip-box-background-error-color-stop1);
+    }
+    &.ohoTip-error:active {
+        box-shadow: 0 0 0 #FFFFFF;
+        @include linear-gradient($tip-box-background-error-color-stop1, $tip-box-background-error-color-stop2);
+    }
+
+    &.ohoTip-warning,
+    .ohoTip-message.ohoTip-message-warning {
+        background-color: transparent;
+    }
+    &.ohoTip-warning {
+        text-shadow: $tip-box-text-shadow-warning;
+        box-shadow: $tip-box-box-shadow-warning;
+        @include linear-gradient($tip-box-background-warning-color-stop1, $tip-box-background-warning-color-stop2);
+    }
+    &.ohoTip-warning:hover {
+        @include linear-gradient($tip-box-background-warning-color-stop2, $tip-box-background-warning-color-stop1);
+    }
+    &.ohoTip-warning:active {
+        box-shadow: 0 0 0 #FFFFFF;
+        @include linear-gradient($tip-box-background-warning-color-stop1, $tip-box-background-warning-color-stop2);
+    }
+
+    &.ohoTip-info,
+    .ohoTip-message.ohoTip-message-info {
+        background-color: transparent;
+    }
+    &.ohoTip-info {
+        text-shadow: $tip-box-text-shadow-info;
+        box-shadow: $tip-box-box-shadow-info;
+        @include linear-gradient($tip-box-background-info-color-stop1, $tip-box-background-info-color-stop2);
+    }
+    &.ohoTip-info:hover {
+        @include linear-gradient($tip-box-background-info-color-stop2, $tip-box-background-info-color-stop1);
+    }
+    &.ohoTip-info:active {
+        box-shadow: 0 0 0 #FFFFFF;
+        @include linear-gradient($tip-box-background-info-color-stop1, $tip-box-background-info-color-stop2);
+    }
+
+    // 手动关闭消息按钮
+    .ohoTip-close {
+        position: absolute;
+        top: $tip-close-icon-top;
+        right: $tip-close-icon-right;
+        display: block;
+        width: 15px;
+        height: 15px;
+        justify-content:center;     /*子元素水平居中*/
+        align-items:center;         /*子元素垂直居中*/
+        display:-webkit-flex;
+        border-radius: 50%;
+        font-family: arial,verdana,Microsoft YaHei,Tahoma,Simsun,sans-serif;
+        color: $tip-close-icon-color-normal;
+        font-size: $tip-close-icon-font-size;
+        font-weight: 600;
+        cursor: pointer;
+        opacity: .8;
+
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+
+    &.ohoTip-success ~ .ohoTip-close {
+        color: $tip-close-icon-color-success;
+    }
+    &.ohoTip-error ~ .ohoTip-close {
+        color: $tip-close-icon-color-error;
+    }
+    &.ohoTip-warning ~ .ohoTip-close {
+        color: $tip-close-icon-color-warning;
+    }
+    &.ohoTip-info ~ .ohoTip-close {
+        color: $tip-close-icon-color-info;
+    }
+
+    // .ohoTip-close-out {
+    //     position: absolute;
+    //     top: -10px;
+    //     right: -10px;
+    //     display: block;
+    //     width: 20px;
+    //     height: 20px;
+    //     justify-content:center;     /*子元素水平居中*/
+    //     align-items:center;         /*子元素垂直居中*/
+    //     display:-webkit-flex;
+    //     border-radius: 50%;
+    //     background-color: #41485b;
+    //     font-family: arial,verdana,Microsoft YaHei,Tahoma,Simsun,sans-serif;
+    //     color: #ffffff;
+    //     font-size: 16px;
+    //     font-weight: 600;
+    //     cursor: pointer;
+    //     opacity: .8;
+
+    //     &:hover {
+    //         box-shadow: 0 0 5px 0px #41485b;
+    //     }
+    // }
+    
+    &.ohoTip-box-html {
+    }
+    &.ohoTip-box-html:hover {
+    }
+
+    &.ohoTip-box-html-transparent {
+        background: transparent;
+    }
+    &.ohoTip-box-html-transparent:hover {
+        background: transparent;
+    }
+
+    &.ohoTip-box-html .box-html {
+        background-color: white;
+        /*border: 1px solid #efefef;*/
+        border-radius: 5px;
+        margin: -15px -20px;
+    }
+
+    &.ohoTip-box-html-transparent .box-html {
+        background-color: transparent;
+    }
+}
+
+/**
+ * 以body 为基准元素时才需要
+ */
+.ohoTip-group {
+    &.ohoTip-fixed {
+        position: fixed;
+    }
+
+    &.ohoTip-fixed.top-left {
+        top: 0px;
+        left: 0px;
+    }
+
+    &.ohoTip-fixed.top-center {
+        top: 0px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    &.ohoTip-fixed.top-right {
+        top: 0px;
+        right: 0px;
+    }
+
+    &.ohoTip-fixed.bottom-left {
+        bottom: 0px;
+        left: 0px;
+    }
+
+    &.ohoTip-fixed.bottom-center {
+        bottom: 0px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    &.ohoTip-fixed.bottom-right {
+        bottom: 0px;
+        right: 0px;
+    }
+
+    &.ohoTip-fixed.center-left {
+        top: 50%;
+        left: 0px;
+        transform: translateY(-50%);
+    }
+
+    &.ohoTip-fixed.middle {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    &.ohoTip-fixed.center-right {
+        top: 50%;
+        right: 0px;
+        transform: translateY(-50%);
+    }
+}
+
+/**
+ * 图标样式
+ */
+.ohoTip-box {
+    .ohoTip-icon-box {
+        position: absolute;
+
+        .ohoTip-icon {
+            position: relative;
+            display: inline-block;
+            box-sizing: border-box;
+            opacity: 0.6;
+
+            &:before,
+            &:after {
+                content: '';
+                pointer-events: none;
+            }
+
+            &.icon-check {
+                width: 30px;
+                height: 30px;
+                border: 2px solid;
+                border-radius: 50%;
+                color: #ddd;
+                transform: rotate(-45deg);
+
+                &:before {
+                    position: absolute;
+                    height: 2px;
+                    width: 14px;
+                    top: 15px;
+                    left: 14px;
+
+                    box-shadow: inset 0 0 0 32px;
+
+                    -webkit-transform: translate(-50%, -50%);
+                    -moz-transform: translate(-50%, -50%);
+                    -ms-transform: translate(-50%, -50%);
+                    -o-transform: translate(-50%, -50%);
+                    transform: translate(-50%, -50%);
+                }
+                &:after {
+                    position: absolute;
+                    width: 2px;
+                    height: 8px;
+                    left: 7px;
+                    bottom: 10px;
+
+                    box-shadow: inset 0 0 0 32px;
+                }
+            }
+
+            &.icon-cross {
+                width: 30px;
+                height: 30px;
+                border: 2px solid;
+                border-radius: 50%;
+                color: #ddd;
+                transform: rotate(45deg);
+
+                &:before {
+                    position: absolute;
+                    width: 2px;
+                    height: 16px;
+                    top: 50%;
+                    left: 50%;
+                    background-color: #ddd;
+                    transform: translate(-50%, -50%);
+                }
+                &:after {
+                    position: absolute;
+                    width: 16px;
+                    height: 2px;
+                    top: 50%;
+                    left: 50%;
+                    background-color: #ddd;
+                    transform: translate(-50%, -50%);
+                }
+            }
+
+            &.icon-exclamation {
+                overflow: visible;
+                width: 32px;
+                border-bottom: 2px solid;
+                -webkit-border-radius: 0 0 4px 4px;
+                -moz-border-radius: 0 0 4px 4px;
+                -o-border-radius: 0 0 4px 4px;
+                border-radius: 0 0 4px 4px;
+                margin: 26px 2px 6px;
+
+                &:before {
+                    position: absolute;
+                    width: 28px;
+                    height: 28px;
+                    left: 1px;
+                    top: -15px;
+                    border-width: 2px 0 0 2px;
+                    border-style: solid;
+                    -webkit-border-radius: 4px 0;
+                    -moz-border-radius: 4px 0;
+                    -o-border-radius: 4px 0;
+                    border-radius: 4px 0;
+                    -webkit-transform: rotate(45deg) skew(14deg, 14deg);
+                    -moz-transform: rotate(45deg) skew(14deg, 14deg);
+                    -ms-transform: rotate(45deg) skew(14deg, 14deg);
+                    -o-transform: rotate(45deg) skew(14deg, 14deg);
+                    transform: rotate(45deg) skew(14deg, 14deg);
+                }
+                &:after {
+                    position: absolute;
+                    left: 50%;
+                    width: 4px;
+                    height: 3px;
+                    top: -15px;
+                    
+                    -webkit-transform: translateX(-50%);
+                    -moz-transform: translateX(-50%);
+                    -ms-transform: translateX(-50%);
+                    -o-transform: translateX(-50%);
+                    transform: translateX(-50%);
+                    box-shadow: inset 0 0 0 32px, 0 2px, 0 4px, 0 10px;
+                }
+            }
+
+            &.icon-circle {
+                width: 30px;
+                height: 30px;
+                border: 2px solid;
+                border-radius: 50%;
+                color: #ddd;
+
+                &:before {
+                    
+                }
+                &:after {
+                    position: absolute;
+                    left: 50%;
+                    width: 4px;
+                    height: 3px;
+                    top: 6px;
+                    
+                    -webkit-transform: translateX(-50%);
+                    -moz-transform: translateX(-50%);
+                    -ms-transform: translateX(-50%);
+                    -o-transform: translateX(-50%);
+                    transform: translateX(-50%);
+                    box-shadow: inset 0 0 0 32px, 0 2px, 0 4px, 0 10px;
+                }
+            }
+
+            &.icon-clock {
+                width: 30px;
+                height: 30px;
+                border: 2px solid;
+                border-radius: 50%;
+                color: #ddd;
+
+                &:before {
+                    position: absolute;
+                    left: 12.5px;
+                    bottom: 13px;
+                    height: 5px;
+                    border-left-width: 0.5px;
+                    border-style: solid;
+                    border-radius: 50%;
+
+                    -webkit-transform-origin: 50% 98%;
+                    transform-origin: 50% 98%; 
+                    -webkit-animation: clock 24s linear infinite; 
+                    animation: clock 24s cubic-bezier(0, 0, 0.50, 0.50) infinite;
+                }
+                &:after {
+                    position: absolute;
+                    left: 12.5px;
+                    bottom: 13px;
+                    height: 7px;
+                    border-left-width: 0.5px;
+                    border-style: solid;
+                    border-radius: 50%;
+
+                    -webkit-transform-origin: 50% 98%;
+                    transform-origin: 50% 98%; 
+                    -webkit-animation: clock 2s linear infinite; 
+                    animation: clock 2s cubic-bezier(0, 0, 0.50, 0.50) infinite;
+                }
+            }
+
+            @-webkit-keyframes clock{
+                0%{-webkit-transform:rotate(0deg);}
+                100%{-webkit-transform:rotate(360deg);}
+            }
+
+            @keyframes clock{
+                0%{transform:rotate(0deg);}
+                100%{transform:rotate(360deg);}
+            }
+        }
+    }
+
+    &.ohoTip-add-icon.icon-left {
+        padding-left: 50px;
+    }
+
+    &.ohoTip-add-icon.icon-left .ohoTip-icon-box {
+        top: 9px;
+        left: 8px;
+    }
+
+    &.ohoTip-add-icon.icon-right {
+        padding-right: 50px;
+    }
+
+    &.ohoTip-add-icon.icon-right .ohoTip-icon-box {
+        top: 9px;
+        right: 8px;
+    }
+
+    &.ohoTip-add-icon.icon-top {
+        padding-top: 50px;
+    }
+
+    &.ohoTip-add-icon.icon-top .ohoTip-icon-box {
+        top: 9px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    &.ohoTip-add-icon.icon-bottom {
+        padding-bottom: 50px;
+    }
+
+    &.ohoTip-add-icon.icon-bottom .ohoTip-icon-box {
+        bottom: 8px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .ohoTip-icon[class*="icon-"].icon-success {
+        color: #00ff1d;
+    }
+
+    .ohoTip-icon[class*="icon-"].icon-error {
+        color: #f00;
+    }
+
+    .ohoTip-icon[class*="icon-"].icon-error:before,
+    .ohoTip-icon[class*="icon-"].icon-error:after {
+        background-color: #f00;
+    }
+
+    .ohoTip-icon[class*="icon-"].icon-warning {
+        color: $tip-box-background-warning-color-stop2;
+    }
+
+    .ohoTip-icon[class*="icon-"].icon-info {
+        color: #00b0ff;
+    }
+
+    &.ohoTip-success [class*="icon-"],
+    &.ohoTip-error [class*="icon-"],
+    &.ohoTip-warning [class*="icon-"],
+    &.ohoTip-info [class*="icon-"] {
+        color: #ffffff;
+    }
+}
+
+/**
+ * 动画
+ */
+.ohoTip-container {
+    /*----------------- 淡入淡出 -----------------*/
+    .ohoTip-amt-fade {
+        transition: opacity 1s;
+    }
+
+    .ohoTip-bg-amt-fade {
+        transition: opacity 1s;
+    }
+
+    .ohoTip-amt-fade.in {
+        opacity: 0.9;
+    }
+
+    .ohoTip-amt-fade.out {
+        opacity: 0;
+    }
+
+    .ohoTip-bg-amt-fade.in {
+        opacity: .5;
+    }
+    /*----------------- 淡入淡出 -----------------*/
+
+
+    /*----------------- 折叠特效 -----------------*/
+    .ohoTip-amt-fold {
+        overflow: hidden;
+        height: 0;
+        transition: height 0.3s;
+        opacity: 0.9
+    }
+
+    .ohoTip-bg-amt-fold {
+        transition: opacity 1s;
+    }
+
+    .ohoTip-amt-fold.in {
+        opacity: 0.9;
+    }
+
+    .ohoTip-amt-fold.out {
+        height: 0 !important;
+    }
+
+    .ohoTip-bg-amt-fold.in {
+        opacity: .5;
+    }
+    /*----------------- 折叠特效 -----------------*/
+
+    /*----------------- oho特效 -----------------*/
+    .ohoTip-amt-oho {
+        transition: opacity 1s, top 0.2s, left 0.2s, height 0.2s, width 0.2s;
+    }
+
+    .ohoTip-bg-amt-oho {
+        transition: opacity 1s;
+    }
+
+    .ohoTip-amt-oho.in {
+        opacity: 0.9;
+    }
+
+    .ohoTip-amt-oho.out {
+        opacity: 0;
+        height: 0 !important;
+    }
+
+    .ohoTip-bg-amt-oho.in {
+        opacity: .5;
+    }
+    /*----------------- oho特效 -----------------*/
+
+    /*----------------- 碎片化特效 -----------------*/
+    .ohoTip-amt-fragment {
+        transition: opacity 1s;
+    }
+
+    .ohoTip-bg-amt-fragment {
+        transition: opacity 1s;
+    }
+
+    .ohoTip-amt-fragment.in {
+        opacity: 0.9;
+    }
+
+    .ohoTip-amt-fragment.out {
+        opacity: 0;
+    }
+
+    .ohoTip-bg-amt-fragment.in {
+        opacity: .5;
+    }
+
+    .ohoTip-amt-fragment-box {
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: transparent;
+    }
+
+    .ohoTip-amt-fragment-box + .flow {
+        transition: top 0.2s, opacity 1s, transform 1.4s ease-in;
+    }
+
+    .ohoTip-amt-fragment-box + .explode-in {
+        -webkit-transition: top .8s, left .8s, opacity .8s, -webkit-transform .8s ease-in;
+        transition: top .8s, left .8s, opacity .8s, transform .8s ease-in;
+    }
+
+    .ohoTip-amt-fragment-box + .explode-out {
+        -webkit-transition: top 1s, left 1s, opacity 1s, -webkit-transform 1s ease-in;
+        transition: top 1s, left 1s, opacity 1s, transform 1s ease-in;
+    }
+    /*----------------- 碎片化特效 -----------------*/
+}
+
+/**
+ * 角标，目前仅支持三角形
+ */
+.ohoTip {
+    .ohoTip-symbol-box {
+
+    }
+
+    .ohoTip-symbol {
+        opacity: .9;
+
+        &.triangle-top-left {
+            position: absolute;
+            top: -16px;
+            left: 4px;
+            width: 0;
+            height: 0;
+            font-size: 0;
+            border: solid 8px;
+            border-top-color: transparent !important;
+            border-right-color: transparent !important;
+            border-bottom-color: $tip-box-background-normal-color-stop1;
+            border-left-color: transparent !important;
+        }
+
+        &.triangle-top-center {
+            position: absolute;
+            top: -16px;
+            left: 50%;
+            transform: translateX(-8px);
+            width: 0;
+            height: 0;
+            font-size: 0;
+            border: solid 8px;
+            border-top-color: transparent !important;
+            border-right-color: transparent !important;
+            border-bottom-color: $tip-box-background-normal-color-stop1;
+            border-left-color: transparent !important;
+        }
+
+        &.triangle-top-right {
+            position: absolute;
+            top: -16px;
+            right: 4px;
+            width: 0;
+            height: 0;
+            font-size: 0;
+            border: solid 8px;
+            border-top-color: transparent !important;
+            border-right-color: transparent !important;
+            border-bottom-color: $tip-box-background-normal-color-stop1;
+            border-left-color: transparent !important;
+        }
+
+        &.triangle-center-left {
+            position: absolute;
+            top: 50%;
+            left: -16px;
+            transform: translateY(-8px);
+            width: 0;
+            height: 0;
+            font-size: 0;
+            border: solid 8px;
+            border-top-color: transparent !important;
+            border-right-color: $tip-box-background-normal-color-stop1;
+            border-bottom-color: transparent !important;
+            border-left-color: transparent !important;
+        }
+
+        &.triangle-middle {
+            
+        }
+
+        &.triangle-center-right {
+            position: absolute;
+            top: 50%;
+            right: -16px;
+            transform: translateY(-8px);
+            width: 0;
+            height: 0;
+            font-size: 0;
+            border: solid 8px;
+            border-top-color: transparent !important;
+            border-right-color: transparent !important;
+            border-bottom-color: transparent !important;
+            border-left-color: $tip-box-background-normal-color-stop1;
+        }
+
+        &.triangle-bottom-left {
+            position: absolute;
+            bottom: -16px;
+            left: 4px;
+            width: 0;
+            height: 0;
+            font-size: 0;
+            border: solid 8px;
+            border-top-color: $tip-box-background-normal-color-stop1;
+            border-right-color: transparent !important;
+            border-bottom-color: transparent !important;
+            border-left-color: transparent !important;
+        }
+
+        &.triangle-bottom-center {
+            position: absolute;
+            bottom: -16px;
+            left: 50%;
+            transform: translateX(-8px);
+            width: 0;
+            height: 0;
+            font-size: 0;
+            border: solid 8px;
+            border-top-color: $tip-box-background-normal-color-stop1;
+            border-right-color: transparent !important;
+            border-bottom-color: transparent !important;
+            border-left-color: transparent !important;
+        }
+
+        &.triangle-bottom-right {
+            position: absolute;
+            bottom: -16px;
+            right: 4px;
+            width: 0;
+            height: 0;
+            font-size: 0;
+            border: solid 8px;
+            border-top-color: $tip-box-background-normal-color-stop1;
+            border-right-color: transparent !important;
+            border-bottom-color: transparent !important;
+            border-left-color: transparent !important;
+        }
+
+        &.triangle-left-top {
+            position: absolute;
+            top: 4px;
+            left: -16px;
+            width: 0;
+            height: 0;
+            font-size: 0;
+            border: solid 8px;
+            border-top-color: transparent !important;
+            border-right-color: $tip-box-background-normal-color-stop1;
+            border-bottom-color: transparent !important;
+            border-left-color: transparent !important;
+        }
+
+        &.triangle-left-bottom {
+            position: absolute;
+            bottom: 4px;
+            left: -16px;
+            width: 0;
+            height: 0;
+            font-size: 0;
+            border: solid 8px;
+            border-top-color: transparent !important;
+            border-right-color: $tip-box-background-normal-color-stop1;
+            border-bottom-color: transparent !important;
+            border-left-color: transparent !important;
+        }
+
+        &.triangle-right-top {
+            position: absolute;
+            top: 4px;
+            right: -16px;
+            width: 0;
+            height: 0;
+            font-size: 0;
+            border: solid 8px;
+            border-top-color: transparent !important;
+            border-right-color: transparent !important;
+            border-bottom-color: transparent !important;
+            border-left-color: $tip-box-background-normal-color-stop1;
+        }
+
+        &.triangle-right-bottom {
+            position: absolute;
+            bottom: 4px;
+            right: -16px;
+            width: 0;
+            height: 0;
+            font-size: 0;
+            border: solid 8px;
+            border-top-color: transparent !important;
+            border-right-color: transparent !important;
+            border-bottom-color: transparent !important;
+            border-left-color: $tip-box-background-normal-color-stop1;
+        }
+    }
+
+    .ohoTip-box .ohoTip-symbol {
+        border-color: $tip-box-background-normal-color-stop1;
+    }
+    .ohoTip-box:hover .ohoTip-symbol {
+        border-color: $tip-box-background-normal-color-stop2;
+    }
+    .ohoTip-box:active .ohoTip-symbol {
+        border-color: $tip-box-background-normal-color-stop1;
+    }
+
+    .ohoTip-success .ohoTip-symbol {
+        border-color: $tip-box-background-success-color-stop1;
+    }
+    .ohoTip-success:hover .ohoTip-symbol {
+        border-color: $tip-box-background-success-color-stop2;
+    }
+    .ohoTip-success:active .ohoTip-symbol {
+        border-color: $tip-box-background-success-color-stop1;
+    }
+
+    .ohoTip-error .ohoTip-symbol {
+        border-color: $tip-box-background-error-color-stop1;
+    }
+    .ohoTip-error:hover .ohoTip-symbol {
+        border-color: $tip-box-background-error-color-stop2;
+    }
+    .ohoTip-error:active .ohoTip-symbol {
+        border-color: $tip-box-background-error-color-stop1;
+    }
+
+    .ohoTip-warning .ohoTip-symbol {
+        border-color: $tip-box-background-warning-color-stop1;
+    }
+    .ohoTip-warning:hover .ohoTip-symbol {
+        border-color: $tip-box-background-warning-color-stop2;
+    }
+    .ohoTip-warning:active .ohoTip-symbol {
+        border-color: $tip-box-background-warning-color-stop1;
+    }
+
+    .ohoTip-info .ohoTip-symbol {
+        border-color: $tip-box-background-info-color-stop1;
+    }
+    .ohoTip-info:hover .ohoTip-symbol {
+        border-color: $tip-box-background-info-color-stop2;
+    }
+    .ohoTip-info:active .ohoTip-symbol {
+        border-color: $tip-box-background-info-color-stop1;
+    }
+
+    /*Symbol 位于Tips底部时，色调跟 top 的相反*/
+    .ohoTip-box .ohoTip-symbol[class*="bottom"] {
+        border-color: $tip-box-background-normal-color-stop2;
+    }
+    .ohoTip-box:hover .ohoTip-symbol[class*="bottom"] {
+        border-color: $tip-box-background-normal-color-stop1;
+    }
+    .ohoTip-box:active .ohoTip-symbol[class*="bottom"] {
+        border-color: $tip-box-background-normal-color-stop2;
+    }
+
+    .ohoTip-success .ohoTip-symbol[class*="bottom"] {
+        border-color: $tip-box-background-success-color-stop2;
+    }
+    .ohoTip-success:hover .ohoTip-symbol[class*="bottom"] {
+        border-color: $tip-box-background-success-color-stop1;
+    }
+    .ohoTip-success:active .ohoTip-symbol[class*="bottom"] {
+        border-color: $tip-box-background-success-color-stop2;
+    }
+
+    .ohoTip-error .ohoTip-symbol[class*="bottom"] {
+        border-color: $tip-box-background-error-color-stop2;
+    }
+    .ohoTip-error:hover .ohoTip-symbol[class*="bottom"] {
+        border-color: $tip-box-background-error-color-stop1;
+    }
+    .ohoTip-error:active .ohoTip-symbol[class*="bottom"] {
+        border-color: $tip-box-background-error-color-stop2;
+    }
+
+    .ohoTip-warning .ohoTip-symbol[class*="bottom"] {
+        border-color: $tip-box-background-warning-color-stop2;
+    }
+    .ohoTip-warning:hover .ohoTip-symbol[class*="bottom"] {
+        border-color: $tip-box-background-warning-color-stop1;
+    }
+    .ohoTip-warning:active .ohoTip-symbol[class*="bottom"] {
+        border-color: $tip-box-background-warning-color-stop2;
+    }
+
+    .ohoTip-info .ohoTip-symbol[class*="bottom"] {
+        border-color: $tip-box-background-info-color-stop2;
+    }
+    .ohoTip-info:hover .ohoTip-symbol[class*="bottom"] {
+        border-color: $tip-box-background-info-color-stop1;
+    }
+    .ohoTip-info:active .ohoTip-symbol[class*="bottom"] {
+        border-color: $tip-box-background-info-color-stop2;
+    }
+    /*Symbol 位于Tips底部时，色调跟 top 的相反*/
+}
+
+@media only screen and (max-width: 600px) {
+    .ohoTip-limit {
+        max-width: 100%;
+    }
+}
