@@ -1,0 +1,68 @@
+// 遮罩层样式
+$bg-background-color: #000000;              // 背景色
+$bg-opacity: 0;                             // 背景透明度
+
+/**
+ * Tips 样式
+ * 1. 圆角
+ * 2. 背景色/文字颜色/阴影颜色，不同类型颜色不同
+ *     背景色颜色线性渐变，渐变方向从上到下
+ */
+$tip-box-border-radius: 5px;
+$tip-box-padding: 15px 20px;
+$tip-box-background-direction-default: left;
+
+// normal type 样式
+$tip-box-background-normal-color-stop1: #454545;
+$tip-box-background-normal-color-stop2: #373737;
+$tip-box-color-normal: #FFFFFF;
+$tip-box-text-shadow-color-normal: #464646;
+$tip-box-text-shadow-normal: 0px 0px 0px $tip-box-text-shadow-color-normal;
+$tip-box-box-shadow-color-normal: #9B9B9B;
+$tip-box-box-shadow-normal: 3px 4px 4px $tip-box-box-shadow-color-normal;
+// success type 样式
+$tip-box-background-success-color-stop1: #8BC34A;
+$tip-box-background-success-color-stop2: #009688;
+$tip-box-color-success: #FFFFFF;
+$tip-box-text-shadow-color-success: #464646;
+$tip-box-text-shadow-success: 0px 0px 0px $tip-box-text-shadow-color-success;
+$tip-box-box-shadow-color-success: #9B9B9B;
+$tip-box-box-shadow-success: 3px 4px 4px $tip-box-box-shadow-color-success;
+// error type 样式
+$tip-box-background-error-color-stop1: #FF0000;
+$tip-box-background-error-color-stop2: #9B0000;
+$tip-box-color-error: #FFFFFF;
+$tip-box-text-shadow-color-error: #FFFFFF;
+$tip-box-text-shadow-error: 0px 0px 0px $tip-box-text-shadow-color-error;
+$tip-box-box-shadow-color-error: #9B9B9B;
+$tip-box-box-shadow-error: 3px 4px 4px $tip-box-box-shadow-color-error;
+// warning type 样式
+$tip-box-background-warning-color-stop1: #FFC107;
+$tip-box-background-warning-color-stop2: #FF9800;
+$tip-box-color-warning: #FFFFFF;
+$tip-box-text-shadow-color-warning: #464646;
+$tip-box-text-shadow-warning: 0px 0px 0px $tip-box-text-shadow-color-warning;
+$tip-box-box-shadow-color-warning: #9B9B9B;
+$tip-box-box-shadow-warning: 3px 4px 4px $tip-box-box-shadow-color-warning;
+// info type 样式
+$tip-box-background-info-color-stop1: #2196F3;
+$tip-box-background-info-color-stop2: #00BCD4;
+$tip-box-color-info: #FFFFFF;
+$tip-box-text-shadow-color-info: #464646;
+$tip-box-text-shadow-info: 0px 0px 0px $tip-box-text-shadow-color-info;
+$tip-box-box-shadow-color-info: #8B8B8B;
+$tip-box-box-shadow-info: 3px 4px 3px $tip-box-box-shadow-color-info;
+
+/**
+ * 关闭按钮样式
+ */
+$tip-close-icon-top: 2px;
+$tip-close-icon-right: 2px;
+$tip-close-icon-font-size: 16px;
+$tip-close-icon-color-normal: #FFFFFF;
+$tip-close-icon-color-success: #FFFFFF;
+$tip-close-icon-color-error: #FFFFFF;
+$tip-close-icon-color-warning: #FFFFFF;
+$tip-close-icon-color-info: #FFFFFF;
+
+@import "ohoTips-style";
