@@ -1,0 +1,27 @@
+{
+  "name": "ohoTips",
+  "version": "1.0.0",
+  "description": "ohoTips 消息美观，可自由方便地定位消息位置，支持任何定位。",
+  "private": true,
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gitHusband/ohoTips.git"
+  },
+  "keywords": [],
+  "author": "gitHusband",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gitHusband/ohoTips/issues"
+  },
+  "homepage": "https://github.com/gitHusband/ohoTips#readme",
+  "devDependencies": {
+    "webpack": "^5.59.0",
+    "webpack-cli": "^4.9.1"
+  }
+}
