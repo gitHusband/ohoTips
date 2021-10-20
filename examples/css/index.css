@@ -611,23 +611,23 @@ button:focus {
 
 
 
-.ohoTip-amt-cus1 {
+.ohoTip-container .ohoTip-amt-cus1 {
     transition: opacity 1s, width 0.2s;
 }
 
-.ohoTip-bg-amt-oho {
+.ohoTip-container .ohoTip-bg-amt-oho {
     transition: opacity 1s;
 }
 
-.ohoTip-amt-cus1.in {
+.ohoTip-container .ohoTip-amt-cus1.in {
     opacity: 0.9;
 }
 
-.ohoTip-amt-cus1.out {
+.ohoTip-container .ohoTip-amt-cus1.out {
     opacity: 0;
     width: 0 !important;
 }
 
-.ohoTip-bg-amt-cus1.in {
+.ohoTip-container .ohoTip-bg-amt-cus1.in {
     opacity: .5;
 }

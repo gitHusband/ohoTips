@@ -430,14 +430,14 @@
   transform: translateX(-50%);
   box-shadow: inset 0 0 0 32px, 0 2px, 0 4px, 0 10px;
 }
-.ohoTip-box .ohoTip-icon-box .ohoTip-icon.icon-circle {
+.ohoTip-box .ohoTip-icon-box .ohoTip-icon.icon-exclamation-circle {
   width: 30px;
   height: 30px;
   border: 2px solid;
   border-radius: 50%;
   color: #ddd;
 }
-.ohoTip-box .ohoTip-icon-box .ohoTip-icon.icon-circle:after {
+.ohoTip-box .ohoTip-icon-box .ohoTip-icon.icon-exclamation-circle:after {
   position: absolute;
   left: 50%;
   width: 4px;
