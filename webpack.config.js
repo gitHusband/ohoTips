@@ -6,5 +6,9 @@ module.exports = {
   output: {
     filename: 'ohoTips.js',
     path: path.resolve(__dirname, 'dist/ohoTips/js'),
+    library: {
+      name: 'oho',
+      type: 'umd',
+    },
   },
 };

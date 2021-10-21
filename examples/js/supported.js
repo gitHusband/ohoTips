@@ -1,3 +1,6 @@
+let ohoTips = oho.ohoTips;
+let ohoTipsPrototype = oho.ohoTipsPrototype;
+
 var bodyElement = '';
 var defConfingElement = "#box-def-config";
 var baseElement = "#box-parent";
