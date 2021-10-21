@@ -28,6 +28,9 @@ ohoTips 消息美观，可自由方便地定位消息位置，支持任何定位
 **下面简单介绍下该工具的用法：**
 
 ```
+let ohoTips = oho.ohoTips;
+let ohoTipsPrototype = oho.ohoTipsPrototype;
+
 ohoTips({
     baseElement: baseElement,           //基准元素为空或者body，则定位基于整个窗口
     position: "top-left",               //Tip显示位置，窗口左上角
@@ -62,9 +65,11 @@ ohoTips(message, options);
 **联系人：蛮吉是魁拔 - 707077549@qq.com**
 
 ## 2. 安装
-项目引入 ohoTips.js, ohoTips.min.css
+
+ohoTips 可以与 CommonJS、AMD 以及 script 标签使用。
 
 ```
+# 项目引入 ohoTips.js, ohoTips.min.css
 <html>
     <link href="../dist/ohoTips/css/themes/ohoTips.min.css" rel="stylesheet">
     <script src="../dist/ohoTips/js/ohoTips.js"></script>
@@ -73,11 +78,17 @@ ohoTips(message, options);
 
 ### 2.1 构建
 
+1. css 构建
 ```
 # 构建调试版
 sass src/ohoTips/css/themes/ohoTips.scss dist/ohoTips/css/themes/ohoTips.css --style expanded
 # 构建生产版
 sass src/ohoTips/css/themes/ohoTips.scss dist/ohoTips/css/themes/ohoTips.min.css --style compressed
+```
+2. js 构建
+
+```
+npm run build
 ```
 
 
