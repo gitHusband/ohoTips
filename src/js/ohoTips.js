@@ -1,6 +1,4 @@
-import { common } from "./common.js";
-
-let C = new common();
+import * as C from "./common.js";
 
 /**
  * tips 插件
