@@ -88,7 +88,8 @@ sass src/ohoTips/css/themes/ohoTips.scss dist/ohoTips/css/themes/ohoTips.min.css
 2. js 构建
 
 ```
-npm run build
+npm run dev             // 构建调试版JS
+npm run prod            // 构建生产版JS
 ```
 
 
