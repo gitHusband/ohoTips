@@ -9,6 +9,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "webpack --watch --config webpack.dev.js",
+    "start": "webpack serve --open --config webpack.server.js",
     "dev": "webpack --config webpack.dev.js",
     "prod": "webpack --config webpack.prod.js"
   },
@@ -24,8 +25,14 @@
   },
   "homepage": "https://github.com/gitHusband/ohoTips#readme",
   "devDependencies": {
+    "css-loader": "^6.4.0",
     "glob": "^7.2.0",
+    "html-webpack-plugin": "^5.4.0",
+    "sass": "^1.43.3",
+    "sass-loader": "^12.2.0",
+    "style-loader": "^3.3.1",
     "webpack": "^5.59.1",
-    "webpack-cli": "^4.9.1"
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.3.1"
   }
 }

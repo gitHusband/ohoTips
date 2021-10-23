@@ -2,7 +2,7 @@
 
 ohoTips 消息美观，可自由方便地定位消息位置，支持任何定位。
 
-麻烦您务必阅读下 **开发目标**， 谢谢！
+麻烦您务必阅读下 **1.3 开发目标**， 谢谢！
 
 > 目录
 
@@ -64,7 +64,7 @@ ohoTips(message, options);
 
 **联系人：蛮吉是魁拔 - 707077549@qq.com**
 
-## 2. 安装
+## 2. 如何引用
 
 ohoTips 可以与 CommonJS、AMD 以及 script 标签使用。
 
@@ -72,30 +72,62 @@ ohoTips 可以与 CommonJS、AMD 以及 script 标签使用。
 # 项目引入 ohoTips.js, ohoTips.min.css
 <html>
     <link href="../dist/ohoTips/css/themes/ohoTips.min.css" rel="stylesheet">
-    <script src="../dist/ohoTips/js/ohoTips.js"></script>
+    <script src="../dist/ohoTips/js/ohoTips.min.js"></script>
 </html>
 ```
+本插件提供测试代码，打开 examples/index.html 即可。
 
-### 2.1 构建
+您可以直接引用 ./dist 文件夹里面的文件, 这是已经构建好的文件。
 
-1. css 构建
+如果您想要开发或者设计您喜欢的样式，可以看看 3. 开发与构建
+
+## 3. 开发与构建
+
+### 3.1. css 构建
+
+目前提供了两种样式，ohoTips.scss 和 ohoTips-light.scss
+```
+ohoTips.scss - 默认样式
+ohoTips-light.scss - 只是改了一点点默认样式，您可参考这个定制您喜欢的样式
+```
+
 ```
 # 构建调试版
 sass src/ohoTips/css/themes/ohoTips.scss dist/ohoTips/css/themes/ohoTips.css --style expanded
 # 构建生产版
 sass src/ohoTips/css/themes/ohoTips.scss dist/ohoTips/css/themes/ohoTips.min.css --style compressed
 ```
-2. js 构建
+如果不熟悉 sass，请参考 [如何安装Sass](https://www.sass.hk/install/)
+
+### 3.2. js 构建
 
 ```
+npm install -save-dev   // 安装依赖
+
 npm run dev             // 构建调试版JS
 npm run prod            // 构建生产版JS
 ```
+如果不熟悉 webpack, 请参考 [起步](https://webpack.docschina.org/guides/getting-started/)
+
+### 3.3 开发
+
+1. 本插件提供测试代码，打开 examples/index.html 即可。
+
+每次修改 src 里面的源码，您必须重新构建 css 或者 js, 然后刷新页面。
+
+2. 模块热替换开发
+
+开发过程中，强烈建议使用 webpack 提供的 [模块热替换](https://webpack.docschina.org/guides/hot-module-replacement/) 功能。它允许在运行时更新所有类型的模块，而无需完全刷新。
+
+```
+// 运行此命令，将自动打开 examples/index.html，任何修改都无所刷新页面
+npm run start
+```
 
 
-## 3. 配置及使用方法
+## 4. 配置及使用方法
 
-### 3.1 配置
+### 4.1 配置
 ```
 {
     message: '',                //传入数组可换行, 支持DOM元素，jQuery元素
@@ -161,7 +193,7 @@ npm run prod            // 构建生产版JS
     debug: true                     //debug 默认打开，打开可以调试log。 error, warn 类型的log 不受此影响
 }
 ```
-### 3.2 使用方法
+### 4.2 使用方法
 
 1. **Options 实例法**
 
@@ -229,8 +261,8 @@ ohoTipsPrototype.resetDefOptions();
 ```
 
 
-## 4. 功能介绍
-### 4.1 消息
+## 5. 功能介绍
+### 5.1 消息
 
 1. 消息支持单行或者多行，多行传入数组
 ```
@@ -259,7 +291,7 @@ ohoTips(["Hello World!", "Here is the second line."]);
 
 如果直接传入 DOM 元素 或者 jQuery 元素，则可省略以上配置。
 
-### 4.2 基准元素
+### 5.2 基准元素
 
 ```
 {
@@ -270,7 +302,7 @@ ohoTips(["Hello World!", "Here is the second line."]);
 
 支持 DOM选择器（id等），DOM元素 以及 jQuery 元素。
 
-### 4.3 方位
+### 5.3 方位
 
 Tips与基准元素的相对方向 
 
@@ -287,7 +319,7 @@ Tips与基准元素的相对方向
 - outside - 不计算Tips 宽高，尽量使Tips 位于基准元素外部。与outer 主要是负数有区别
 
 
-### 4.4 定位
+### 5.4 定位
 
 ```
 {
@@ -305,9 +337,9 @@ position 支持字符串 或者 对象：
 position | Tips与基准元素的相对定位  | top-left, top-center , top-right , center-left , middle , <br/> center-right , bottom-left , bottom-center , bottom-right, float, translate
 offset | 微调定位 | top, left 设置 微调量, 支持正负数，单位px
 
-特别地，当position 等于 float 或 translate，Tips会浮动起来。具体参考 ++4.10 浮动的Tips++ 
+特别地，当position 等于 float 或 translate，Tips会浮动起来。具体参考 ++5.10 浮动的Tips++ 
 
-4.5 分组的Tips
+5.5 分组的Tips
 
 ```
 {
@@ -322,7 +354,7 @@ offset | 微调定位 | top, left 设置 微调量, 支持正负数，单位px
 - 相同组的Tips 会从上到下自动排列在一起。
 - 如果存在的Tips 个数超过 group.maxLength，将自动删除第一个Tips。
 
-### 4.6 css 样式
+### 5.6 css 样式
 
 ```
 {
@@ -358,7 +390,7 @@ my-css-2 { color: #ffffff; }
 }
 ```
 
-### 4.7 图标
+### 5.7 图标
 
 ```
 {
@@ -375,7 +407,7 @@ my-css-2 { color: #ffffff; }
 默认: **info** 
 
 
-### 4.8 角标
+### 5.8 角标
 
 ```
 {
@@ -397,7 +429,7 @@ top-left, top-center , top-right , right-top , center-right , right-bottom ,
 bottom-left , bottom-center , bottom-right, left-bottom, center-left, left-top, middle
 ```
 
-### 4.9 销毁
+### 5.9 销毁
 
 ```
 {
@@ -410,7 +442,7 @@ bottom-left , bottom-center , bottom-right, left-bottom, center-left, left-top, 
 - **manual** 手动销毁，单击Tips 右上角x图标销毁
 - **never** 永不销毁，调用接口可销毁Tips - myTips.destroy();
 
-### 4.10 浮动的Tips
+### 5.10 浮动的Tips
 
 ```
 {
@@ -432,7 +464,7 @@ bottom-left , bottom-center , bottom-right, left-bottom, center-left, left-top, 
 - **x**: 浮动方向是 左上角->右下角->右上角->左下角->左上角...
 - **square**: 浮动方向是 左上角->右上角->右下角->左下角->左上角...
 
-### 4.11 动画
+### 5.11 动画
 
 ```
 {
@@ -457,7 +489,7 @@ bottom-left , bottom-center , bottom-right, left-bottom, center-left, left-top, 
 - **oho**: 在基准元素中间由小到大弹出到定位位置，从定位位置由大到小消失在基准元素中间
 - **fragment**: Tips 由碎片合成整体展示，Tips 由整体分裂成碎片消失
 
-### 4.12 生命周期函数
+### 5.12 生命周期函数
 
 ```
 {

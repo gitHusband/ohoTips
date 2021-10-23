@@ -1,3 +1,4 @@
+// 需要先引入 ohoTips.js
 let ohoTips = oho.ohoTips;
 let ohoTipsPrototype = oho.ohoTipsPrototype;
 
