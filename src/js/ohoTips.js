@@ -236,12 +236,12 @@ tips.prototype.isHtmlMessage = function() {
  * 包括消息，图标，遮罩层，阴影，标志等
  */
 tips.prototype.setClass = function() {
-    let type = this.options.type;
-    let limit = this.options.limit;
-    let shadow = this.options.shadow;
-    let icon = this.options.icon;
-    let symbol = this.options.symbol;
-    let html = this.options.html;
+    let optType = this.options.type;
+    let optLimit = this.options.limit;
+    let optShadow = this.options.shadow;
+    let optIcon = this.options.icon;
+    let optSymbol = this.options.symbol;
+    let optHtml = this.options.html;
 
     // ohoTip-hide 动画用，首先设置为全透明
     let tipClass = "ohoTip ohoTip-hide";
@@ -252,20 +252,20 @@ tips.prototype.setClass = function() {
     let symbolClass = "";
 
     // 限制Tips 宽度或者高度
-    if(limit) {
+    if(optLimit) {
         tipClass = tipClass + " ohoTip-limit";
     }
     // 是否显示阴影
-    if(!shadow) {
+    if(!optShadow) {
         tipBoxClass = tipBoxClass + ' ohoTip-box-no-shadow';
     }
 
     if(this.isHtmlMessage()) {
         tipBoxClass = tipBoxClass + ' ohoTip-box-html';
-        if(C.isObj(html) && html.isContainerTransparent) tipBoxClass = tipBoxClass + ' ohoTip-box-html-transparent';
+        if(C.isObj(optHtml) && optHtml.isContainerTransparent) tipBoxClass = tipBoxClass + ' ohoTip-box-html-transparent';
     }
 
-    switch(type) {
+    switch(optType) {
         case "normal" :
             messageClass = "ohoTip-message";
             iconClass = "ohoTip-icon icon-check";
@@ -296,18 +296,18 @@ tips.prototype.setClass = function() {
             symbolClass = "ohoTip-symbol symbol-info";
             break;
         default :
-            messageClass = type;        //用户自定义
+            messageClass = optType;        //用户自定义
             iconClass = "ohoTip-icon icon-check";
             symbolClass = "ohoTip-symbol";
             break;
     }
 
-    if(icon) {
+    if(optIcon) {
         tipBoxClass = tipBoxClass + " ohoTip-add-icon" + " icon-" + this.options.iconOptions.position;
         // 如果icon 为true，色调基于option.type。 如果为字符串，则根据字符串设置
-        if(typeof icon == 'string') {
+        if(typeof optIcon == 'string') {
             iconClass = "ohoTip-icon";
-            switch(icon) {
+            switch(optIcon) {
                 case "normal" :
                     iconClass = iconClass + " icon-check";
                     break;
@@ -333,7 +333,7 @@ tips.prototype.setClass = function() {
         }
     }
 
-    if(symbol) {
+    if(optSymbol) {
         // 如果symbolOptions.type 为空，色调基于option.type。 如果为字符串，则根据字符串设置色调
         if(this.options.symbolOptions.type) {
             symbolClass = "ohoTip-symbol";
@@ -372,10 +372,10 @@ tips.prototype.setClass = function() {
  * 比如组名
  */
 tips.prototype.setTipsAttribute = function() {
-    let group = this.options.group;
+    let optGroup = this.options.group;
     let tipsAttribute = {};
-    if(group.name) {
-        tipsAttribute.tipName = group.name;
+    if(optGroup.name) {
+        tipsAttribute.tipName = optGroup.name;
     }else {
         tipsAttribute.tipName = new Date().getTime();
     }
@@ -491,8 +491,8 @@ tips.prototype.renderTipsBody = function(options) {
 
     // 如果基准元素Postion 是Fixed，则Tips插入到基准元素内
     // 否则插入到body 内更好
-    let pStylePosition = C.getStyle($base, 'position');
-    if(pStylePosition == 'fixed') $base.appendChild($tipContainer);         //先插入元素，然后才能获取宽度和高度
+    let baseStylePosition = C.getStyle($base, 'position');
+    if(baseStylePosition == 'fixed') $base.appendChild($tipContainer);         //先插入元素，然后才能获取宽度和高度
     else document.body.appendChild($tipContainer);
 
     this.setStyleSymbolBox();
@@ -657,13 +657,13 @@ tips.prototype.setStyleSymbolBox = function() {
 tips.prototype.setGroup = function() {
     let _this = this;
 
-    let group = this.options.group;
+    let optGroup = this.options.group;
 
-    if(group.name) {
-        if(this.tGroups.hasOwnProperty(group.name)) {
-            this.tGroups[group.name].push(_this);
+    if(optGroup.name) {
+        if(this.tGroups.hasOwnProperty(optGroup.name)) {
+            this.tGroups[optGroup.name].push(_this);
         }else {
-            this.tGroups[group.name] = [_this];
+            this.tGroups[optGroup.name] = [_this];
         }
     }
 }
@@ -675,13 +675,13 @@ tips.prototype.setGroup = function() {
 tips.prototype.unsetGroup = function() {
     let _this = this;
 
-    let group = this.options.group;
+    let optGroup = this.options.group;
 
-    if(group.name) {
-        if(this.tGroups.hasOwnProperty(group.name)) {
-            for (let i = 0; i < this.tGroups[group.name].length; i++) {
-                if(this.tGroups[group.name][i].id == this.id) {
-                    this.tGroups[group.name].splice(i, 1);
+    if(optGroup.name) {
+        if(this.tGroups.hasOwnProperty(optGroup.name)) {
+            for (let i = 0; i < this.tGroups[optGroup.name].length; i++) {
+                if(this.tGroups[optGroup.name][i].id == this.id) {
+                    this.tGroups[optGroup.name].splice(i, 1);
                     break;
                 }
             }
@@ -696,12 +696,12 @@ tips.prototype.unsetGroup = function() {
 tips.prototype.checkGroup = function() {
     let _this = this;
 
-    let group = this.options.group;
+    let optGroup = this.options.group;
 
-    if(group.name) {
-        if(this.tGroups.hasOwnProperty(group.name) && this.tGroups[group.name].length > group.maxLength) {
-            this.tGroups[group.name][0].destroy(_this);
-            this.tGroups[group.name].splice(0, 1);
+    if(optGroup.name) {
+        if(this.tGroups.hasOwnProperty(optGroup.name) && this.tGroups[optGroup.name].length > optGroup.maxLength) {
+            this.tGroups[optGroup.name][0].destroy(_this);
+            this.tGroups[optGroup.name].splice(0, 1);
         }
     }
 }
@@ -726,7 +726,7 @@ tips.prototype.getElementDetails = function() {
 
     this.setInitPosition();
 
-    let $pElem = this.backup._baseElm;
+    let $base = this.backup._baseElm;
     let $tipGroup = this.backup._tipGroupElm;
     let $tip = this.backup._tipElm;
     let details;
@@ -754,18 +754,18 @@ tips.prototype.getElementDetails = function() {
         };
     }else {
         details = {
-            basePosition: C.position($pElem),
-            baseMarginTop: parseFloat(C.css($pElem, "margin-top")),            //获取基准元素外边距，position() 获取的值不算外边距
-            baseMarginLeft: parseFloat(C.css($pElem, "margin-left")),
-            baseWidth: C.innerWidth($pElem, true),                                   //width+padding
-            baseHeight: C.innerHeight($pElem, true),                                 //height+padding
-            baseOuterWidth: C.outerWidth($pElem),
-            baseOuterHeight: C.outerHeight($pElem),
-            baseBorderTopWidth: parseFloat(C.css($pElem, "border-top-width")),            //top border
-            baseBorderBottomWidth: parseFloat(C.css($pElem, "border-bottom-width")),
-            baseBorderLeftWidth: parseFloat(C.css($pElem, "border-left-width")),           //left border
-            baseBorderRightWidth: parseFloat(C.css($pElem, "border-right-width")),
-            baseBorderRadius: C.css($pElem, "border-radius"),                     //圆角半径
+            basePosition: C.position($base),
+            baseMarginTop: parseFloat(C.css($base, "margin-top")),            //获取基准元素外边距，position() 获取的值不算外边距
+            baseMarginLeft: parseFloat(C.css($base, "margin-left")),
+            baseWidth: C.innerWidth($base, true),                                   //width+padding
+            baseHeight: C.innerHeight($base, true),                                 //height+padding
+            baseOuterWidth: C.outerWidth($base),
+            baseOuterHeight: C.outerHeight($base),
+            baseBorderTopWidth: parseFloat(C.css($base, "border-top-width")),            //top border
+            baseBorderBottomWidth: parseFloat(C.css($base, "border-bottom-width")),
+            baseBorderLeftWidth: parseFloat(C.css($base, "border-left-width")),           //left border
+            baseBorderRightWidth: parseFloat(C.css($base, "border-right-width")),
+            baseBorderRadius: C.css($base, "border-radius"),                     //圆角半径
             tipGroupWidth: C.outerWidth($tipGroup),
             tipGroupHeight: C.outerHeight($tipGroup),
             tipWidth: C.outerWidth($tip),
@@ -833,45 +833,45 @@ tips.prototype.getPositionClass = function(myPosition) {
 tips.prototype.setClassPositionOffset = function() {
     let $tipGroup = this.backup._tipGroupElm;
     let myPosition = this.options.position;
-    let offset = this.options.offset;
-    offset.top = offset.top || 0;
-    offset.left = offset.left || 0;
+    let optOffset = this.options.offset;
+    optOffset.top = optOffset.top || 0;
+    optOffset.left = optOffset.left || 0;
 
-    if(offset.top == 0 && offset.left == 0) return;
+    if(optOffset.top == 0 && optOffset.left == 0) return;
 
     if(this.isBodyElement()) {
         if(typeof myPosition == "string") {
             switch(myPosition) {
                 case "top-left" :           //坐标在基准元素的左上角位置
-                    $tipGroup.style.top = offset.top + "px";
-                    $tipGroup.style.left = offset.left + "px";
+                    $tipGroup.style.top = optOffset.top + "px";
+                    $tipGroup.style.left = optOffset.left + "px";
                     break;
                 case "top-center" :         //坐标在基准元素的上中位置
-                    $tipGroup.style.top = offset.top + "px";
-                    $tipGroup.style.right = offset.left + "px";
+                    $tipGroup.style.top = optOffset.top + "px";
+                    $tipGroup.style.right = optOffset.left + "px";
                     break;
                 case "top-right" :          //坐标在基准元素的右上角位置
-                    $tipGroup.style.top = offset.top + "px";
-                    $tipGroup.style.right = offset.left + "px";
+                    $tipGroup.style.top = optOffset.top + "px";
+                    $tipGroup.style.right = optOffset.left + "px";
                     break;
                 case "center-left" :        //坐标在基准元素的左中位置
-                    $tipGroup.style.left = offset.left + "px";
+                    $tipGroup.style.left = optOffset.left + "px";
                     break;
                 case "middle" :             //坐标在基准元素的中间位置
                     break;
                 case "center-right" :       //坐标在基准元素的右中位置
-                    $tipGroup.style.right = offset.left + "px";
+                    $tipGroup.style.right = optOffset.left + "px";
                     break;
                 case "bottom-left" :        //坐标在基准元素的左下角位置
-                    $tipGroup.style.bottom = offset.top + "px";
-                    $tipGroup.style.left = offset.left + "px";
+                    $tipGroup.style.bottom = optOffset.top + "px";
+                    $tipGroup.style.left = optOffset.left + "px";
                     break;
                 case "bottom-center" :      //坐标在基准元素的下中位置
-                    $tipGroup.style.bottom = offset.top + "px";
+                    $tipGroup.style.bottom = optOffset.top + "px";
                     break;
                 case "bottom-right" :       //坐标在基准元素的右下角位置
-                    $tipGroup.style.bottom = offset.top + "px";
-                    $tipGroup.style.right = offset.left + "px";
+                    $tipGroup.style.bottom = optOffset.top + "px";
+                    $tipGroup.style.right = optOffset.left + "px";
                     break;
                 case "default" :            //默认坐标在基准元素的中间位置
                     break;
@@ -1357,13 +1357,13 @@ tips.prototype.getPosStyleOuter = function(myPosition, calculateTip, tipPosition
  * 比如上居中，此时Tips 顶部是紧贴着基准元素顶部的，设置offset.top = 10, 则Tips 顶部低于基准元素顶部10px
  */
 tips.prototype.setStylePositionOffset = function(tipPosition) {
-    let offset = this.options.offset;
+    let optOffset = this.options.offset;
 
-    if(!offset) return tipPosition;
+    if(!optOffset) return tipPosition;
 
     let regNum = C.regNum;
-    if(offset.hasOwnProperty('top') && regNum.test(offset.top)) tipPosition.top += offset.top;
-    if(offset.hasOwnProperty('left') && regNum.test(offset.left)) tipPosition.left += offset.left;
+    if(optOffset.hasOwnProperty('top') && regNum.test(optOffset.top)) tipPosition.top += optOffset.top;
+    if(optOffset.hasOwnProperty('left') && regNum.test(optOffset.left)) tipPosition.left += optOffset.left;
 
     return tipPosition;
 }
@@ -1735,8 +1735,8 @@ tips.prototype.floatTypeSquare =  function() {
 };
 
 tips.prototype.setFloatType = function() {
-    let type = this.options.float.type;
-    let floatFun = 'floatType' + type.slice(0, 1).toUpperCase() + type.slice(1);
+    let optFloatType = this.options.float.type;
+    let floatFun = 'floatType' + optFloatType.slice(0, 1).toUpperCase() + optFloatType.slice(1);
     if(this[floatFun]) {
         this[floatFun]();
     }else {
@@ -1766,7 +1766,7 @@ tips.prototype.setFloatPosition = function(floatFlag = 0) {
     let _this = this;
     let $tip = _this.backup._tipElm;
     let $tipGroup = this.backup._tipGroupElm;
-    let $pElem = _this.backup._baseElm;
+    let $base = _this.backup._baseElm;
 
     C.css($tipGroup, {display: 'none'});
     let tipPosition = _this.getPosition({});
@@ -2102,8 +2102,8 @@ tips.prototype.setfloatTranslateStart = function() {
  * 设置浮动类型，默认浮动方式是左上角->右下角
  */
 tips.prototype.setFloatTranslateType = function() {
-    let type = this.options.float.type;
-    let floatFun = 'floatTranslateType' + type.slice(0, 1).toUpperCase() + type.slice(1);
+    let optFloatType = this.options.float.type;
+    let floatFun = 'floatTranslateType' + optFloatType.slice(0, 1).toUpperCase() + optFloatType.slice(1);
     if(this[floatFun]) {
         this[floatFun]();
     }else {
@@ -2173,7 +2173,7 @@ tips.prototype.setFloatTranslate = function(floatFlag = 0) {
     let _this = this;
     let $tip = _this.backup._tipElm;
     let $tipGroup = this.backup._tipGroupElm;
-    let $pElem = _this.backup._baseElm;
+    let $base = _this.backup._baseElm;
 
     C.css($tipGroup, {display: 'none'});
 
@@ -2287,7 +2287,7 @@ tips.prototype.setFloatTranslate = function(floatFlag = 0) {
 tips.prototype.setTipsPosition = function() {
     let $tip = this.backup._tipElm;
     let $tipGroup = this.backup._tipGroupElm;
-    let $pElem = this.backup._baseElm;
+    let $base = this.backup._baseElm;
 
     if(this.options.position == 'float') {
         this.setFloatPosition();
