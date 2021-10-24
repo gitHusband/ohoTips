@@ -136,6 +136,7 @@ npm run start
         isContainerTransparent: false,  //false - Tips 容器不透明，true - Tips 容器透明
     },
     baseElement: "",            //基准方位元素
+    parentElement: "",          //Tips container 直接父元素，注意，基准元素建议也是父元素的子元素，不然没必要
     direction: 'inner',         //计算Tips定位时，inner - 计算Tips 宽高，尽量使Tips 位于基准元素内部，normal - 不计算Tips宽高，按照position数据来，outer - 计算Tips 宽高，尽量使Tips 位于基准元素外部, outside - 计算Tips 宽高，尽量使Tips 位于基准元素外部； 默认'inner'。
     position: "middle",         //Tips 位置，左上角，上居中，右上角，左居中，全居中，右居中，左下角，下居中，右下角，自定义相对位置，浮动
     offset: {                   //如果position 是对象如{top: 0}，则一般不需要这个，如果是字符串，则可以酌情添加offset, 调整基准元素与Tips 的相对定位, 仅支持top，left

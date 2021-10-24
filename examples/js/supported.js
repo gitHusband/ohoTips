@@ -12,18 +12,19 @@ var baseElementAnimation = '#box-animation';
 
 function defConfig() {
     var defConfigHelpTips = null;
-    var showDefConfigHelp = function() {
+    var showDefConfigHelp = function(message) {
+        message = message || '单击一下，固定住弹框不缩小';
         destroyDefConfigHelp();
         defConfigHelpTips = ohoTips({
             baseElement: defConfigIconBox,         //基准元素id，可接受其它选择器，如class
             position: "center-right",                 //Tip显示位置，基准元素左上角
             direction: 'outer',                     //Tip 方向, 默认inner
-            type: 'success',
+            type: 'info',
             icon: false,
             symbol: 'triangle',
             // destroy: 'never',
             delay: 3000,
-            message: '单击一下，固定住弹框不缩小',
+            message: message,
         });
     }
     var destroyDefConfigHelp = function() {
@@ -47,6 +48,12 @@ function defConfig() {
         });
     }
 
+    setTimeout(function(){
+        showDefConfigHelp([
+            "你可以试试这里，配置全局参数"
+        ]);
+    }, 10000);
+
     var isFixedSize = false;
     var iconBox = document.querySelector('.icon-box');
     var defConfigIconBox = document.querySelector("#def-config-icon-box");
@@ -67,15 +74,33 @@ function defConfig() {
             isFixedSize = false;
         }
     }
-    document.querySelector('#def-parent').onclick = function() {
+    var btnDefParent = document.querySelector('#def-parent');
+    btnDefParent.onclick = function() {
         var options = {baseElement: ''};
         if(this.checked) {
             options.baseElement = this.value;
 
-            showDefConfigClickMessage('设置默认 baseElement: #box-def-config');
+            showDefConfigClickMessage([
+                '设置默认 baseElement: #box-def-config',
+                '接下来生成的Tips 都将以 “Tips 全局配置” 框为基准',
+                '请点击左侧 “!” 图标将此固定不缩小'
+            ]);
         }
         ohoTipsPrototype.setDefOptions(options);
     }
+    ohoTips().hoverTip({
+        baseElement: btnDefParent.parentNode,
+        parentElement: "#box-def-config",
+        position: "top-center",
+        direction: 'outer',
+        type: 'warning',
+        icon: false,
+        destroy: 'never',
+        message: [
+            "单击设置 Tips 全局配置",
+            "再次点击则恢复默认的全局配置"
+        ],
+    }, btnDefParent.parentNode);
     document.querySelector('#def-direction').onclick = function() {
         var options = {direction: 'inner'};
         if(this.checked) {
@@ -1179,6 +1204,99 @@ function tipOuter() {
         message: stringifyHtml('{ "baseElement": "this", "position": "right-bottom", "direction": "outer", "destroy": "never", "icon": "error", "iconOptions": { "position": "right" }, "html": true, "message": "html" }'),
     }, btnOuterRightBottom);
 
+
+    var btnOuterTopLeftParent = document.querySelector('#btn-outer-top-left-parent');
+    btnOuterTopLeftParent.onclick = function() {
+        var checkboxValue = getCheckboxValue();
+        var message = '左上角，类型：success';
+        ohoTips({
+            baseElement: btnOuterTopLeftParent,       //基准元素
+            parentElement: baseElementOuter,            //父元素
+            position: "top-left",                     //Tip显示位置，基准元素上居中
+            direction: 'outer',
+            icon: 'success',
+            iconOptions: {                      
+                position: 'top',                        //Icon 位置
+            },
+            symbol: 'triangle',
+            destroy: 'manual',
+            message: message                            //Tip内容
+        })
+    }
+    ohoTips().hoverTip({
+        baseElement: btnOuterTopLeftParent,           //基准元素
+        position: "top-left",                         //Tip显示位置，基准元素左上角
+        direction: 'outer',                             //Tip 方向, 默认inner
+        type: 'success',
+        icon: false,
+        destroy: 'never',
+        message: [
+            "如果基准元素的父元素存在 scroll",
+            "Tips 元素最好创建在父元素之内"
+        ],
+    }, btnOuterTopLeftParent);
+
+    var btnOuterTopCenterParent = document.querySelector('#btn-outer-top-center-parent');
+    btnOuterTopCenterParent.onclick = function() {
+        var checkboxValue = getCheckboxValue();
+        var message = '上居中，类型：success';
+        ohoTips({
+            baseElement: btnOuterTopCenterParent,       //基准元素
+            parentElement: baseElementOuter,            //父元素
+            position: "top-center",                     //Tip显示位置，基准元素上居中
+            direction: 'outer',
+            icon: 'success',
+            iconOptions: {                      
+                position: 'top',                        //Icon 位置
+            },
+            symbol: 'triangle',
+            destroy: 'manual',
+            message: message                            //Tip内容
+        })
+    }
+    ohoTips().hoverTip({
+        baseElement: btnOuterTopCenterParent,           //基准元素
+        position: "top-center",                         //Tip显示位置，基准元素左上角
+        direction: 'outer',                             //Tip 方向, 默认inner
+        type: 'success',
+        icon: false,
+        destroy: 'never',
+        message: [
+            "Tips 父元素 position: relative",
+            "所以 Tips 会被父元素scroll 隐藏"
+        ],
+    }, btnOuterTopCenterParent);
+
+    var btnOuterTopRightParent = document.querySelector('#btn-outer-top-right-parent');
+    btnOuterTopRightParent.onclick = function() {
+        var checkboxValue = getCheckboxValue();
+        var message = '右上角，类型：success';
+        ohoTips({
+            baseElement: btnOuterTopRightParent,       //基准元素
+            parentElement: baseElementOuter,            //父元素
+            position: "top-right",                     //Tip显示位置，基准元素上居中
+            direction: 'outer',
+            icon: 'success',
+            iconOptions: {                      
+                position: 'top',                        //Icon 位置
+            },
+            symbol: 'triangle',
+            destroy: 'manual',
+            message: message                            //Tip内容
+        })
+    }
+    ohoTips().hoverTip({
+        baseElement: btnOuterTopRightParent,           //基准元素
+        position: "top-right",                         //Tip显示位置，基准元素左上角
+        direction: 'outer',                             //Tip 方向, 默认inner
+        type: 'success',
+        icon: false,
+        destroy: 'never',
+        message: [
+            "你可以试试手动删除父元素 position",
+            "然后看看效果"
+        ],
+    }, btnOuterTopRightParent);
 }
 
 function tipFloat() {

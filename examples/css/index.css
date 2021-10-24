@@ -68,8 +68,8 @@
 
 .box-def-config {
     position: fixed;
-    top: 10;
-    left: 0;
+    top: 310px;
+    left: 10px  ;
     z-index: 100;
     width: 29px;
     height: 29px;
@@ -92,8 +92,8 @@
 
 .box-def-config-fixed,
 .box-def-config:hover {
-    top: 0;
-    left: 0;
+    top: 210px;
+    left: 10px;
     z-index: 100;
     width: 500px;
     height: 350px;
@@ -223,6 +223,17 @@
 
 .label-box > label > input:checked + .red-2 {
     box-shadow: none;
+}
+
+.box-outer {
+    position: relative;
+    width: 80%;
+    margin: 50px auto;
+    padding-bottom: 30px;
+    border: 5px solid #607D8B;
+    /*border-radius: 20px 30px;*/
+    /*border-width: 150px 12px 10px 200px;*/
+    box-shadow: 5px 10px 20px #000000;
 }
 
 .box-float {

@@ -408,9 +408,20 @@ export function position(el) {
     
 }
 
+export function relativePosition(el) {
+    return {top: el.offsetTop, left: el.offsetLeft};
+}
+
 export function css(el, styleName, value) {
     if(value !== undefined) return el.style[styleName] = value;
     else return getComputedStyle(el)[styleName];
+}
+
+export function getScrollPosition() {
+    let t;
+    let scrollX = (((t = document.documentElement) || (t = document.body.parentNode)) && typeof t.scrollLeft == 'number' ? t : document.body).scrollLeft;
+    let scrollY = (((t = document.documentElement) || (t = document.body.parentNode)) && typeof t.scrollTop == 'number' ? t : document.body).scrollTop;
+    return {x: scrollX, y: scrollY};
 }
 
 export function getScrollWidth() {

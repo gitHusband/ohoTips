@@ -45,6 +45,7 @@ tips.defaultOptions = {
         isContainerTransparent: false,  //false - Tips 容器不透明，true - Tips 容器透明
     },
     baseElement: "",            //基准方位元素
+    parentElement: "",          //Tips container 直接父元素，注意，基准元素建议也是父元素的子元素，不然没必要
     direction: 'inner',         //计算Tips定位时，inner - 计算Tips 宽高，尽量使Tips 位于基准元素内部，normal - 不计算Tips宽高，按照position数据来，outer - 计算Tips 宽高，尽量使Tips 位于基准元素外部, outside - 计算Tips 宽高，尽量使Tips 位于基准元素外部； 默认'inner'。
     position: "middle",         //Tips 位置，左上角，上居中，右上角，左居中，全居中，右居中，左下角，下居中，右下角，自定义相对位置，浮动
     offset: {                   //如果position 是对象如{top: 0}，则一般不需要这个，如果是字符串，则可以酌情添加offset, 调整基准元素与Tips 的相对定位, 仅支持top，left
@@ -162,6 +163,7 @@ tips.prototype.init = function(options) {
     
     this.backup = {
         _baseElm : null,                //备份基准元素
+        _parentElm : null,              //Tips container 直接父元素
         _tipContainerElm : null,        //备份Tips 容器元素
         _tipGroupElm : null,            //备份Tips 分组元素
         _tipElm : null,                 //备份Tips 元素
@@ -385,6 +387,9 @@ tips.prototype.setTipsAttribute = function() {
     return tipsAttribute;
 };
 
+/**
+ * 获取基准元素
+ */
 tips.prototype.getBaseElememt = function(options) {
     let $base = null;
 
@@ -400,6 +405,55 @@ tips.prototype.getBaseElememt = function(options) {
 
     return $base;
 };
+
+/**
+ * 获取Tips container 直接父元素
+ * 
+ * 说明：特殊的定位，比如，position: relative / absolute / fixed 。 如果这种定位类型的父元素的子元素的定位是 absolute，定位以父元素为基准。
+ * 
+ * 根据这个特性，我们可以：
+ * 1. 当基准元素的定位是Fixed，我们把 Tips 插入到这个基准元素内部
+ * 2. 用户可以根据这个特性自定义父元素，建议基准元素也要是父元素的子元素，否则毫无意义
+ * 3. 以上均不匹配，那么父元素就是 BODY
+ */
+tips.prototype.getParentElememt = function(options, $base) {
+    let $parent = null;
+
+    // 用户自定义父元素
+    if(!options.parentElement) {
+        $parent = null;
+    }else if(options.parentElement instanceof HTMLElement) {
+        $parent = options.parentElement;
+    }else if(window.jQuery && options.parentElement instanceof jQuery) {
+        $parent = options.parentElement[0];
+    }else {
+        $parent = document.querySelector(options.parentElement);
+    }
+
+    // 如果没有自定义父元素，那么就自动根据基准元素来获取父元素
+    if(!$parent) {
+        // 如果基准元素Postion 是Fixed，则Tips插入到基准元素内
+        // 否则插入到body 内更好
+        let baseStylePosition = C.getStyle($base, 'position');
+
+        if(["fixed"].includes(baseStylePosition)) {
+            $parent = $base;
+        }
+        else {
+            $parent = document.body;
+        }
+    }
+
+    return $parent;
+};
+
+/**
+ * 特殊的定位，比如，position: relative / absolute / fixed
+ * 如果这种定位类型的父元素的子元素的定位是 absolute，定位以父元素为基准。
+ */
+tips.prototype.isSpecialStylePosition = function(stylePosition) {
+    return ["relative", "absolute", "fixed"].includes(stylePosition);
+}
 
 // 获取组元素，同一个组的Tips 将包含在相同的组元素里面
 tips.prototype.getTipsGroup = function(options) {
@@ -436,7 +490,7 @@ tips.prototype.getTipsContainer = function(options) {
  * 包括 消息，图标，标志箭头等
  */
 tips.prototype.renderTipsBody = function(options) {
-    let $base = this.backup._baseElm;
+    let $parent = this.backup._parentElm;
     let $tipContainer = this.backup._tipContainerElm;
     let $tipGroup = this.backup._tipGroupElm;
     let cssClass = this.cssClass;
@@ -489,11 +543,8 @@ tips.prototype.renderTipsBody = function(options) {
     $tipGroup.appendChild($tip);
     $tipContainer.appendChild($tipGroup);
 
-    // 如果基准元素Postion 是Fixed，则Tips插入到基准元素内
-    // 否则插入到body 内更好
-    let baseStylePosition = C.getStyle($base, 'position');
-    if(baseStylePosition == 'fixed') $base.appendChild($tipContainer);         //先插入元素，然后才能获取宽度和高度
-    else document.body.appendChild($tipContainer);
+    //先插入元素，然后才能获取宽度和高度
+    $parent.appendChild($tipContainer);
 
     this.setStyleSymbolBox();
 
@@ -709,8 +760,15 @@ tips.prototype.checkGroup = function() {
 /**
  * 判断Tips 基准元素是否是 Body 元素
  */
-tips.prototype.isBodyElement = function() {
+tips.prototype.isBaseBodyElement = function() {
     return !this.options.baseElement || this.backup._baseElm.tagName == 'BODY';
+}
+
+/**
+ * 判断Tips container 直接父元素是否是 Body 元素
+ */
+tips.prototype.isParentBodyElement = function() {
+    return this.backup._parentElm.tagName == 'BODY';
 }
 
 /**
@@ -731,7 +789,7 @@ tips.prototype.getElementDetails = function() {
     let $tip = this.backup._tipElm;
     let details;
 
-    if(this.isBodyElement()) {
+    if(this.isBaseBodyElement()) {
         details = {
             basePosition: {top: 0, left: 0},
             baseMarginTop: 0,           //获取基准元素外边距，position() 获取的值不算外边距
@@ -771,6 +829,24 @@ tips.prototype.getElementDetails = function() {
             tipWidth: C.outerWidth($tip),
             tipHeight: C.outerHeight($tip),
         };
+
+        // 如果父元素不是 BODY 元素，那么要求基准元素也要是父元素的子元素，否则定位将出错
+        if(!this.isParentBodyElement()) {
+            let $parent = this.backup._parentElm;
+            let parentStylePosition = C.css($parent, 'position');
+
+            // 如果父元素定位类型是 相对的，绝对或固定，那么Tips子元素的定位将根据基准元素与父元素相对定位来实现，而不是基准元素与BODY的相对定位
+            if(this.isSpecialStylePosition(parentStylePosition)) {
+                if($parent === $base) {
+                    details.basePosition = { top: 0, left: 0 };
+                } else {
+                    details.basePosition = C.relativePosition($base);
+                }
+
+                this.writeLog("info", "父元素不是BODY,且其定位是 相对的，绝对或固定的");
+                this.writeLog("info", "基准元素与父元素的相对定位是：", details.basePosition);
+            }
+        }
     }
 
     //补算外边距
@@ -796,7 +872,7 @@ tips.prototype.getElementDetails = function() {
 tips.prototype.getPositionClass = function(myPosition) {
     let positionClass = {};
 
-    if(this.isBodyElement()) {
+    if(this.isBaseBodyElement()) {
         positionClass.tipClass = "ohoTip-fixed";
         positionClass.bgClass = "ohoTip-bg-fixed";
 
@@ -839,7 +915,7 @@ tips.prototype.setClassPositionOffset = function() {
 
     if(optOffset.top == 0 && optOffset.left == 0) return;
 
-    if(this.isBodyElement()) {
+    if(this.isBaseBodyElement()) {
         if(typeof myPosition == "string") {
             switch(myPosition) {
                 case "top-left" :           //坐标在基准元素的左上角位置
@@ -902,7 +978,7 @@ tips.prototype.setClassSymbolOffset = function() {
         bottom: parseFloat(tgStyle.bottom),
     }
 
-    if(this.isBodyElement()) {
+    if(this.isBaseBodyElement()) {
         let symbolSize = this.getSymbolSize();
 
         let symbolPosition = this.options.symbolOptions.position || this.mapPositionToSymbolPosition(this.options.position);
@@ -959,7 +1035,7 @@ tips.prototype.setClassOffset = function() {
  * @return   {[Object]}             [Position object]
  */
 tips.prototype.getPositionStyle = function(myPosition, calculateTip, force) {
-    if(((this.isBodyElement()) && typeof myPosition == "string") && !force) {
+    if(((this.isBaseBodyElement()) && typeof myPosition == "string") && !force) {
         return {};
     }
 
@@ -2295,7 +2371,7 @@ tips.prototype.setTipsPosition = function() {
         this.setFloatTranslate();
     }else {
         let tipPosition = this.getPosition(this.options.position);
-        if(this.isBodyElement()) {
+        if(this.isBaseBodyElement()) {
             C.addClass($tipGroup, tipPosition.class.tipClass);
             this.setClassOffset();
         }else {
@@ -2309,7 +2385,7 @@ tips.prototype.setBgPosition = function() {
     if(!this.options.background || !this.backup._backgroundElem) return false;
     let $bg = this.backup._backgroundElem;
 
-    if(this.isBodyElement()) {
+    if(this.isBaseBodyElement()) {
         let positionClass = this.getPositionClass(this.options.position);
         C.addClass($bg, positionClass.bgClass);
     }else {
@@ -2349,6 +2425,7 @@ tips.prototype.resetPosition = function() {
 tips.prototype.render = function() {
     let options = this.options;
     this.backup._baseElm = this.getBaseElememt(options);
+    this.backup._parentElm = this.getParentElememt(options, this.backup._baseElm);
     this.backup._tipGroupElm = this.getTipsGroup(options);
     this.backup._tipContainerElm = this.getTipsContainer(options);
     this.backup._backgroundElem = this.renderTipsBg(options);
@@ -2737,13 +2814,15 @@ tips.prototype.listen = function() {
         }, 10);
     }
     window.addEventListener('resize', _this.backup.bind);
-    window.addEventListener('scroll', _this.backup.bind);
+    // window.addEventListener('scroll', _this.backup.bind);
+    this.backup._parentElm.addEventListener('scroll', _this.backup.bind);
 };
 
 tips.prototype.unlisten = function() {
     let _this = this;
     window.removeEventListener('resize', _this.backup.bind);
-    window.removeEventListener('scroll', _this.backup.bind);
+    // window.removeEventListener('scroll', _this.backup.bind);
+    this.backup._parentElm.removeEventListener('scroll', _this.backup.bind);
 };
 
 tips.prototype.clearTimeout = function() {
