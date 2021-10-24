@@ -93,9 +93,9 @@ ohoTips-light.scss - 只是改了一点点默认样式，您可参考这个定�
 
 ```
 # 构建调试版
-sass src/ohoTips/css/themes/ohoTips.scss dist/ohoTips/css/themes/ohoTips.css --style expanded
+sass src/css/themes/ohoTips.scss dist/ohoTips/css/themes/ohoTips.css --style expanded
 # 构建生产版
-sass src/ohoTips/css/themes/ohoTips.scss dist/ohoTips/css/themes/ohoTips.min.css --style compressed
+sass src/css/themes/ohoTips.scss dist/ohoTips/css/themes/ohoTips.min.css --style compressed
 ```
 如果不熟悉 sass，请参考 [如何安装Sass](https://www.sass.hk/install/)
 
