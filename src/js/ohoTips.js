@@ -2589,7 +2589,7 @@ tips.prototype.animationTypeOho = function(status) {
     let startStyle = C.extend({}, startPosition, startSize, {'opacity': '1'});
 
     let eleDetails = this.getElementDetails();
-    let tipGroupPosition = C.position($tipGroup);
+    let tipGroupPosition = C.relativePosition($tipGroup);
     let oldGroupStyle = $tipGroup.style.cssText;
     let oldGroupStyleObj = {
         top: tipGroupPosition.top,
