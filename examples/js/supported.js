@@ -12,12 +12,13 @@ var baseElementAnimation = '#box-animation';
 
 function defConfig() {
     var defConfigHelpTips = null;
-    var showDefConfigHelp = function(message) {
+    var showDefConfigHelp = function(message, parentElement) {
         message = message || '单击一下，固定住弹框不缩小';
         destroyDefConfigHelp();
         defConfigHelpTips = ohoTips({
-            baseElement: defConfigIconBox,         //基准元素id，可接受其它选择器，如class
-            position: "center-right",                 //Tip显示位置，基准元素左上角
+            baseElement: defConfigIconBox,          //基准元素id，可接受其它选择器，如class
+            parentElement: parentElement || "#box-def-config",           //Tips 元素父元素
+            position: "center-right",               //Tip显示位置，基准元素左上角
             direction: 'outer',                     //Tip 方向, 默认inner
             type: 'info',
             icon: false,
@@ -51,7 +52,7 @@ function defConfig() {
     setTimeout(function(){
         showDefConfigHelp([
             "你可以试试这里，配置全局参数"
-        ]);
+        ], "body");
     }, 10000);
 
     var isFixedSize = false;

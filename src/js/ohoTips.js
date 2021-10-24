@@ -45,7 +45,7 @@ tips.defaultOptions = {
         isContainerTransparent: false,  //false - Tips 容器不透明，true - Tips 容器透明
     },
     baseElement: "",            //基准方位元素
-    parentElement: "",          //Tips container 直接父元素，注意，基准元素建议也是父元素的子元素，不然没必要
+    parentElement: "",          //Tips container 直接父元素，注意，基准元素建议也是父元素的子元素，且父元素定位是特殊的定位类型
     direction: 'inner',         //计算Tips定位时，inner - 计算Tips 宽高，尽量使Tips 位于基准元素内部，normal - 不计算Tips宽高，按照position数据来，outer - 计算Tips 宽高，尽量使Tips 位于基准元素外部, outside - 计算Tips 宽高，尽量使Tips 位于基准元素外部； 默认'inner'。
     position: "middle",         //Tips 位置，左上角，上居中，右上角，左居中，全居中，右居中，左下角，下居中，右下角，自定义相对位置，浮动
     offset: {                   //如果position 是对象如{top: 0}，则一般不需要这个，如果是字符串，则可以酌情添加offset, 调整基准元素与Tips 的相对定位, 仅支持top，left
@@ -412,9 +412,10 @@ tips.prototype.getBaseElememt = function(options) {
  * 说明：特殊的定位，比如，position: relative / absolute / fixed 。 如果这种定位类型的父元素的子元素的定位是 absolute，定位以父元素为基准。
  * 
  * 根据这个特性，我们可以：
- * 1. 当基准元素的定位是Fixed，我们把 Tips 插入到这个基准元素内部
- * 2. 用户可以根据这个特性自定义父元素，建议基准元素也要是父元素的子元素，否则毫无意义
- * 3. 以上均不匹配，那么父元素就是 BODY
+ * 1. 用户可以根据这个特性自定义父元素，注意，基准元素建议也是父元素的子元素，且父元素定位是特殊的定位类型，否则毫无意义
+ * 2. 如果基准元素的定位是特殊定位，我们把 Tips 插入到这个基准元素内部
+ * 3. 如果基准元素的直接父元素的定位是特殊定位，我们把 Tips 插入到这个基准元素的直接父元素
+ * 4. 以上均不匹配，那么父元素就是 BODY
  */
 tips.prototype.getParentElememt = function(options, $base) {
     let $parent = null;
@@ -432,15 +433,23 @@ tips.prototype.getParentElememt = function(options, $base) {
 
     // 如果没有自定义父元素，那么就自动根据基准元素来获取父元素
     if(!$parent) {
-        // 如果基准元素Postion 是Fixed，则Tips插入到基准元素内
-        // 否则插入到body 内更好
+        // 如果基准元素Postion 是特殊定位，则Tips插入到基准元素内
         let baseStylePosition = C.getStyle($base, 'position');
 
-        if(["fixed"].includes(baseStylePosition)) {
+        if(this.isSpecialStylePosition(baseStylePosition)) {
             $parent = $base;
         }
+        // 如果基准元素的直接父元素的定位是特殊定位，我们把 Tips 插入到这个基准元素的直接父元素
         else {
-            $parent = document.body;
+            let baseParentStylePosition = C.getStyle($base.parentNode, 'position');
+
+            if(this.isSpecialStylePosition(baseParentStylePosition)) {
+                $parent = $base.parentNode;
+            }
+            // 以上均不匹配，那么父元素就是 BODY
+            else {
+                $parent = document.body;
+            }
         }
     }
 
@@ -830,15 +839,18 @@ tips.prototype.getElementDetails = function() {
             tipHeight: C.outerHeight($tip),
         };
 
-        // 如果父元素不是 BODY 元素，那么要求基准元素也要是父元素的子元素，否则定位将出错
+        // 如果父元素不是 BODY 元素，那么建议基准元素也要是父元素的子元素，否则定位将出错
         if(!this.isParentBodyElement()) {
             let $parent = this.backup._parentElm;
             let parentStylePosition = C.css($parent, 'position');
 
-            // 如果父元素定位类型是 相对的，绝对或固定，那么Tips子元素的定位将根据基准元素与父元素相对定位来实现，而不是基准元素与BODY的相对定位
+            // 如果父元素定位类型是特殊定位，比图 相对的，绝对或固定，那么Tips子元素的定位将根据基准元素与父元素相对定位来实现，而不是基准元素与BODY的相对定位
             if(this.isSpecialStylePosition(parentStylePosition)) {
                 if($parent === $base) {
-                    details.basePosition = { top: 0, left: 0 };
+                    // 基准元素同时也是父元素，那么基准元素相对于父元素的定位就是 { top: 0, left: 0 }
+                    // 定位计算规则都是以BODY为父元素设计的。假设父元素是BODY, 基准元素的定位还应该算上基准元素的边框厚度
+                    // 在此我们将其算上
+                    details.basePosition = { top: 0-details.baseBorderTopWidth, left: 0-details.baseBorderLeftWidth };
                 } else {
                     details.basePosition = C.relativePosition($base);
                 }
@@ -2814,15 +2826,15 @@ tips.prototype.listen = function() {
         }, 10);
     }
     window.addEventListener('resize', _this.backup.bind);
-    // window.addEventListener('scroll', _this.backup.bind);
-    this.backup._parentElm.addEventListener('scroll', _this.backup.bind);
+    if(this.isParentBodyElement()) window.addEventListener('scroll', _this.backup.bind);
+    else this.backup._parentElm.addEventListener('scroll', _this.backup.bind);
 };
 
 tips.prototype.unlisten = function() {
     let _this = this;
     window.removeEventListener('resize', _this.backup.bind);
-    // window.removeEventListener('scroll', _this.backup.bind);
-    this.backup._parentElm.removeEventListener('scroll', _this.backup.bind);
+    if(this.isParentBodyElement()) window.removeEventListener('scroll', _this.backup.bind);
+    else this.backup._parentElm.removeEventListener('scroll', _this.backup.bind);
 };
 
 tips.prototype.clearTimeout = function() {

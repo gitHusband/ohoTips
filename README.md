@@ -136,7 +136,7 @@ npm run start
         isContainerTransparent: false,  //false - Tips 容器不透明，true - Tips 容器透明
     },
     baseElement: "",            //基准方位元素
-    parentElement: "",          //Tips container 直接父元素，注意，基准元素建议也是父元素的子元素，不然没必要
+    parentElement: "",          //Tips container 直接父元素，注意，基准元素建议也是父元素的子元素，且父元素定位是特殊的定位类型
     direction: 'inner',         //计算Tips定位时，inner - 计算Tips 宽高，尽量使Tips 位于基准元素内部，normal - 不计算Tips宽高，按照position数据来，outer - 计算Tips 宽高，尽量使Tips 位于基准元素外部, outside - 计算Tips 宽高，尽量使Tips 位于基准元素外部； 默认'inner'。
     position: "middle",         //Tips 位置，左上角，上居中，右上角，左居中，全居中，右居中，左下角，下居中，右下角，自定义相对位置，浮动
     offset: {                   //如果position 是对象如{top: 0}，则一般不需要这个，如果是字符串，则可以酌情添加offset, 调整基准元素与Tips 的相对定位, 仅支持top，left
@@ -292,16 +292,34 @@ ohoTips(["Hello World!", "Here is the second line."]);
 
 如果直接传入 DOM 元素 或者 jQuery 元素，则可省略以上配置。
 
-### 5.2 基准元素
-
+### 5.2 基准元素与父元素
+**1. 基准元素**
 ```
 {
     baseElement: "",            //基准方位元素
 }
 ```
-任何定位都以此为基准。默认以整个整个窗口为基准。
+- 任何定位都以此为基准。默认以整个整个窗口为基准。
+- 支持 DOM选择器（id等），DOM元素 以及 jQuery 元素。
+- 遮罩层也将遮罩的是基准元素，不是父元素
 
-支持 DOM选择器（id等），DOM元素 以及 jQuery 元素。
+**2. 父元素**
+```
+{
+    parentElement: "",          //Tips container 直接父元素，注意，基准元素建议也是父元素的子元素，且父元素定位是特殊的定位类型
+}
+```
+Tips container 直接父元素，也就是 Tips 将插入到这个元素内。
+
+**需要说明的是**：
+
+特殊的定位，比如，position: relative / absolute / fixed 。 如果这种定位类型的父元素的子元素的定位是 absolute，定位以父元素为基准。
+
+根据这个特性，我们支持：
+- 用户可以根据这个特性自定义父元素，注意，基准元素建议也是父元素的子元素，且父元素定位是特殊的定位类型，否则毫无意义
+- 如果基准元素的定位是特殊定位，我们把 Tips 插入到这个基准元素内部
+- 如果基准元素的直接父元素的定位是特殊定位，我们把 Tips 插入到这个基准元素的直接父元素
+- 以上均不匹配，那么父元素就是 BODY
 
 ### 5.3 方位
 
