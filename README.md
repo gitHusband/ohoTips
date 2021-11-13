@@ -31,6 +31,7 @@ ohoTips 消息美观，可自由方便地定位消息位置，支持任何定位
 let ohoTips = oho.ohoTips;
 let ohoTipsPrototype = oho.ohoTipsPrototype;
 
+// 用法一
 ohoTips({
     baseElement: baseElement,           //基准元素为空或者body，则定位基于整个窗口
     position: "top-left",               //Tip显示位置，窗口左上角
@@ -39,8 +40,10 @@ ohoTips({
     message: message,                   //Tip内容
 })
 
+// 用法二
 ohoTips().success(message, baseElement);
 
+// 用法三
 ohoTips(message, options);
 ```
 > 具体例子展示 请看 index.html
