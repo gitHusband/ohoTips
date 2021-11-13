@@ -1,0 +1,247 @@
+{
+    "message": {
+        "header": "Tips 消息实体",
+        "desc": "支持字符串，DOM 或 JQuery 元素",
+        "defaultValue": "",
+        "options": [
+            "字符串，字符串数组",
+            "DOM 或 JQuery 元素"
+        ]
+    },
+    "html": {
+        "param": {
+            "header": "是否将消息实体字符串转换成DOM元素",
+            "desc": "",
+            "defaultValue": false,
+            "options": [
+                true,
+                false
+            ]
+        },
+        "isContainerTransparent": {
+            "header": "是否将容器背景设置为透明",
+            "desc": "",
+            "defaultValue": false,
+            "options": [
+                true,
+                false
+            ]
+        }
+    },
+    "baseElement": {
+        "header": "Tips 基准元素",
+        "desc": "Tips 定位的参照元素",
+        "defaultValue": "空值",
+        "options": [
+            "空值 - 代表Body元素",
+            "DOM 或 jQuery 元素",
+            "DOM 选择器"
+        ]
+    },
+    "parentElement": {
+        "header": "Tips 父元素",
+        "desc": "Tips 插入到哪一个DOM元素内",
+        "defaultValue": "空值",
+        "options": [
+            "空值 - 代表Body元素",
+            "DOM 或 jQuery 元素",
+            "DOM 选择器"
+        ]
+    },
+    "direction": {
+        "header": "Tips 与基准元素的相对方向",
+        "desc": "",
+        "defaultValue": "inner",
+        "options": [
+            "inner - 计算Tips 宽高，尽量使Tips 位于父元素内部",
+            "normal - 不计算Tips宽高，按照position数据来，尽量使Tips 位于基准元素内部",
+            "outer - 计算Tips 宽高，尽量使Tips 位于父元素外部",
+            "outside - 不计算Tips 宽高，尽量使Tips 位于基准元素外部。与outer 主要是负数有区别"
+        ]
+    },
+    "position": {
+        "header": "Tips 与基准元素的相对定位",
+        "desc": "",
+        "defaultValue": "middle",
+        "options": [
+            "top-left, top-center , top-right",
+            "center-left , middle , center-right",
+            "bottom-left , bottom-center , bottom-right",
+            "float, translate - 这两个参数作用一样，都是使 Tips 在基准元素内浮动，详细配置见 float 配置"
+        ]
+    },
+    "offset": {
+        "top": {
+            "header": "Tips 偏移基准元素Top 多少px",
+            "desc": "任意实数"
+        },
+        "left": {
+            "header": "Tips 偏移基准元素Left 多少px",
+            "desc": "任意实数"
+        }
+    },
+    "group": {
+        "name": {
+            "header": "分组名称",
+            "desc": "分组名称相同的Tips 定位配置必须保持一致，他们将从上到下组合在一起"
+        },
+        "maxLength": {
+            "header": "同一个分组内允许存在的Tips 最大数量",
+            "desc": "仅支持正整数，每次超出数量，将销毁第一个 Tips",
+            "defaultValue": 9999
+        }
+    },
+    "type": {
+        "header": "Tips 样式",
+        "desc": "支持自定义样式（传入class名称)",
+        "defaultValue": "normal",
+        "options": [
+            "normal, success, error, warning, info",
+            "用户自定义css"
+        ]
+    },
+    "limit": {
+        "header": "限制Tips 的大小",
+        "desc": "如果不限制，那么消息多长，Tips 就有多宽",
+        "defaultValue": true
+    },
+    "shadow": {
+        "header": "是否显示阴影",
+        "desc": "",
+        "defaultValue": false
+    },
+    "background": {
+        "header": "是否显示遮罩层，遮盖基准元素",
+        "desc": "",
+        "defaultValue": false
+    },
+    "icon": {
+        "header": "是否显示图标 icon",
+        "desc": "显示图标，可以使用户更加直观地了解消息表达的内容",
+        "defaultValue": false,
+        "options": [
+            "true - 按照type参数自动设置icon类型，支持字符串设置icon类型",
+            "false - 不显示图标 icon"
+        ]
+    },
+    "iconOptions": {
+        "type": {
+            "header": "图标 icon 的类型",
+            "desc": "当icon 为字符串时，icon主要定制形状(也含颜色)，此时type可以额外设置icon 的色调",
+            "defaultValue": "info",
+            "options": [
+                "normal, success, error",
+                "warning, info, clock"
+            ]
+        },
+        "position": {
+            "header": "图标 icon 的定位",
+            "desc": "",
+            "defaultValue": "left",
+            "options": [
+                "top, left",
+                "bottom, right"
+            ]
+        }
+    },
+    "symbol": {
+        "header": "是否显示粘合器 binder",
+        "desc": "",
+        "defaultValue": false,
+        "options": [
+            "false - 不显示粘合器",
+            "true - 默认三角形 triangle，支持字符串设置粘合器类型，如 triangle等，目前仅支持三角形triangle",
+            "其他类型字符串 - 暂不支持"
+        ]
+    },
+    "symbolOptions": {
+        "type": {
+            "header": "粘合器 binder 类型",
+            "desc": "如果不设置，粘合器则按 option.type 色调，否则按该参数的色调",
+            "defaultValue": "空值",
+            "options": [
+                "normal, success, error",
+                "warning, info"
+            ]
+        },
+        "position": {
+            "header": "粘合器 binder 与 Tips 的相对定位",
+            "desc": "",
+            "defaultValue": "空值",
+            "options": [
+                "top-left, top-center, top-right",
+                "right-top , center-right , right-bottom",
+                "bottom-left , bottom-center , bottom-right",
+                "left-bottom, center-left, left-top, middle"
+            ]
+        }
+    },
+    "destroy": {
+        "header": "销毁 Tips 的方式",
+        "desc": "",
+        "defaultValue": "auto",
+        "options": [
+            "auto - 自动销毁Tips",
+            "manual - 不自动销毁Tips，需手动销毁",
+            "never - 从不销毁Tips，需要调用 destory() 方法销毁"
+        ]
+    },
+    "delay": {
+        "header": "自动销毁Tips 延时，单位：ms",
+        "desc": "",
+        "defaultValue": 2000
+    },
+    "animation": {
+        "in": {
+            "header": "Tips 显示时候的动画",
+            "desc": "",
+            "defaultValue": "default",
+            "options": [
+                "default - fade",
+                "oho - 在基准元素中间由小到大弹出到定位位置，从定位位置由大到小消失在基准元素中间",
+                "fade - 淡入淡出",
+                "fold - 从上到下展开，从下到上收起",
+                "Fragment - Tips 由碎片合成整体展示，Tips 由整体分裂成碎片消失"
+            ]
+        },
+        "out": {
+            "header": "Tips 隐藏时候的动画",
+            "desc": "同 in"
+        },
+        "fragments": {
+            "type": "两种创建fragment 的算法，0和1，1 体验更好, 默认 1",
+            "basePix": "对应fragments.type = 0, 最小的像素, type 1则不需要该参数, 默认 10",
+            "xCount": "对应fragments.type = 1, 水平fragment的个数, 默认 10",
+            "yCount": "对应fragments.type = 1, 垂直fragment的个数, 默认 10"
+        },
+        "delay": "Tips 动画执行时间，延时时间删除Tips，默认 1000",
+        "customAmtFuntion": "自定义Tips 动画函数, 默认 null"
+    },
+    "float": {
+        "type": {
+            "header": "Tips 浮动的详细配置，当position 等于 'float' 或 'translate' 时，可选；其余情况不需要",
+            "desc": "可选择默认浮动方法，浮动方法支持自定义，见 customFloatType",
+            "defaultValue": "default",
+            "options": [
+                "default - 沿着基准元素左上角到右下角直线浮动",
+                "x - 浮动方向是 左上角->右下角->右上角->左下角->左上角...",
+                "square - 浮动方向是 左上角->右上角->右下角->左下角->左上角...",
+                "fold - 从上到下展开，从下到上收起"
+            ]
+        },
+        "customFloatOptions": "自定义浮动选项，参考 tips.floatOptions，默认 null",
+        "customFloatStatus": "自定义浮动初始状态，top，left等，默认 null",
+        "customFloatType": "自定义浮动类型的方法, 参考 floatTypeDefault 方法"
+    },
+    "events": {
+        "beforeCreated": "Tips 创建消息之前 触发",
+        "created": "Tips 创建消息之后 触发",
+        "beforeShown": "Tips 创建消息之后，展示之前 触发",
+        "shown": "Tips 展示之后 触发",
+        "beforeDestroyed": "Tips 销毁之前 触发",
+        "destroyed": "Tips 销毁之后 触发",
+        "beforeFloated": "Tips 每次浮动之前 触发",
+        "floated": "Tips 每次浮动之后 触发"
+    },
+    "debug": "debug 默认打开，打开可以调试log。 error, warn 类型的log 不受此影响"
+}
