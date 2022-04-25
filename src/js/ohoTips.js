@@ -225,7 +225,7 @@ tips.prototype.isHtmlMessage = function() {
     if(options.html === true 
         || (C.isObj(options.html) && options.html.param === true)
         || options.message instanceof HTMLElement
-        || options.message instanceof jQuery)
+        || (typeof jQuery != 'undefined' && options.message instanceof jQuery))
     {
         return true;
     } else {
@@ -525,7 +525,7 @@ tips.prototype.renderTipsBody = function(options) {
             $message = C.createNode(options.message);
         }else if(options.message instanceof HTMLElement) {
             $message = options.message;
-        }else if(options.message instanceof jQuery) {
+        }else if(typeof jQuery != 'undefined' && options.message instanceof jQuery) {
             $message = options.message[0];
         }
         $messageBox.appendChild($message);
